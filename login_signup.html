@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slide Navbar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+        }
+        .main {
+            width: 350px;
+            height: auto;
+            background: #ffffff;
+            border: 1px solid #cccccc;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #chk {
+            display: none;
+        }
+        .signup {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+        label {
+            font-size: 1.5em;
+            justify-content: center;
+            display: flex;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 15px;
+            padding: 5px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            color: #ffffff;
+            background: #007bff;
+            font-size: 1em;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .password-message {
+            text-align: left;
+            font-size: 0.9em;
+            color: red;
+            display: none;
+        }
+        .password-message.valid {
+            color: green;
+            display: block;
+        }
+        .password-message.invalid {
+            color: red;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">      
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="signup">
+            <form>
+                <label for="chk" aria-hidden="true">Sign up</label>
+                <input type="text" name="txt" placeholder="User name" required="">
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="number" name="broj" placeholder="Phone Number" required="">
+                <input type="password" id="password" name="pswd" placeholder="Password" required="">
+                <input type="password" id="confirm-password" name="confirm-pswd" placeholder="Confirm Password" required="">
+                <div class="password-message" id="password-message">비밀 번호가 일치하지 않습니다</div>
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+        <div class="login">
+            <form>
+                <label for="chk" aria-hidden="true">Login</label>
+                <input type="email" name="email" placeholder="Email" required="">
+                <input type="password" name="pswd" placeholder="Password" required="">
+                <button>Login</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirm-password');
+        const passwordMessage = document.getElementById('password-message');
+
+        confirmPasswordField.addEventListener('input', () => {
+            if (passwordField.value === confirmPasswordField.value) {
+                passwordMessage.textContent = '비밀 번호가 일치합니다';
+                passwordMessage.classList.remove('invalid');
+                passwordMessage.classList.add('valid');
+            } else {
+                passwordMessage.textContent = '비밀 번호가 일치하지 않습니다';
+                passwordMessage.classList.remove('valid');
+                passwordMessage.classList.add('invalid');
+            }
+        });
+    </script>
+</body>
+</html>
