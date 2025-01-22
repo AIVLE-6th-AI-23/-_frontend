@@ -1,0 +1,223 @@
+/* 공통 스타일 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽으로 정렬 */
+  align-items: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e3e3e3;
+  height: 80px; /* 헤더 높이 고정 */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  width: 150px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 텍스트와 이미지 간격 */
+}
+
+.userName {
+  font-size: 1rem;
+  color: #333;
+}
+
+.profilePic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* 프로필 사진 둥글게 */
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+}
+
+.board {
+  display: flex;
+  flex: 3;
+  gap: 20px;
+}
+
+.column {
+  background: #f4f7fb;
+  border-radius: 10px;
+  padding: 10px;
+  flex: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.columnHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.addBtn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.taskCard {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskCard h3 {
+  margin: 0 0 5px;
+  font-size: 1.2rem;
+}
+
+.avatars {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.sidebar {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profileInfo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.menu li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.darkMode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.darkModeToggle {
+  padding: 5px 10px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 10px;
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.logoutBtn:hover {
+  background: #e33c3c;
+}
+
+/* 다크모드 */
+.darkMode {
+  background: #2c2c2c;
+  color: #f9f9f9;
+}
+
+.taskCard {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskCard h3 {
+  margin: 0 0 5px;
+  font-size: 1.2rem;
+}
+
+.avatars {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+/* 다크 모드 스타일 */
+.dark-mode {
+  background: #2c2c2c;
+  color: #f9f9f9;
+}
+
+.dark-mode .taskCard {
+  background: #444;
+}
+
+.dark-mode .avatar {
+  background: #666;
+}
