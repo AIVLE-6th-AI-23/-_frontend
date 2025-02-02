@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body>
                 <QueryClientProvider client={queryClient}>
-                    {!isFetching && <LoadingBar />}
+                    {isFetching && <LoadingBar />}
                     {children}
                 </QueryClientProvider>
             </body>
