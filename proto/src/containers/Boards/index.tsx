@@ -20,7 +20,7 @@ const BoardList: React.FC = () => {
             lastPage.length > 0 ? lastPage[lastPage.length - 1].createdAt : null,
         initialPageParam: null,
         refetchOnWindowFocus: false,
-        retry: 2,
+        retry: false,
     });
 
     if (status === 'pending') return <p>로딩 중...</p>;

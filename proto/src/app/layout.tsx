@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 if (error?.response?.status === 403) {
                     console.log("403 Forbidden: 로그인 페이지로 이동");
-                    router.push(`/login?redirect=${encodeURIComponent(window.location.pathname)}`); // ✅ 403이면 로그인 페이지로 이동
+                    router.push(`/login?redirect=${encodeURIComponent(window.location.pathname)}`);
                 }
                 else if (Number(error?.response?.status) >= 400) {
                     console.log(`${error?.response?.status} : 서버 오류, 에러 페이지로 이동`);

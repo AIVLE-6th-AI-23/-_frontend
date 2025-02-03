@@ -1,3 +1,4 @@
+import { FETCH_SIZE } from '@/constants/constants';
 import { api,  ApiResponse } from './api';
 import { Post, PostRequest, Posts } from '@/types/types';
 
@@ -11,7 +12,7 @@ export const fetchPosts = async ({
     status?: string | null;
  }): Promise<Posts> => {
     const response = await api.get<ApiResponse<Posts>>(`/api/${boardId}/posts`, {
-        params: { cursor: pageParam, size: 10, status : status}
+        params: { cursor: pageParam, size: FETCH_SIZE, status : status}
     });
     return response.data.data;
 };

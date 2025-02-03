@@ -32,6 +32,7 @@ export const PostList: React.FC<PostListProps> = ({ boardId }) => {
         getNextPageParam: (lastPage : Posts) =>
             lastPage.length > 0 ? lastPage[lastPage.length - 1].createdAt : null,
         initialPageParam : null,
+        retry : false,
     });
 
     const updateMutation = useMutation({
