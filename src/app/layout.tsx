@@ -1,6 +1,8 @@
-import "@/styles/globals.css"; // 글로벌 CSS 경로
-import Header from "@/components/header"; // 공통 헤더 컴포넌트
+import "@/styles/globals.css"; // 글로벌 CSS
 import type { JSX } from "react";
+import Link from "next/link";
+import Header from "@/components/header";
+
 
 export const metadata = {
   title: "Hate Speech Prevention",
@@ -21,16 +23,9 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         {/* Next.js에서 메타데이터는 자동으로 처리됩니다 */}
       </head>
       <body>
-        {/* 헤더 스타일을 유지하고 컴포넌트로 캡슐화 */}
-        <header className="header">
-          <a href="/home" className="logo-container">
-            <img
-              src="/images/global/Nero_logo1.png"
-              alt="NERO Logo"
-              className="logo"
-            />
-          </a>
-        </header>
+        {/* 헤더 */}
+        <Header userName={"a"} profileImg={"a"} />
+
         {/* 페이지 내용 */}
         {children}
       </body>
