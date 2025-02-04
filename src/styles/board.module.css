@@ -1,0 +1,364 @@
+/* 공통 스타일 */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽으로 정렬 */
+  align-items: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e3e3e3;
+  height: 80px; /* 헤더 높이 고정 */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  width: 150px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+  padding: 10px;
+  padding-top: 50px;
+}
+
+.board {
+  display: flex;
+  flex: 3;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+
+.column {
+  background: #f4f7fb;
+  border-radius: 10px;
+  padding: 10px;
+  flex:0.8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskCardContainer {
+  display: grid; /* 그리드 레이아웃 적용 */
+  gap: 10px; /* taskCard들 간의 간격 */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* 최소 250px의 열 크기 */
+  grid-auto-rows: minmax(200px, auto); /* 각 taskCard의 최소 높이 */
+}
+
+.columnHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 13px;
+  margin-bottom: 10px;
+}
+
+.addBtn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.addBtn:hover {
+  background: #2e94d9; /* 배경색 변경 */
+  transform: scale(1.1); /* 버튼 크기 살짝 커지도록 */
+}
+
+.taskCard {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 13px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between; /* 제목과 버튼을 양 끝에 배치 */
+  align-items: center;
+}
+
+.taskBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.iconImage {
+  width: 16px; /* 크기 설정 */
+  height: 16px; /* 크기 설정 */
+  object-fit: contain; /* 비율에 맞게 크기 조정 */
+}
+
+/* 안의 text가 길 경우 생략 */
+.taskCard p{
+  text-align: left;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient:vertical;
+  overflow: hidden;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.taskCard h3 {
+  padding-left: 10px;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.avatars {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+
+.sidebar {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profileInfo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.menu li {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.darkMode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.darkModeToggle {
+  padding: 5px 10px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 10px;
+  background: #ff4d4d;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.logoutBtn:hover {
+  background: #e33c3c;
+}
+
+/* 다크모드 */
+.darkMode {
+  background: #2c2c2c;
+  color: #f9f9f9;
+}
+
+.taskCard {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.taskCard h3 {
+  margin: 0 0 5px;
+  font-size: 1.2rem;
+}
+
+.avatars {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  background: #3498db;
+  color: #fff;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+/* 다크 모드 스타일 */
+.dark-mode {
+  background: #2c2c2c;
+  color: #f9f9f9;
+}
+
+.dark-mode .taskCard {
+  background: #444;
+}
+
+.dark-mode .avatar {
+  background: #666;
+}
+
+
+/* 다이얼로그 오버레이 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 반투명한 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 다이얼로그가 다른 요소 위에 표시되도록 */
+}
+
+/* 다이얼로그 창 */
+.dialog {
+  background: #fff;
+  padding: 30px; /* 반응형 패딩 (뷰포트 너비 비율) */
+  border-radius: 10px;
+  max-width: 90%; /* 화면 크기 90%를 차지하도록 제한 */
+  width: 40rem; /* 최소 너비 설정 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* 좌우 여백을 자동으로 설정 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 제목, 폼, 버튼을 공간을 나누어 배치 */
+  height: 40rem;
+  box-sizing: border-box; /* padding이 너비에 포함되도록 */
+}
+
+/* 다이얼로그 제목 */
+.dialog h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem; /* 제목 크기 확대 */
+  line-height: 1.5;
+  margin-top: 0; /* 상단 여백 제거 */
+}
+
+
+/* 다이얼로그 폼 */
+.dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0 0 20px 0; /* 여백 조정 */
+  flex-grow: 1; /* 폼이 나머지 공간을 차지하도록 설정 */
+}
+
+/* 입력창 및 텍스트영역 */
+.dialog input,
+.dialog textarea {
+  width: 100%; /* 100% 너비로 맞추기 */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box; /* padding 포함 */
+}
+
+.dialog textarea {
+  height: 150px; /* 텍스트 영역 높이 설정 */
+  height: 15rem;
+  resize: vertical; /* 사용자가 크기 조정 가능하도록 */
+}
+
+/* 버튼 컨테이너 */
+.dialog .buttonContainer {
+  display: flex; /* 버튼들을 가로로 정렬 */
+  justify-content: center; /* 버튼을 오른쪽으로 정렬 */
+  gap: 10px; /* 버튼 간의 간격 */
+}
+
+/* 저장 버튼 */
+.dialog .saveBtn {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 16px; /* 기본 패딩 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 100px; /* 최소 너비 */
+  height: auto; /* 높이를 자동으로 설정 */
+  transition: background-color 0.3s ease; /* 전환 효과 추가 */
+}
+
+.dialog .saveBtn:hover {
+  background-color: #0056b3;
+}
+
+/* 닫기 버튼 */
+.dialog .closeBtn {
+  background-color: #e66557;
+  color: white;
+  padding: 8px 16px; /* 기본 패딩 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 100px; /* 최소 너비 */
+  height: auto; /* 높이를 자동으로 설정 */
+  transition: background-color 0.3s ease; /* 전환 효과 추가 */
+}
+
+.dialog .closeBtn:hover {
+  background-color: #c32d2d;
+}
