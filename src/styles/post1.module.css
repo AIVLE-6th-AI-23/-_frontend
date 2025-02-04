@@ -1,0 +1,139 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.uploadSection {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: center; /* 가로 가운데 정렬 */
+  justify-content: center; /* 세로 가운데 정렬 */
+  gap: 20px; /* 아이템 간 간격 */
+  margin-top: 20px; /* 페이지 상단에서 간격 */
+}
+
+.placeholder {
+  width: 200px;
+  height: 200px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.fileLabel {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileName {
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+.analysisSection {
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.status,
+.resultDetails {
+  margin-top: 15px;
+}
+
+.resultTitle {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.editInput {
+  width: 50%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  margin: 10px auto;
+}
+
+.buttonContainer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin : 2px;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.analyzeButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.cancelButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.editButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.saveButton {
+  background-color: #17a2b8;
+  color: white;
+}
+
+
+.box {
+  margin-top: 20px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.resultDetails p {
+  margin: 10px 0;
+}

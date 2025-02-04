@@ -1,0 +1,209 @@
+.container {
+  display: grid;
+  grid-template-areas:
+    "titleBox uploadSection"
+    "resultBox categoryBox";
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fb; /* 연한 파란색 */
+}
+
+.titleBox {
+  grid-area: titleBox;
+  position: relative; /* 아이콘 버튼을 절대 위치로 배치 */
+  padding: 40px;
+  background: #f9f9f9;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.uploadSection {
+  grid-area: uploadSection;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #f9f9f9;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.placeholder {
+  width: 200px;
+  height: 200px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.fileLabel {
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #44affc;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileName {
+  margin-top: 10px;
+  color: #333;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+}
+
+.resultBox {
+  grid-area: resultBox;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.categoryBox {
+  grid-area: categoryBox;
+  padding: 0px;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.resultTitle,
+.categoryTitle {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.resultDetails p,
+.categoryDetails p {
+  margin: 10px 0;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.editInput {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin: 10px auto;
+  display: block;
+}
+
+.buttonContainer {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.analyzeButton {
+  background-color: #6d2fff9e;
+  color: white;
+}
+
+.cancelButton {
+  background-color: #dc35467e;
+  color: white;
+}
+
+.editButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.saveButton {
+  background-color: #007bff;
+  color: white;
+}
+
+/* 제목 입력 필드 스타일 */
+.titleInput {
+  height: 40px; /* 기본 높이 */
+}
+
+/* 내용 입력 필드 스타일 */
+.descriptionInput {
+  height: 120px; /* 더 긴 높이 */
+  resize: none; /* 사용자가 크기 조정을 못 하게 설정 */
+}
+
+.iconButtons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+/* 🔥 로딩 화면 (화면 중앙 정렬) */
+.loadingOverlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 중앙 정렬 */
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* 반투명한 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 화면 맨 위에 표시 */
+}
+
+.loadingGif {
+  width: 400px;
+  height: auto;
+}
