@@ -1,7 +1,6 @@
 /* Google Fonts 추가 */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;700&display=swap');
-
-
+@import 'reset.module';
 
 /* 기본 설정 */
 body {
@@ -15,45 +14,114 @@ body {
 
 /* 헤더 스타일 */
 .header {
-  display: flex; /* 플렉스 컨테이너 */
-  align-items: center; /* 세로 가운데 정렬 */
-  justify-content: flex-start; /* 왼쪽 정렬 */
-  padding: 10px 20px; /* 내부 여백 */
-  background-color: rgb(231, 232, 232); /* 밝은 회색 배경 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
-  position: sticky; /* 스크롤 시 고정 */
-  top: 0; /* 화면 상단에 고정 */
-  z-index: 1000; /* 다른 요소 위에 표시 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a1a; /* 다크 테마 */
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+/* 헤더 내부 컨테이너 */
+.header-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
 }
 
 /* 로고 스타일 */
-.logo {
-  width: 150px; /* 로고 너비 */
-  height: auto; /* 비율 유지 */
-  cursor: pointer; /* 클릭 가능한 스타일 */
-  transition: transform 0.3s; /* 부드러운 확대 효과 */
+.logo .logo-img {
+  height: 40px;
+  cursor: pointer;
+  filter: brightness(0) invert(1); /* 다크 테마에 맞게 로고 색상 변경 */
+  transition: transform 0.3s ease-in-out;
 }
 
-/* 로고 호버 효과 */
-.logo:hover {
-  transform: scale(1.1); /* 호버 시 약간 확대 */
+.logo .logo-img:hover {
+  transform: scale(1.1);
 }
 
-/* 헤더 텍스트 스타일 */
-.header-text {
-  font-size: 1.5rem; /* 텍스트 크기 */
-  font-family: 'Nunito', Arial, sans-serif; /* 헤더에 Nunito 폰트 적용 */
-  color: #555; /* 부드러운 회색 */
-  margin-left: 20px; /* 로고와 텍스트 사이 간격 */
-  font-weight: 600; /* 강조 */
+/* 네비게이션 바 */
+.navbar {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
 }
 
-/* 전체적으로 통일된 스타일 */
-a {
-  text-decoration: none; /* 밑줄 제거 */
-  color: inherit; /* 링크 색상을 기본 텍스트 색상과 동일하게 */
+/* 네비게이션 리스트 */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
 }
 
-a:hover {
-  color: #3498db; /* 호버 시 파란색 강조 */
+/* 네비게이션 항목 */
+.nav-links li a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  transition: color 0.3s ease-in-out;
+  padding: 10px 15px;
+}
+
+.nav-links li a:hover {
+  color: #00aaff; /* 넥슨 블루 */
+  text-shadow: 0px 0px 8px rgba(0, 170, 255, 0.5);
+}
+
+/* 사용자 프로필 */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+  }
+
+  .navbar {
+    margin-top: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .user-profile {
+    margin-top: 10px;
+  }
 }
