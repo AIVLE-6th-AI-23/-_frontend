@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import Link from "next/link";
 
 interface HeaderProps {
@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ userName, profileImg }) => {
       <div className="header-container">
         {/* 로고 */}
         <div className="logo">
-          <Link href="/">
+          <Link href="/home">
             <img src="/images/global/NERO_logo1.png" alt="Nero Logo" className="logo-img" />
           </Link>
         </div>
@@ -20,8 +20,8 @@ const Header: React.FC<HeaderProps> = ({ userName, profileImg }) => {
         {/* 네비게이션 바 */}
         <nav className="navbar">
           <ul className="nav-links">
-            <li><Link href="/home">Home</Link></li>
-            <li><Link href="/project">Project</Link></li>
+            <li><Link href="/home">HOME</Link></li>
+            <li><Link href="/board">BOARD</Link></li>
           </ul>
         </nav>
 

@@ -19,7 +19,7 @@ export default function Project(): JSX.Element {
           assignees: ["AB", "CD"],
         },
         {
-          title: "마인크래프트트",
+          title: "마인크래프트",
           description:
             "Plan and create the user flow for onboarding. Include wireframes and presentation slides.",
           assignees: ["AB", "CD"],
@@ -171,14 +171,14 @@ export default function Project(): JSX.Element {
                           aria-label="update"
                           onClick={() => openDialog(task)} // 수정 버튼
                         >
-                          <img src="/images/update.png" alt="update" className={styles.iconImage} />
+                          <img src="/images/board/edit.png" alt="update" className={styles.iconImage} />
                         </button>
                         <button
                           className={styles.taskBtn}
                           aria-label="remove"
                           onClick={() => handleDelete(task)} // 삭제 버튼
                         >
-                          <img src="/images/remove.png" alt="remove" className={styles.iconImage} />
+                          <img src="/images/board/remove.png" alt="remove" className={styles.iconImage} />
                         </button>
                       </div>
                     </div>

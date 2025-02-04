@@ -31,12 +31,20 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1300px; /* 중앙 정렬을 위해 max-width 조정 */
   margin: 0 auto;
-  justify-content: space-between;
+  justify-content: space-between; /* 양쪽 정렬 */
+  gap: 50px; /* 요소 간 기본 간격 */
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
 }
 
+
+
 /* 로고 스타일 */
+.logo {
+  flex-shrink: 0; /* 로고 크기 유지 */
+}
+
 .logo .logo-img {
   height: 40px;
   cursor: pointer;
@@ -51,8 +59,7 @@ body {
 /* 네비게이션 바 */
 .navbar {
   display: flex;
-  flex-grow: 1;
-  justify-content: center;
+  margin-left: 40px; /* 네비게이션 바를 왼쪽으로 이동 */
 }
 
 /* 네비게이션 리스트 */
@@ -83,14 +90,23 @@ body {
 .user-profile {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
+  min-width: 150px; /* 최소 너비 유지 */
+  max-width: 250px; /* 너무 길어지는 걸 방지 */
+  overflow: hidden; /* 길이가 초과되면 숨김 */
 }
 
+/* 프로필 이름 */
 .user-name {
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
+  white-space: nowrap; /* 줄 바꿈 방지 */
+  overflow: hidden; /* 넘칠 경우 숨김 */
+  text-overflow: ellipsis; /* 너무 길면 '...'으로 표시 */
+  max-width: 100px; /* 최대 너비 설정 */
 }
+
 
 .profile-pic {
   width: 40px;
@@ -109,6 +125,8 @@ body {
 @media screen and (max-width: 768px) {
   .header-container {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   .navbar {

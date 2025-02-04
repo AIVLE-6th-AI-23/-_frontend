@@ -3,7 +3,6 @@ import type { JSX } from "react";
 import Link from "next/link";
 import Header from "@/components/header";
 
-
 export const metadata = {
   title: "Hate Speech Prevention",
   description: "Identify and prevent hate speech in everyday life.",
@@ -24,7 +23,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
       </head>
       <body>
         {/* 헤더 */}
-        <Header userName={"a"} profileImg={"a"} />
+        <Header userName={"basic profile"} profileImg={"/images/global/profile.jpg"} />
 
         {/* 페이지 내용 */}
         {children}

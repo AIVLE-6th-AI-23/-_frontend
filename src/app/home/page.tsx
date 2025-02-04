@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link"; // ✅ Link 추가
 import Header from "@/components/header";
 import styles from "@/styles/home.module.css";
 import type { JSX } from "react";
@@ -7,54 +8,69 @@ import type { JSX } from "react";
 export default function Home(): JSX.Element {
   const [likes, setLikes] = useState<number>(0);
   const [showInfo, setShowInfo] = useState<boolean>(false);
-  const [infoPosition, setInfoPosition] = useState<{ top: number; left: number }>({
-    top: 0,
-    left: 0,
-  });
+  const [infoPosition, setInfoPosition] = useState<{ top: number; left: number }>(
+    { top: 0, left: 0 }
+  );
 
   const infoButtonRef = useRef<HTMLSpanElement | null>(null); // 🛈 버튼 참조
 
-  // 페이지 로드 시 LocalStorage에서 상태를 복원
+  // ✅ LocalStorage에서 likes 값 불러오기 (최초 1회 실행)
   useEffect(() => {
     const savedLikes = localStorage.getItem("likes");
-    if (savedLikes) {
-      setLikes(parseInt(savedLikes, 10)); // 문자열을 숫자로 변환
+    if (savedLikes !== null) {
+      setLikes(parseInt(savedLikes, 10)); // 문자열을 숫자로 변환하여 저장
     }
   }, []);
 
-  // 상태 변경 시 LocalStorage에 저장
+  // ✅ 다른 창에서도 likes 값 유지하도록 이벤트 리스너 추가
+  useEffect(() => {
+    const syncLikes = (event: StorageEvent) => {
+      if (event.key === "likes") {
+        setLikes(parseInt(event.newValue || "0", 10)); // 다른 창에서 변경된 값 동기화
+      }
+    };
+
+    window.addEventListener("storage", syncLikes);
+    return () => window.removeEventListener("storage", syncLikes); // 클린업
+  }, []);
+
+  // ✅ 좋아요 수 변경될 때마다 LocalStorage 업데이트
   useEffect(() => {
     localStorage.setItem("likes", likes.toString());
   }, [likes]);
 
+  // 좋아요 증가 함수
   const handleLike = (): void => {
-    setLikes((prevLikes) => prevLikes + 1); // 좋아요 증가
+    setLikes((prevLikes) => prevLikes + 1);
   };
 
+  // 정보 토글 함수
   const toggleInfo = (): void => {
     if (infoButtonRef.current) {
-      const rect = infoButtonRef.current.getBoundingClientRect(); // 버튼의 위치 정보 가져오기
+      const rect = infoButtonRef.current.getBoundingClientRect();
       setInfoPosition({
-        top: rect.bottom + window.scrollY + 10, // 버튼 아래로 10px
-        left: rect.left + rect.width / 2 - 150, // 버튼 중심에 맞춤 (창 너비 고려)
+        top: rect.bottom + window.scrollY + 10,
+        left: rect.left + rect.width / 2 - 150,
       });
     }
-    setShowInfo((prev) => !prev); // 정보 창 표시 여부 토글
+    setShowInfo((prev) => !prev);
   };
 
   const closeInfo = (): void => {
-    setShowInfo(false); // 정보 창 닫기
+    setShowInfo(false);
   };
 
   return (
     <div className={styles.container}>
-      <button className={styles.logoButton}>
-        <img
-          src="/images/home/nero.png"
-          alt="Hate Speech Prevention Logo"
-          className={styles.logo}
-        />
-      </button>
+      <Link href="/project">
+        <button className={styles.logoButton}>
+          <img
+            src="/images/home/nero.png"
+            alt="Hate Speech Prevention Logo"
+            className={styles.logo}
+          />
+        </button>
+      </Link>
       <h1 className={styles.title}>
         <span className={styles.highlight}>N</span>evigate{" "}
         <span className={styles.highlight}>E</span>xpressions,{" "}
@@ -62,7 +78,12 @@ export default function Home(): JSX.Element {
         <span className={styles.highlight}>O</span>utcomes
       </h1>
       <div className={styles.icons}>
-        <span>📁</span>
+        <span>
+          <Link href="/board" style={{ textDecoration: "none" }}>
+            📁
+          </Link>
+        </span>
+
         <span>🖼️</span>
         <span
           className={styles.infoIcon}
@@ -85,7 +106,7 @@ export default function Home(): JSX.Element {
           {/* 정보 창 */}
           <div
             className={styles.infoBox}
-            style={{ top: infoPosition.top, left: infoPosition.left }} // 동적 위치 설정
+            style={{ top: infoPosition.top, left: infoPosition.left }}
           >
             <h2>About NERO</h2>
             <p>
