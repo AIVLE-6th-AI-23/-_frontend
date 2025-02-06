@@ -1,0 +1,39 @@
+import { useQuery } from "@tanstack/react-query";
+import { fetchContentAnalysis } from "@/services/contentAnalysis";
+import * as styles from './contentAnalysis.css';
+
+interface ContentAnalysisProps {
+    postId: number;
+}
+
+const ContentAnalysis: React.FC<ContentAnalysisProps> = ({ postId }) => {
+    const { data, status, isLoading, error } = useQuery({
+        queryKey: ["contentAnalysis", postId],
+        queryFn: () => fetchContentAnalysis(postId),
+        retry: false
+    });
+
+    if (isLoading) return <p className={styles.analysisTextStyle}>분석 결과를 불러오는 중...</p>;
+    if (status === "error") return <p className={styles.analysisTextStyle}>분석 결과를 가져오지 못했습니다. {error?.message}</p>;
+
+    return (
+        <div className={styles.contentAnalysisContainer}>
+            <h2 className={styles.analysisTitleStyle}>분석 결과</h2>
+            <p className={styles.analysisTextStyle}>분석 ID: {data?.analysisId}</p>
+            <p className={styles.analysisTextStyle}>컨텐츠 유형: {data?.contentType}</p>
+            <p className={styles.analysisTextStyle}>분석 세부 정보: {data?.analysisDetail}</p>
+            <p className={styles.analysisTextStyle}>분석 일시: {data?.analysisAt ? new Date(data?.analysisAt).toLocaleString() : "작성일 없음"}</p>
+            
+            <h2 className={styles.analysisTitleStyle}>분석 카테고리 결과</h2>
+            <ul className={styles.analysisListStyle}>
+                {data?.analysisCategoryResultResponseDto.map((result, index) => (
+                    <li key={index} className={styles.analysisListItemStyle}>
+                        {result.category}: {result.score}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default ContentAnalysis;
