@@ -15,3 +15,8 @@ export const login = async ({
 export const logout = async () => {
     return api.post('/api/user/logout');
 }
+
+export const sessionCheck = async () : Promise<UserResponse | null> => {
+    const response = await api.get<ApiResponse<UserResponse>>('/api/user/profile');
+    return response.data.data;
+};
