@@ -43,6 +43,11 @@ export const inputField = style({
     width: "100%",
 });
 
+export const multiSelect = style({
+    width: "100%",
+    marginBottom: "10px",
+});
+
 export const createButton = style({
   backgroundColor: colors.primary,
   color: colors.text,
