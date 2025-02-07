@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updatePost } from "@/services/post";
 import { Post, PostRequest } from "@/types/types";
-import * as styles from "../postActionButton.css";
+import * as styles from "@/styles/Actionbuton.css";
 
 interface EditPostButtonProps {
   boardId: number; // 게시판 ID
@@ -18,7 +18,7 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
   const editMutation = useMutation({
     mutationFn: (updatedPost: PostRequest) =>
       updatePost({
-        boardId,
+        boardId: post.boardId,
         postId: post.postId,
         postData: updatedPost,
       }),
@@ -31,14 +31,23 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
     onError: () => alert("게시글 수정 실패"),
   });
 
-  const handleSave = () => {
+  const handleSave = (event: React.MouseEvent) => {
+    event.stopPropagation();
     editMutation.mutate({
       boardId,
       postTitle,
       description,
     });
   };
-
+  const handleCancel = (event: React.MouseEvent) => {
+      event.stopPropagation();
+      setIsEditing(false);
+    };
+  
+  const handleEditClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setIsEditing(true);
+  };
   return (
     <div>
       {isEditing ? (
@@ -47,11 +56,13 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
             type="text"
             className={styles.inputField}
             value={postTitle}
+            onClick={(e) => e.stopPropagation()} 
             onChange={(e) => setPostTitle(e.target.value)}
           />
           <textarea
             className={styles.inputField}
             value={description}
+            onClick={(e) => e.stopPropagation()} 
             onChange={(e) => setDescription(e.target.value)}
           />
           <button className={styles.saveButton} onClick={handleSave}>
@@ -59,7 +70,7 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
           </button>
           <button
             className={styles.cancelButton}
-            onClick={() => setIsEditing(false)}
+            onClick={handleCancel}
           >
             Cancel
           </button>
@@ -67,7 +78,7 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
       ) : (
         <button
           className={styles.editButton}
-          onClick={() => setIsEditing(true)}
+          onClick={handleEditClick}
         >
           ✏️ Edit
         </button>

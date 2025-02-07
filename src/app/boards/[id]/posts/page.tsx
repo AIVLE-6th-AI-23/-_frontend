@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useParams } from 'next/navigation';
-import Project from '@/containers/Project';
+import PostsPage from '@/containers/Posts';
 
 
 const PostPage: React.FC = () => {
@@ -13,7 +13,7 @@ const PostPage: React.FC = () => {
     }
 
     return (
-        <Project boardId={Number(id)} />
+        <PostsPage boardId={Number(id)} />
     );
 };
 

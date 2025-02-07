@@ -1,22 +1,21 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteBoard } from "@/services/board";
-import * as styles from "../../../../styles/Actionbuton.css";
-import { Board } from "@/types/types";
+import * as styles from "@/styles/Actionbuton.css";
 
 interface DeleteBoardProps {
   boardId: number;
 }
 
-const DeleteBoard: React.FC<DeleteBoardProps> = ({ boardId }) => {
+const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId }) => {
   const queryClient = useQueryClient();
 
   const deleteMutation = useMutation({
     mutationFn: (boardId: number) => deleteBoard({boardId}), 
     onSuccess: () => {
-      queryClient.setQueryData(["boards"], (oldData: any) =>
-        oldData.filter((b: Board) => b.boardId !== boardId)
-      );
+      queryClient.invalidateQueries({
+        queryKey: ["boards"],
+      })
     },
     onError: (error) => alert(`게시판 삭제 실패: ${error.message}`),
   });
@@ -36,4 +35,4 @@ const DeleteBoard: React.FC<DeleteBoardProps> = ({ boardId }) => {
   );
 };
 
-export default DeleteBoard;
+export default DeleteBoardButton;

@@ -3,7 +3,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchPost, updatePost } from '@/services/post';
 import { Post, PostRequest } from '@/types/types';
 import PostThumbnail from '@/components/PostThumbnail';
-import ContentAnalysis from '@/containers/Post/ContentAnalysis';
 import * as styles from './postDetails.css';
 
 interface PostProps {
@@ -26,6 +25,8 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
         enabled: !cachedPost,
     });
 
+    if(status === 'error') throw new Error('500');
+
     const postData = cachedPost || post;
 
     const updateMutation = useMutation({
@@ -36,8 +37,6 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
         },
     });
 
-    if (isLoading) return <p className={styles.infoTextStyle}>로딩 중...</p>;
-    if (status === "error") return <p className={styles.infoTextStyle}>게시글을 불러오지 못했습니다. {error?.message}</p>;
     if (!postData) return <p className={styles.infoTextStyle}>게시글이 존재하지 않습니다.</p>;
 
     const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,19 +51,16 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
     };
 
     return (
-        <div className={styles.postDetailsContainer}>
-            {/* 썸네일 강조 */}
+        <div>
             <div className={styles.postThumbnailStyle}>
                 <PostThumbnail post={postData} update={true} />
             </div>
-            
-            {/* 제목 & 설명 간략화 */}
+
             <div className="text-center space-y-2">
                 <h1 className={styles.postTitleStyle}>{postData.postTitle}</h1>
                 <p className={styles.postDescriptionStyle}>{postData.description}</p>
             </div>
 
-            {/* 게시글 편집 */}
             {isEditing ? (
                 <form onSubmit={handleSave} className={styles.editFormStyle}>
                     <input type="text" name="postTitle" defaultValue={postData.postTitle} className="w-full p-2 border rounded" />
@@ -80,15 +76,9 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
                 </div>
             )}
 
-            {/* 게시글 추가 정보 */}
             <div className={styles.infoTextStyle}>
                 <p>조회수: {postData.viewCount}</p>
                 <p>작성일: {postData.createdAt ? new Date(postData.createdAt).toLocaleDateString() : "작성일 없음"}</p>
-            </div>
-            
-            {/* 콘텐츠 분석 결과 */}
-            <div className={styles.contentAnalysisContainer}>
-                <ContentAnalysis postId={Number(postId)} />
             </div>
         </div>
     );

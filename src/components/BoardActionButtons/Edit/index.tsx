@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBoard } from "@/services/board";
 import { Board, BoardRequest } from "@/types/types";
-import * as styles from "../../../../styles/Actionbuton.css";
+import * as styles from "@/styles/Actionbuton.css";
 
 interface EditBoardProps {
   board: Board;
@@ -17,12 +17,10 @@ const EditBoard: React.FC<EditBoardProps> = ({ board }) => {
   const updateMutation = useMutation({
     mutationFn: (updatedData: BoardRequest) =>
       updateBoard({ boardId: board.boardId, boardData: updatedData }),
-    onSuccess: (updatedBoard) => {
-      queryClient.setQueryData(["boards"], (oldData: any) =>
-        oldData.map((b: Board) =>
-          b.boardId === updatedBoard.boardId ? updatedBoard : b
-        )
-      );
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["boards"],
+      })
       setIsEditing(false);
     },
     onError: (error) => alert(`게시판 수정 실패: ${error.message}`),

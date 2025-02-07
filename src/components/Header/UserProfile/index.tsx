@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { logout } from "@/services/auth";
 import { UserResponse } from "@/types/types";
-import * as styles from "@/components/Header/header.css"
+import * as styles from "./userProfile.css"
 import Link from "next/link";
 import Image from "next/image";
 

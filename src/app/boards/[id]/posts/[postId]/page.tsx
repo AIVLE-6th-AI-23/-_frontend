@@ -2,10 +2,10 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import { PostDetails } from "@/containers/Post/PostDetails";
-import ContentAnalysis from "@/containers/Post/ContentAnalysis";
+import PostPage from "@/containers/Post";
 
-const PostPage = () => {
+
+const Post = () => {
     const params = useParams();
     const boardId = params.id;
     const postId = params.postId;
@@ -15,11 +15,9 @@ const PostPage = () => {
         return <p>잘못된 요청입니다.</p>;
     }
 
-    return(
-        <div>
-            <PostDetails boardId={Number(boardId)} postId={Number(postId)} />
-        </div>
+    return(        
+        <PostPage boardId={Number(boardId)} postId={Number(postId)} />
     );
 };
 
-export default PostPage;
+export default Post;

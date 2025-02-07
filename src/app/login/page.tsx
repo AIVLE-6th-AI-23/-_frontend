@@ -1,21 +1,19 @@
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { login } from '@/services/auth';
 import * as styles from './login.css';
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get('redirect') || '/boards';
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: (data: { userId: string; password: string }) => login({ employeeId: data.userId, password: data.password }),
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data);
-      router.push(redirectUrl);
+      router.push('/boards');
     },
   });
 

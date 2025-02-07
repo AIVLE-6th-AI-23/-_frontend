@@ -1,14 +1,12 @@
-import React from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchBoards } from '@/services/board';
 import { Board, Boards } from '@/types/types';
 import InfiniteScrollList from '@/components/InfiniteScrollList';
 import { usePathname, useRouter } from 'next/navigation';
-import * as styles from '../boards.css'
-import EditBoardButton from '../BoardActionButtons/Edit';
-import DeleteBoardButton from '../BoardActionButtons/Delete';
-import CreateBoard from '../BoardActionButtons/Create';
-import GlobalLoadingBar from '@/components/LoadingBar';
+import * as styles from './boardList.css'
+import EditBoardButton from '@/components/BoardActionButtons/Edit';
+import DeleteBoardButton from '@/components/BoardActionButtons/Delete';
+import CreateBoard from '@/components/BoardActionButtons/Create';
 
 
 interface BoardListProps {
@@ -24,9 +22,9 @@ const BoardList: React.FC<BoardListProps> = ( { boardStatus } ) => {
     fetchNextPage,
     isFetchingNextPage,
     isLoading,
-    status
+    status,
   } = useInfiniteQuery({
-    queryKey: ["boards", boardStatus], // ✅ 상태별 캐싱 방지
+    queryKey: ["boards", boardStatus],
     queryFn: ({ pageParam }: { pageParam?: string | null }) => fetchBoards({ pageParam, status: boardStatus }),
     getNextPageParam: (lastPage: Boards) =>
       lastPage.length > 0 ? lastPage[lastPage.length - 1].createdAt : null,
@@ -38,15 +36,12 @@ const BoardList: React.FC<BoardListProps> = ( { boardStatus } ) => {
     const handleBoardClick = (boardId : number) => {
         router.push(`${pathName}/${boardId}/posts`);
     }
-    // if (isLoading) return <p>로딩 중...</p>;
-    // if (status === 'error') return <p>게시판을 불러오지 못했습니다.</p>;
-
-    // if (!data || !data.pages) return null;
+    
+    if(status === 'error') throw new Error("500");
 
     return (
         
         <div className={styles.boardListContainer}>
-            {isLoading && <GlobalLoadingBar />}
             <CreateBoard />
             <InfiniteScrollList
                 data={data?.pages.flatMap((page : Boards) => page) || []}

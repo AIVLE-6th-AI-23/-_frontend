@@ -45,12 +45,14 @@ const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
             className={styles.inputField}
             placeholder="제목"
             value={postTitle}
+            onClick={(e) => e.stopPropagation()} 
             onChange={(e) => setPostTitle(e.target.value)}
           />
           <textarea
             className={styles.inputField}
             placeholder="내용"
             value={description}
+            onClick={(e) => e.stopPropagation()} 
             onChange={(e) => setDescription(e.target.value)}
           />
           <button className={styles.saveButton} onClick={handleCreate}>

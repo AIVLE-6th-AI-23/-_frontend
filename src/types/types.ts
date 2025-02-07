@@ -1,10 +1,10 @@
 export interface UserResponse {
-    userName : String,
-    deptId : String,
+    userName : string,
+    deptId : string,
 }
 
 export interface Board {
-    deptIds: any;
+    deptIds: string[];
     boardId: number;
     boardTitle: string;
     description : string;

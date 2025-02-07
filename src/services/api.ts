@@ -1,17 +1,47 @@
-import axios from 'axios';
+import axios from "axios";
+import { getCsrfToken } from "@/utils/csrf";
 
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = "http://127.0.0.1:8080";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
+  timeout: 10000,
 });
 
+api.interceptors.request.use(
+  (config) => {
+    const csrfToken = getCsrfToken();
+    if (csrfToken) {
+      config.headers["X-CSRF-TOKEN"] = csrfToken;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error("❌ API 요청 오류:", error);
+
+    if (axios.isAxiosError(error) && error.code === "ECONNABORTED") {
+      throw new Error("⏳ 요청 시간이 초과되었습니다. 다시 시도해주세요.");
+    }
+
+    if (error.response?.status >= 500) {
+      throw new Error("❌ 서버 오류가 발생했습니다.");
+    }
+    
+    throw new Error(`unexpected error ${error}`)
+  }
+);
+
 export interface ApiResponse<T> {
-    success : boolean;
-    message : string;
-    data : T;
+  success: boolean;
+  message: string;
+  data: T;
 }

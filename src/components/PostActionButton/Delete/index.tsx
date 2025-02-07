@@ -4,8 +4,8 @@ import { deletePost } from "@/services/post";
 import * as styles from "@/styles/Actionbuton.css";
 
 interface DeletePostButtonProps {
-  boardId: number; // 게시판 ID
-  postId: number; // 게시글 ID
+  boardId: number;
+  postId: number;
 }
 
 const DeletePostButton: React.FC<DeletePostButtonProps> = ({
@@ -24,7 +24,8 @@ const DeletePostButton: React.FC<DeletePostButtonProps> = ({
     onError: () => alert("게시글 삭제 실패"),
   });
 
-  const handleDelete = () => {
+  const handleDelete = (event: React.MouseEvent) => {
+    event.stopPropagation();
     if (window.confirm("정말 삭제 하시겠습니까?")) {
       deleteMutation.mutate();
     }

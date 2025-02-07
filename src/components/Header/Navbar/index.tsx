@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import * as styles from "@/components/Header/header.css"
+import * as styles from "./navbar.css"
 
 export default function Navbar() {
   return (

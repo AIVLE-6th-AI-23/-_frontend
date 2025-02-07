@@ -1,6 +1,7 @@
 import React from "react";
 import { updatePostThumbnail } from "@/services/post";
 import { Post } from "@/types/types";
+import Image from "next/image";
 
 
 interface PostThumbnailProps {
@@ -26,7 +27,7 @@ const PostThumbnail: React.FC<PostThumbnailProps> = ({ post, update }) => {
         const fileType = post.thumbnail.split(".").pop()?.toLowerCase() || "";
 
         if (["jpg", "jpeg", "png", "gif", "webp"].includes(fileType)) {
-            return <img src={post.thumbnail} alt="업로드된 이미지" style={{ width: "100px", height: "100px" }} />;
+            return <Image src={post.thumbnail} alt="업로드된 이미지" width={100} height={100} />;
         } else if (["mp4", "webm", "ogg"].includes(fileType)) {
             return (
                 <video width="100px" height="100px" controls>

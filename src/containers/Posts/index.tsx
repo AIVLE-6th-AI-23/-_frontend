@@ -4,18 +4,20 @@ import { fetchPosts } from '@/services/post';
 import { Posts } from '@/types/types';
 import PostSection from './PostSection';
 import * as styles from './posts.css';
+import CreatePostButton from '@/components/PostActionButton/Create';
+import GlobalLoadingBar from '@/components/LoadingBar';
 
 interface PostListProps {
     boardId: number;
 }
 
-const Project: React.FC<PostListProps> = ({ boardId }) => {
+const PostsPage: React.FC<PostListProps> = ({ boardId }) => {
     const {
         data,
         fetchNextPage,
         isFetchingNextPage,
         isLoading,
-        status: queryStatus,
+        status
     } = useInfiniteQuery({
         queryKey: ['posts', boardId],
         queryFn: ({ pageParam = null }) => fetchPosts({ boardId, pageParam }),
@@ -25,9 +27,8 @@ const Project: React.FC<PostListProps> = ({ boardId }) => {
         retry: false,
     });
 
-    if (isLoading) return <p>로딩 중...</p>;
-    if (queryStatus === 'error') return <p>게시글을 불러오지 못했습니다.</p>;
-
+    if(status === 'error') throw new Error('500');
+    
     // 📌 전체 데이터에서 상태별로 분류
     const allPosts = data?.pages.flatMap((page) => page) || [];
     const todoPosts = allPosts.filter((post) => !post.status );
@@ -35,7 +36,9 @@ const Project: React.FC<PostListProps> = ({ boardId }) => {
 
     return (
         <div>
+            {isLoading && <GlobalLoadingBar />}
             <h1 className={styles.postsTitle}>Board {boardId} Posts</h1>
+            <CreatePostButton boardId={boardId} />
             <div className={styles.postContainer}>
                 <div className={styles.postSectionWrapper}>
                     {/* ToDo Section */}
@@ -63,4 +66,4 @@ const Project: React.FC<PostListProps> = ({ boardId }) => {
     
 };
 
-export default Project;
+export default PostsPage;

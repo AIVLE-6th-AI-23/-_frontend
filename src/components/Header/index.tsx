@@ -1,5 +1,4 @@
 import React from "react"; 
-import Link from "next/link";
 import * as styles from "./header.css"; // ✅ 스타일 파일 import
 import UserProfile from "./UserProfile";
 import Navbar from "./Navbar";

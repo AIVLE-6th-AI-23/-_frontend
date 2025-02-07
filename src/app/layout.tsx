@@ -1,13 +1,18 @@
 "use client";
 
 import '@/styles/globals.css';
-import { QueryClient, QueryClientProvider, useIsFetching, useIsMutating } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React from 'react';
-import { usePathname, useRouter } from "next/navigation";
-import LoadingBar from '@/components/LoadingBar';
+import { useRouter } from "next/navigation";
 import Header from '@/components/Header';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: false,
+        }
+    }
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
@@ -15,15 +20,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
     React.useEffect(() => {
         const unsubscribe = queryClient.getQueryCache().subscribe((event) => {
-            const error = event?.query.state.error as any;
-            
-            if (error?.response?.status === 403) {
-                console.log("403 Forbidden: 로그인 페이지로 이동");
-                router.push(`/login?redirect=${encodeURIComponent(window.location.pathname)}`);
-            }
-            else if (Number(error?.response?.status) >= 400) {
-                console.log(`${error?.response?.status} : 서버 오류, 에러 페이지로 이동`);
-                // router.push("/error");
+            const error = event?.query.state.error as unknown;
+        
+            if (typeof error === "object" && error !== null && "response" in error) {
+                const response = (error as { response?: { status?: number } }).response;
+                
+                if (response?.status === 403) {
+                    console.log("403 Forbidden: 로그인 페이지로 이동");
+                    router.push('/login');
+                    queryClient.cancelQueries();
+                }
             }
         });
 

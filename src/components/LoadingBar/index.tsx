@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsFetching, useIsMutating } from "@tanstack/react-query";
+import Image from "next/image";
 import * as styles from "./loadingBar.css";
 
 const GlobalLoadingBar: React.FC = () => {

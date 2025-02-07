@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBoard } from "@/services/board";
 import { BoardRequest } from "@/types/types";
-import * as styles from "../../../../styles/Actionbuton.css";
-import { useRouter } from "next/navigation";
+import * as styles from "@/styles/Actionbuton.css";
 
-const CreateBoard: React.FC = () => {
-  const router = useRouter();
+const CreateBoardButton: React.FC = () => {
+  const queryClient = useQueryClient();
   const [isCreating, setIsCreating] = useState(false);
   const [boardTitle, setBoardTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,7 +14,9 @@ const CreateBoard: React.FC = () => {
   const createMutation = useMutation({
     mutationFn: (boardData: BoardRequest) => createBoard({ boardData }),
     onSuccess: () => {
-        router.push("/boards");
+      queryClient.invalidateQueries({
+        queryKey: ["boards"],
+    });
       setIsCreating(false);
       setBoardTitle("");
       setDescription("");
@@ -74,4 +75,4 @@ const CreateBoard: React.FC = () => {
   );
 };
 
-export default CreateBoard;
+export default CreateBoardButton;
