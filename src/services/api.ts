@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getCsrfToken } from "@/utils/csrf";
 
-const API_BASE_URL = "http://127.0.0.1:8080";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -12,16 +12,21 @@ export const api = axios.create({
   timeout: 10000,
 });
 
-api.interceptors.request.use(
-  (config) => {
-    const csrfToken = getCsrfToken();
-    if (csrfToken) {
-      config.headers["X-CSRF-TOKEN"] = csrfToken;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+
+const CSRFProtection = Boolean(process.env.NEXT_PUBLIC_CSRF_PROTECTION); 
+
+if(CSRFProtection){
+  api.interceptors.request.use(
+    (config) => {
+      const csrfToken = getCsrfToken();
+      if (csrfToken) {
+        config.headers["X-CSRF-TOKEN"] = csrfToken;
+      }
+      return config;
+    },
+    (error) => Promise.reject(error)
+  );
+}
 
 api.interceptors.response.use(
   (response) => response,
