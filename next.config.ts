@@ -4,6 +4,15 @@ import { NextConfig } from 'next';
 const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "hatefilterai.blob.core.windows.net",
+        pathname: "/blob1/**",
+      }
+    ]
+  },
   reactStrictMode: true
 };
 
