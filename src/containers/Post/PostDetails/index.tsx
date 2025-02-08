@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchPost, updatePost } from '@/services/post';
 import { Post, PostRequest } from '@/types/types';
@@ -25,7 +25,12 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
         enabled: !cachedPost,
     });
 
-    if(status === 'error') throw new Error('500');
+    useEffect(() => {
+        if (status === "error") {
+        queryClient.resetQueries({ queryKey: ["posts", boardId] });
+        throw new Error();
+        }
+    }, [status, queryClient]);
 
     const postData = cachedPost || post;
 

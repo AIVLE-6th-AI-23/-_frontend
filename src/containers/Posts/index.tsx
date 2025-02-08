@@ -1,5 +1,5 @@
-import React from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchPosts } from '@/services/post';
 import { Posts } from '@/types/types';
 import PostSection from './PostSection';
@@ -12,6 +12,7 @@ interface PostListProps {
 }
 
 const PostsPage: React.FC<PostListProps> = ({ boardId }) => {
+    const queryClient = useQueryClient();
     const {
         data,
         fetchNextPage,
@@ -24,10 +25,16 @@ const PostsPage: React.FC<PostListProps> = ({ boardId }) => {
         getNextPageParam: (lastPage: Posts) =>
             lastPage.length > 0 ? lastPage[lastPage.length - 1].createdAt : null,
         initialPageParam: null,
+        refetchOnWindowFocus: false,
         retry: false,
     });
 
-    if(status === 'error') throw new Error('500');
+    useEffect(() => {
+        if (status === "error") {
+        queryClient.resetQueries({ queryKey: ["posts", boardId] });
+        throw new Error();
+        }
+    }, [status, queryClient]);
     
     // 📌 전체 데이터에서 상태별로 분류
     const allPosts = data?.pages.flatMap((page) => page) || [];

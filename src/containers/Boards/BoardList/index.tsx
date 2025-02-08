@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchBoards } from '@/services/board';
 import { Board, Boards } from '@/types/types';
 import InfiniteScrollList from '@/components/InfiniteScrollList';
@@ -7,6 +7,7 @@ import * as styles from './boardList.css'
 import EditBoardButton from '@/components/BoardActionButtons/Edit';
 import DeleteBoardButton from '@/components/BoardActionButtons/Delete';
 import CreateBoard from '@/components/BoardActionButtons/Create';
+import { useEffect } from 'react';
 
 
 interface BoardListProps {
@@ -14,9 +15,9 @@ interface BoardListProps {
 }
 
 const BoardList: React.FC<BoardListProps> = ( { boardStatus } ) => {
-    const pathName = usePathname();
-    const router = useRouter();
-
+  const pathName = usePathname();
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const {
     data,
     fetchNextPage,
@@ -37,7 +38,12 @@ const BoardList: React.FC<BoardListProps> = ( { boardStatus } ) => {
         router.push(`${pathName}/${boardId}/posts`);
     }
     
-    if(status === 'error') throw new Error("500");
+    useEffect(() => {
+      if (status === "error") {
+        queryClient.resetQueries({ queryKey: ["boards", boardStatus] });
+        throw new Error();
+      }
+    }, [status, queryClient]);
 
     return (
         
