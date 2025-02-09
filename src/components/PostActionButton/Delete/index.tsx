@@ -33,7 +33,7 @@ const DeletePostButton: React.FC<DeletePostButtonProps> = ({
 
   return (
     <button className={styles.deleteButton} onClick={handleDelete}>
-      🗑️ Delete
+      🗑️
     </button>
   );
 };

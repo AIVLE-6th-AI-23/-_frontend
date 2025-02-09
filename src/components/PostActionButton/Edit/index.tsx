@@ -49,7 +49,7 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
     setIsEditing(true);
   };
   return (
-    <div>
+    <>
       {isEditing ? (
         <div className={styles.formContainer}>
           <input
@@ -80,10 +80,10 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ boardId, post }) => {
           className={styles.editButton}
           onClick={handleEditClick}
         >
-          ✏️ Edit
+          ✏️
         </button>
       )}
-    </div>
+    </>
   );
 };
 

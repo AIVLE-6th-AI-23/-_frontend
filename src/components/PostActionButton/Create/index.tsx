@@ -70,7 +70,7 @@ const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
           className={styles.createButton}
           onClick={() => setIsCreating(true)}
         >
-          ➕ Create Post
+          ➕
         </button>
       )}
     </div>

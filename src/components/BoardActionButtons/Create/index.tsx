@@ -87,7 +87,7 @@ const CreateBoardButton: React.FC = () => {
         </div>
       ) : (
         <button className={styles.createButton} onClick={() => setIsCreating(true)}>
-          ➕ Create Board
+          ➕
         </button>
       )}
     </div>

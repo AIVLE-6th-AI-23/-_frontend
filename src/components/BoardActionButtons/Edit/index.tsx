@@ -47,7 +47,7 @@ const EditBoard: React.FC<EditBoardProps> = ({ board }) => {
   };
 
   return (
-    <div className={styles.buttonContainer}>
+    <>
       {isEditing ? (
         <>
           <input
@@ -72,10 +72,10 @@ const EditBoard: React.FC<EditBoardProps> = ({ board }) => {
         </>
       ) : (
         <button className={styles.editButton} onClick={handleEditClick}>
-          ✏️ Edit
+          ✏️
         </button>
       )}
-    </div>
+    </>
   );
 };
 
