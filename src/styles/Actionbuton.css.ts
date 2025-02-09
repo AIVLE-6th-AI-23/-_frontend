@@ -49,6 +49,9 @@ export const multiSelect = style({
 });
 
 export const createButton = style({
+  position: 'absolute',
+  top: '16px',
+  right: '24px',
   backgroundColor: colors.primary,
   color: colors.text,
   padding: "8px 12px",

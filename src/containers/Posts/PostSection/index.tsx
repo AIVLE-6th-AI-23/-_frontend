@@ -4,8 +4,8 @@ import { Post } from '@/types/types';
 import InfiniteScrollList from '@/components/InfiniteScrollList';
 import PostThumbnail from '@/components/PostThumbnail';
 import * as styles from './postSection.css';
-import EditPostButton from '../../../components/PostActionButton/Edit';
-import DeletePostButton from '../../../components/PostActionButton/Delete';
+import EditPostButton from '@/components/PostActionButton/Edit';
+import DeletePostButton from '@/components/PostActionButton/Delete';
 
 interface PostSectionProps {
     title: string;

@@ -24,7 +24,7 @@ const InfiniteScrollList = <T,>({
                     fetchNextPage();
                 }
             },
-            { threshold: 0.5 }
+            { threshold: 0.3 }
         );
 
         observer.observe(observerRef.current);
@@ -32,13 +32,10 @@ const InfiniteScrollList = <T,>({
     }, [fetchNextPage]);
 
     return (
-        <div>
-            <ul>
-                {data.map(renderItem)}
-            </ul>
+        <>
+            {data.map(renderItem)}
             <div ref={observerRef} />
-            {isFetchingNextPage && <p>로딩 중...</p>}
-        </div>
+        </>
     );
 };
 

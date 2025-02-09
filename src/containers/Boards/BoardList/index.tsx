@@ -6,7 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import * as styles from './boardList.css'
 import EditBoardButton from '@/components/BoardActionButtons/Edit';
 import DeleteBoardButton from '@/components/BoardActionButtons/Delete';
-import CreateBoard from '@/components/BoardActionButtons/Create';
 import { useEffect } from 'react';
 
 
@@ -48,21 +47,21 @@ const BoardList: React.FC<BoardListProps> = ( { boardStatus } ) => {
     return (
         
         <div className={styles.boardListContainer}>
-            <CreateBoard />
             <InfiniteScrollList
                 data={data?.pages.flatMap((page : Boards) => page) || []}
                 renderItem={(board: Board) => (
-                    <li key={board.boardId} className={styles.boardItem}
+                    <div key={board.boardId} className={styles.boardItem}
                         onClick={() => handleBoardClick(board.boardId)}
                         style={{cursor: 'pointer'}}>
-                        <div className={styles.boardWrapper}>
-                          <h3 className={styles.boardTitle}>{board.boardTitle}</h3>
-                          <p className={styles.boardDescription}>{board.description}</p>
-                          
+                        <div className={styles.boardActions}>
                           <EditBoardButton board={board} />
                           <DeleteBoardButton boardId={board.boardId} />
                         </div>
-                    </li>
+                        <div className={styles.boardWrapper}>
+                          <h3 className={styles.boardTitle}>{board.boardTitle}</h3>
+                          <p className={styles.boardDescription}>{board.description}</p>
+                        </div>
+                    </div>
                 )}
                 fetchNextPage={fetchNextPage}
                 isFetchingNextPage={isFetchingNextPage}

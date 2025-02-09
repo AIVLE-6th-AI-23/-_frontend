@@ -3,6 +3,7 @@ import BoardList from './BoardList';
 import * as styles from './boards.css';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import GlobalLoadingBar from '@/components/LoadingBar';
+import CreateBoardButton from '@/components/BoardActionButtons/Create';
 
 const Board: React.FC = () => {
   const isFetching = useIsFetching() > 0; 
@@ -12,10 +13,11 @@ const Board: React.FC = () => {
   return (
     <div className={styles.boardContainer}>
       {isLoading && <GlobalLoadingBar />}
-      <h1 className={styles.boardPageTitle}>Boards</h1>
-      <div className={styles.boardListContainer}>
-        <BoardList boardStatus={ "active" }/>
+      <div className={styles.boardHeader}>
+        <h1 className={styles.boardPageTitle}>Boards</h1>
+        <CreateBoardButton />
       </div>
+      <BoardList boardStatus={ "active" }/>
     </div>
   );
 };
