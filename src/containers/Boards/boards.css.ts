@@ -21,7 +21,7 @@ export const boardHeader = style({
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width : '100%',
     padding: '16px 24px',
     borderBottom: '1px solid #e0e0e0',

@@ -1,9 +1,34 @@
 import { style } from "@vanilla-extract/css";
 import { colors } from "@/styles/colors.css";
 
-export const buttonContainer = style({
+export const modalOverlay = style({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: "rgba(0, 0, 0, 0.5)", 
   display: "flex",
-  gap: "8px",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1000, 
+});
+
+export const modalContent = style({
+  backgroundColor: "white",
+  padding: "20px",
+  borderRadius: "8px",
+  width: "400px",
+  height: "260px",
+  maxWidth: "90%",
+  maxHeight: "90%",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+  position: "relative",
+});
+
+export const modalActions = style({
+  display: "flex",
+  justifyContent: "space-between",
   marginTop: "10px",
 });
 
@@ -19,63 +44,76 @@ export const formContainer = style({
   width: "100%",
 });
 
-export const createContainer = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: "10px",
-  alignItems: "center",
-  marginBottom: "20px",
-});
-
-export const createForm = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: "8px",
-  width: "100%",
-  maxWidth: "400px",
-});
 
 export const inputField = style({
-    padding: "8px",
-    border: `1px solid ${colors.border}`,
-    borderRadius: "4px",
-    fontSize: "14px",
-    width: "100%",
+  width: "100%",
+  padding: "10px",
+  marginBottom: "10px",
+  borderRadius: "4px",
+  border: "1px solid #ccc",
+  boxSizing: "border-box",
+});
+
+export const descriptionField = style({
+  width: "100%",
+  padding: "10px",
+  marginBottom: "10px",
+  borderRadius: "4px",
+  border: "1px solid #ccc",
+  boxSizing: "border-box",
+  height: "120px", 
 });
 
 export const multiSelect = style({
-    width: "100%",
-    marginBottom: "10px",
-});
-
-export const createButton = style({
-  position: 'absolute',
-  top: '16px',
-  right: '24px',
-  backgroundColor: colors.primary,
-  color: colors.text,
-  padding: "8px 12px",
-  borderRadius: "5px",
-  cursor: "pointer",
-  ":hover": { backgroundColor: colors.primaryHover },
+  marginBottom: "10px",
+  width: "100%",
 });
 
 export const saveButton = style({
-  backgroundColor: colors.secondary,
-  color: colors.text,
-  padding: "8px 12px",
-  borderRadius: "5px",
+  backgroundColor: "#4CAF50",
+  color: "white",
+  border: "none",
+  padding: "10px 20px",
+  borderRadius: "4px",
   cursor: "pointer",
-  ":hover": { backgroundColor: colors.secondaryHover },
 });
 
 export const cancelButton = style({
-  backgroundColor: colors.tertiary,
-  color: colors.text,
-  padding: "8px 12px",
-  borderRadius: "5px",
+  backgroundColor: "#f44336",
+  color: "white",
+  border: "none",
+  padding: "10px 20px",
+  borderRadius: "4px",
   cursor: "pointer",
-  ":hover": { backgroundColor: colors.tertiaryHover },
+});
+
+export const createContainer = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
+
+
+export const createButton = style({
+  backgroundColor: "transparent", 
+  border: "none", 
+  padding: 0, 
+  display: "flex", 
+  cursor: "pointer",
+});
+
+export const createButtonImage = style({
+  width: "35px",
+  height: "35px",
+  objectFit: "contain",
+  backgroundColor: "transparent", 
+  border: "none", 
+
+  ":hover": {
+    transform: "scale(1.1)", 
+    transition: "transform 0.2s ease, background-color 0.2s ease", 
+  },
+
 });
 
 export const editInput = style({
@@ -88,20 +126,47 @@ export const editInput = style({
 });
 
 export const editButton = style({
-  backgroundColor: colors.edit,
-  color: colors.text,
-  padding: "8px 12px",
-  borderRadius: "5px",
-  zIndex: 30,
+  width: "25px",
+  height: "25px", 
+  // backgroundColor: colors.edit, 
+  border: "none", 
+  padding: 0, 
+  display: "flex", 
   cursor: "pointer",
-  ":hover": { backgroundColor: colors.editHover },
+});
+
+export const editButtonImage = style({
+  width: "20px",
+  height: "20px", 
+  objectFit: "contain", 
+  backgroundColor: "transparent", 
+  border: "none", 
+
+  ":hover": {
+    transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
+    transition: "transform 0.2s ease, background-color 0.2s ease", 
+  },
 });
 
 export const deleteButton = style({
-  backgroundColor: colors.delete,
-  color: colors.text,
-  padding: "8px 12px",
-  borderRadius: "5px",
+  width: "25px",
+  height: "25px", 
+  backgroundColor: "transparent",
+  border: "none", 
+  paddingTop: 3, 
+  display: "flex", 
   cursor: "pointer",
-  ":hover": { backgroundColor: colors.deleteHover },
+});
+
+export const deleteButtonImage = style({
+  width: "23px",
+  height: "23px", 
+  objectFit: "contain", 
+  backgroundColor: "transparent",
+  border: "none", 
+
+  ":hover": {
+    transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
+    transition: "transform 0.2s ease, background-color 0.2s ease", 
+  },
 });

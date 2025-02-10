@@ -30,7 +30,7 @@ const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId }) => {
 
   return (
     <button className={styles.deleteButton} onClick={handleDelete}>
-      🗑️
+      <img src="/images/remove.png" className={styles.deleteButtonImage} />
     </button>
   );
 };

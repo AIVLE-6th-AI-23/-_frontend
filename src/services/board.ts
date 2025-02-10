@@ -9,11 +9,13 @@ export const fetchBoards = async ({
     const response = await api.get<ApiResponse<Boards>>('/api/boards', {
         params: { cursor: pageParam, size: FETCH_SIZE, status : status}
     });
+    console.log(response);
     return response.data.data;
 };
 
 export const createBoard = async ({ boardData }: { boardData: BoardRequest }): Promise<Board> => {
     const response = await api.post<ApiResponse<Board>>(`/api/boards/create`, boardData);
+    console.log(response);
     return response.data.data;
 };
 
