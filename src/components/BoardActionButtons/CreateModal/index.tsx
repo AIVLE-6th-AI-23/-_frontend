@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Select, { MultiValue } from "react-select";
 import * as styles from "@/styles/Actionbuton.css";
-
-interface DepartmentOption {
-  value: string;
-  label: string;
-}
+import { DepartmentOption } from "@/types/types";
+import { DepartmentOptions } from "@/constants/constants";
 
 interface CreateBoardModalProps {
   isOpen: boolean;
@@ -17,13 +14,6 @@ interface CreateBoardModalProps {
     deptIds: string[];
   };
 }
-
-const departmentOptions: DepartmentOption[] = [
-  { value: "DEPT001", label: "개발팀" },
-  { value: "DEPT002", label: "마케팅팀" },
-  { value: "3", label: "디자인팀" },
-  { value: "4", label: "인사팀" },
-];
 
 const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
   isOpen,
@@ -44,7 +34,7 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
       setBoardTitle(initialData.boardTitle);
       setDescription(initialData.description);
       setSelectedDepts(
-        departmentOptions.filter((dept) =>
+        DepartmentOptions.filter((dept) =>
           initialData.deptIds?.includes(dept.value) 
         )
       );
@@ -80,7 +70,7 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
           />
           <Select
             className={styles.multiSelect}
-            options={departmentOptions}
+            options={DepartmentOptions}
             isMulti
             value={selectedDepts}
             onChange={(selectedOptions: MultiValue<DepartmentOption>) =>{

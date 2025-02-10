@@ -8,6 +8,7 @@ import EditBoardButton from "@/components/BoardActionButtons/Edit";
 import DeleteBoardButton from "@/components/BoardActionButtons/Delete";
 import { useEffect, useState } from "react";
 import CreateBoardModal from "@/components/BoardActionButtons/CreateModal";
+import { DepartmentOptions } from "@/constants/constants";
 
 interface BoardListProps {
   boardStatus: string;
@@ -112,7 +113,12 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
 
             {board.deptIds && board.deptIds.length > 0 ? (
               <div className={styles.boardDeptIds}>
-                <p>Departments:</p> {board.deptIds.join(", ")}
+              <div>
+                {board.deptIds.map((id) => {
+                  const label = DepartmentOptions.find((dept) => dept.value === id)?.label || id;
+                  return <div key={id}>{label}</div>;
+                })}
+              </div>
               </div>
             ) : (
               <p>No departments available</p>  // 부서 정보가 없다면 대체 텍스트 출력
