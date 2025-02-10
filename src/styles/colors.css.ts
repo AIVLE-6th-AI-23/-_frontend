@@ -15,7 +15,11 @@ export const colors = createThemeContract({
 
   delete: "delete", // 삭제 버튼 색상
   deleteHover: "deleteHover",
-  test : "test",
+  
+  test : "test", // 테스트를 위해 눈에 띄는 색상
+  
+  department : "department", // Boardlist department 색상상
+
   background: "background", // 배경 색상
 
   gridbackground : "gridbackground",
@@ -45,6 +49,8 @@ export const globalTheme = createGlobalTheme(":root", colors, {
   background: "#F5F5F5", // 배경색
 
   gridbackground:"#B8D0FA",
+
+  department : "#AAD1E7",
 
   text: "#4A4A4A", // 기본 텍스트 색상
   border: "#ccc", // 입력 필드 테두리

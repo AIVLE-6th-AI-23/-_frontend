@@ -56,7 +56,6 @@ export const boardFooter = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '10px 0',
   opacity: 0,
   visibility: 'hidden',
   selectors: {
@@ -72,8 +71,25 @@ export const boardPeriod = style({
   color: colors.tertiary,
 });
 
-export const boardDeptIds = style({
-  fontSize: '14px',
+export const boardDepts =style({
+  width :"100%",
+  display : "flex",
+  flexDirection:"row",
+  flexWrap:"wrap",
+  gap:"8px",
+});
+
+export const boardDpetLabels = style({
+  backgroundColor : colors.department,
+  alignItems: "center",
+  justifyContent : "center",
+  borderRadius:"8px",
+  display: "flex", 
+  height: "30px",
+  width:"auto",
+  whiteSpace: "nowrap",
+  padding:"0 5px",
+
 });
 
 export const boardActions = style({
@@ -118,7 +134,7 @@ export const boardWrapper = style({
 
    export const buttonAndBoardWrapper = style({
     display: 'flex',
-    height:"90%",
+    height:"100%",
     flexDirection: 'column',
     gap: '12px', 
   });

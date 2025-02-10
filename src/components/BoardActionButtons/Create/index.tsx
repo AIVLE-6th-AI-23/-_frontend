@@ -18,11 +18,11 @@ const CreateBoardButton: React.FC = () => {
     onError: (error: any) => alert(`게시판 생성 실패: ${error.message}`),
   });
 
-  const handleCreateBoard = (boardTitle: string, description: string, deptIds: string[]) => {
+  const handleCreateBoard = (boardTitle: string, description: string, deptIds: string[], endDate : string|null) => {
     createMutation.mutate({
       boardTitle,
       description,
-      endDate: null,
+      endDate,
       deptIds,
     });
   };
@@ -33,7 +33,7 @@ const CreateBoardButton: React.FC = () => {
         isOpen={isCreating}
         onClose={() => setIsCreating(false)}
         onSave={handleCreateBoard}
-        initialData={{ boardTitle: "", description: "", deptIds: [] }} 
+        initialData={{ boardTitle: "", description: "", deptIds: [] , endDate: null}} 
       />
       {!isCreating && (
         <button className={styles.createButton} onClick={() => setIsCreating(true)}> 
