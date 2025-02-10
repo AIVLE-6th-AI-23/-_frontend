@@ -111,12 +111,17 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
             </div>
 
             {board.deptIds && board.deptIds.length > 0 ? (
-              <div className={styles.boardDeptIds}>
-                <p>Departments:</p> {board.deptIds.join(", ")}
-              </div>
+                <div className={styles.boardDeptIds}>
+                  <p>Departments:</p> {board.deptIds.join(", ")}
+                </div>
             ) : (
               <p>No departments available</p>  // 부서 정보가 없다면 대체 텍스트 출력
             )}
+            <div className={styles.boardFooter}>
+              <div className={styles.boardPeriod}>
+                <p>{new Date(board.createdAt).toLocaleDateString()} ~ {board.endDate ? new Date(board.endDate).toLocaleTimeString() : ""} </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
