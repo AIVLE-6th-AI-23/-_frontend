@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { logout, sessionCheck } from "@/services/auth";
+import { logout, sessionCheck } from "@/services/user";
 import { UserResponse } from "@/types/types";
 import * as styles from "./userProfile.css"
 import Link from "next/link";

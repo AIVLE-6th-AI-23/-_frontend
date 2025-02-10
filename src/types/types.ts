@@ -1,6 +1,14 @@
+export interface UserInfoRequest {
+    employeeId: string,
+    userName: string,
+    email: string,
+    password: string,
+    deptId: string,
+}
+
 export interface UserResponse {
-    userName : string,
-    deptId : string,
+    userName: string,
+    deptId: string,
 }
 
 export interface Board {
@@ -10,6 +18,11 @@ export interface Board {
     description : string;
     createdAt: string;
     endDate : string | null;
+}
+
+export interface DepartmentOption {
+    value: string;
+    label: string;
 }
 
 export type Boards = Board[];

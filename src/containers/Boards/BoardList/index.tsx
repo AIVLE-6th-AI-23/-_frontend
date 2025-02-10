@@ -61,6 +61,9 @@ const BoardList: React.FC<BoardListProps> = ( { boardStatus } ) => {
                           <h3 className={styles.boardTitle}>{board.boardTitle}</h3>
                           <p className={styles.boardDescription}>{board.description}</p>
                         </div>
+                        <div className={styles.boardFooter}>
+                          <p className={styles.boardPeriod}>{new Date(board.createdAt).toLocaleDateString()} ~ {board.endDate ? new Date(board.endDate).toLocaleDateString() : ""}</p>
+                        </div>
                     </div>
                 )}
                 fetchNextPage={fetchNextPage}

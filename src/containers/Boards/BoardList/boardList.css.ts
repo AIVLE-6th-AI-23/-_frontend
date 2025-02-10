@@ -3,7 +3,7 @@ import { colors } from '@/styles/colors.css';
 
 export const boardListContainer = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, minmax(300px, 1fr))', // 한 행에 여러 열이 들어가도록 설정
+  gridTemplateColumns: 'repeat(2, minmax(300px, 1fr))',
   gap: '16px',
   width: '100%',
   padding: '16px',
@@ -16,9 +16,9 @@ export const boardItem = style({
   padding: '16px',
   borderRadius: '8px',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  width: '100%', // Grid 셀 크기를 채우도록 설정
-  maxWidth: '100%', // 부모 Grid에 맞게 제한
-  boxSizing: 'border-box', // 패딩 포함 크기 계산
+  width: '100%',
+  maxWidth: '100%',
+  boxSizing: 'border-box',
   cursor: 'pointer',
   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
   ':hover': {
@@ -35,6 +35,26 @@ export const boardTitle = style({
 
 export const boardDescription = style({
   fontSize: '14px',
+});
+
+export const boardFooter = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '10px 0',
+  opacity: 0,
+  visibility: 'hidden',
+  selectors: {
+    [`${boardItem}:hover &`]: {
+      opacity: 1,
+      visibility: 'visible',
+    },
+  },
+});
+
+export const boardPeriod = style({
+  fontSize: '14px',
+  color: colors.tertiary,
 });
 
 export const boardActions = style({

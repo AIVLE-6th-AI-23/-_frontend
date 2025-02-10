@@ -36,37 +36,32 @@ const PostsPage: React.FC<PostListProps> = ({ boardId }) => {
         }
     }, [status, queryClient]);
     
-    // 📌 전체 데이터에서 상태별로 분류
     const allPosts = data?.pages.flatMap((page) => page) || [];
     const todoPosts = allPosts.filter((post) => !post.status );
     const inProgressPosts = allPosts.filter((post) => post.status);
 
     return (
-        <div>
+        <div className={styles.postContainer}>
             {isLoading && <GlobalLoadingBar />}
-            <h1 className={styles.postsTitle}>Board {boardId} Posts</h1>
-            <CreatePostButton boardId={boardId} />
-            <div className={styles.postContainer}>
-                <div className={styles.postSectionWrapper}>
-                    {/* ToDo Section */}
-                    <PostSection
-                        title="To Do"
-                        posts={todoPosts}
-                        fetchNextPage={fetchNextPage}
-                        isFetchingNextPage={isFetchingNextPage}
-                        inProgress={false}
-                    />
-                </div>
-                <div className={styles.postSectionWrapper}>
-                    {/* In Progress Section */}
-                    <PostSection
-                        title="In Progress"
-                        posts={inProgressPosts}
-                        fetchNextPage={fetchNextPage}
-                        isFetchingNextPage={isFetchingNextPage}
-                        inProgress={true}
-                    />
-                </div>
+            <div className={styles.postsHeader}>
+                <h1 className={styles.postsTitle}>Board {boardId} Posts</h1>
+                <CreatePostButton boardId={boardId} />
+            </div>
+            <div className={styles.postSectionWrapper}>
+                <PostSection
+                    title="To Do"
+                    posts={todoPosts}
+                    fetchNextPage={fetchNextPage}
+                    isFetchingNextPage={isFetchingNextPage}
+                    inProgress={false}
+                />
+                <PostSection
+                    title="In Progress"
+                    posts={inProgressPosts}
+                    fetchNextPage={fetchNextPage}
+                    isFetchingNextPage={isFetchingNextPage}
+                    inProgress={true}
+                />
             </div>
         </div>
     );

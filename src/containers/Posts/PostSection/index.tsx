@@ -29,20 +29,23 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
             <InfiniteScrollList
                 data={posts}
                 renderItem={(post) => (
-                    <li 
+                    <div
                         key={post.postId} 
                         className={styles.postItem}
                         onClick={() => handlePostClick(post.postId)}
                         style={{ cursor: 'pointer' }}
                     >
-                        <PostThumbnail post={post} update={false} />
-                        <h3 className={styles.postTitle}>{post.postTitle}</h3>
-                        <p className={styles.postDescription}>{post.description}</p>
-                        {inProgress && <p className={styles.postStatus}>상태: {post.status}</p>}
-                        <p className={styles.postViewCount}>조회수: {post.viewCount}</p>
-                        <EditPostButton boardId={post.boardId} post={post} />
-                        <DeletePostButton boardId={post.boardId} postId={post.postId} />
-                    </li>
+                        <div className={styles.postActions}>
+                            <DeletePostButton boardId={post.boardId} postId={post.postId} />
+                        </div>
+                        <div className={styles.postsWrapper}>
+                            <PostThumbnail post={post} update={false} />
+                            <h3 className={styles.postTitle}>{post.postTitle}</h3>
+                            <p className={styles.postDescription}>{post.description}</p>
+                            {inProgress && <p className={styles.postStatus}>상태: {post.status}</p>}
+                            <p className={styles.postViewCount}>조회수: {post.viewCount}</p>
+                        </div>
+                    </div>
                 )}
                 fetchNextPage={fetchNextPage}
                 isFetchingNextPage={isFetchingNextPage}

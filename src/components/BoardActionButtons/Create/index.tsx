@@ -2,20 +2,9 @@ import React, { useState } from "react";
 import Select, { MultiValue } from "react-select";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBoard } from "@/services/board";
-import { BoardRequest } from "@/types/types";
+import { BoardRequest, DepartmentOption } from "@/types/types";
 import * as styles from "@/styles/Actionbuton.css";
-
-interface DepartmentOption {
-  value: string;
-  label: string;
-}
-
-const departmentOptions: DepartmentOption[] = [
-  { value: "1", label: "개발팀" },
-  { value: "2", label: "마케팅팀" },
-  { value: "3", label: "디자인팀" },
-  { value: "4", label: "인사팀" },
-];
+import { DepartmentOptions } from "@/constants/constants";
 
 const CreateBoardButton: React.FC = () => {
   const queryClient = useQueryClient();
@@ -69,7 +58,7 @@ const CreateBoardButton: React.FC = () => {
 
           <Select
             className={styles.multiSelect}
-            options={departmentOptions}
+            options={DepartmentOptions}
             isMulti
             value={selectedDepts}
             onChange={(selectedOptions: MultiValue<DepartmentOption>) =>
