@@ -1,53 +1,71 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { updatePostThumbnail } from "@/services/post";
 import { Post } from "@/types/types";
 import Image from "next/image";
-
+import { useDropzone } from "react-dropzone";
+import * as styles from "./postThumbnail.css";
 
 interface PostThumbnailProps {
     post: Post;
-    update : boolean;
+    update: boolean;
 }
 
 const PostThumbnail: React.FC<PostThumbnailProps> = ({ post, update }) => {
-    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
+    const [filePreview, setFilePreview] = useState<string | null>(post.thumbnail || null);
+
+    const handleFileUpload = async (file: File) => {
         if (!file) return;
-
-        await updatePostThumbnail({ boardId : post.boardId, postId: post.postId, file });
-
+        setFilePreview(URL.createObjectURL(file));
+        await updatePostThumbnail({ boardId: post.boardId, postId: post.postId, file });
         window.location.reload();
     };
 
-    const renderFilePreview = () => {
-        if (!post.thumbnail) {
-            return null; // TODO :: thumbnail 없을 시 처리 추가
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        if (acceptedFiles.length > 0) {
+            handleFileUpload(acceptedFiles[0]);
         }
+    }, []);
 
-        const fileType = post.thumbnail.split(".").pop()?.toLowerCase() || "";
-
-        if (["jpg", "jpeg", "png", "gif", "webp"].includes(fileType)) {
-            return <Image src={post.thumbnail} alt="업로드된 이미지" width={100} height={100} />;
-        } else if (["mp4", "webm", "ogg"].includes(fileType)) {
-            return (
-                <video width="100px" height="100px" controls>
-                    <source src={post.thumbnail} type={`video/${fileType}`} />
-                    동영상을 재생할 수 없습니다.
-                </video>
-            );
-        } else {
-            return (
-                <p>
-                    파일 업로드됨: <a href={post.thumbnail} target="_blank" rel="noopener noreferrer">파일 보기</a>
-                </p>
-            );
-        }
-    };
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept: {
+            "image/*": [],
+            "video/*": []
+        },
+        multiple: false,
+        disabled: !update,
+    });
 
     return (
         <div>
-            {renderFilePreview()}
-            {update && <input type="file" onChange={handleFileUpload} />}
+            <div
+                {...getRootProps()}
+                className={styles.dragArea}
+                style={{
+                    width: "100%",
+                    height: "200px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    marginTop: "10px",
+                }}
+            >
+                {filePreview ? (
+                filePreview.endsWith(".mp4") || filePreview.endsWith(".webm") || filePreview.endsWith(".ogg") ? (
+                    <video width="100px" height="100px" controls>
+                        <source src={filePreview} type="video/mp4" />
+                        동영상을 재생할 수 없습니다.
+                    </video>
+                ) : (
+                    <Image src={filePreview} alt="업로드된 이미지" width={100} height={100} />
+                )
+                ) : (
+                    <Image src="/images/No-Image-Placeholder.png" alt="No Image" width={100} height={100} />
+                )}
+                <input {...getInputProps()} />
+            </div>
         </div>
     );
 };

@@ -52,6 +52,26 @@ export const boardDescription = style({
   fontSize: '14px',
 });
 
+export const boardFooter = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: '10px 0',
+  opacity: 0,
+  visibility: 'hidden',
+  selectors: {
+    [`${boardItem}:hover &`]: {
+      opacity: 1,
+      visibility: 'visible',
+    },
+  },
+});
+
+export const boardPeriod = style({
+  fontSize: '14px',
+  color: colors.tertiary,
+});
+
 export const boardDeptIds = style({
   fontSize: '14px',
 });

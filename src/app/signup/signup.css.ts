@@ -8,7 +8,7 @@ export const container = style({
   backgroundColor: '#f8f9fa',
 });
 
-export const loginBox = style({
+export const signupBox = style({
   width: '400px',
   padding: '40px',
   borderRadius: '12px',
@@ -62,13 +62,6 @@ export const error = style({
   marginBottom: '10px',
 });
 
-export const userIdDisplay = style({
-  fontSize: '18px',
-  fontWeight: '500',
-  color: '#202124',
-  marginBottom: '12px',
-});
-
 export const backButton = style({
   marginTop: '10px',
   backgroundColor: 'transparent',
@@ -80,21 +73,5 @@ export const backButton = style({
 
   ':hover': {
     textDecoration: 'none',
-  },
-});
-
-export const signupLink = style({
-  marginTop: '16px',
-  fontSize: '14px',
-  color: '#5f6368',
-});
-
-export const link = style({
-  color: '#1a73e8',
-  textDecoration: 'none',
-  fontWeight: '500',
-
-  ':hover': {
-      textDecoration: 'underline',
   },
 });

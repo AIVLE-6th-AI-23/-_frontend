@@ -1,4 +1,4 @@
-import { UserResponse } from '@/types/types';
+import { UserResponse, UserInfoRequest } from '@/types/types';
 import { api, ApiResponse } from './api';
 
 export const login = async ({
@@ -20,3 +20,19 @@ export const sessionCheck = async () : Promise<UserResponse | null> => {
     const response = await api.get<ApiResponse<UserResponse>>('/api/user/profile');
     return response.data.data;
 };
+
+export const signup = async (
+    user: UserInfoRequest
+): Promise<string> => {
+    const response = await api.post<ApiResponse<string>>('/api/user/signup', user);
+    return response.data.data;
+};
+
+export const updateUserInfo = async (
+    user: UserInfoRequest
+): Promise<string> => {
+    const response = await api.post<ApiResponse<string>>('/api/user/update', user);
+    return response.data.data;
+};
+
+
