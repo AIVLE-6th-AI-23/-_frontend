@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Select, { MultiValue } from "react-select";
 import * as styles from "@/styles/Actionbuton.css";
-import { DepartmentOption } from "@/types/types";
-import { DepartmentOptions } from "@/constants/constants";
 
-interface CreateBoardModalProps {
+interface CreatePostModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (boardTitle: string, description: string, deptIds: string[]) => void;
+  onSave: (boardTitle: string, description: string) => void;
   initialData?: {
     boardTitle: string;
     description: string;
-    deptIds: string[];
   };
 }
 
-const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
+const CreateBoardModal: React.FC<CreatePostModalProps> = ({
   isOpen,
   onClose,
   onSave,
@@ -23,21 +19,11 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
 }) => {
   const [boardTitle, setBoardTitle] = useState<string>(initialData?.boardTitle || "");
   const [description, setDescription] = useState<string>(initialData?.description || "");
-  const [selectedDepts, setSelectedDepts] = useState<DepartmentOption[]>([]);
-
+  
   useEffect(() => {
-
-    console.log("Initial Data from Parent:", initialData);
-    console.log("initialData.deptIds:", initialData?.deptIds);
-
-    if (initialData && initialData.deptIds) {
+    if (initialData) {
       setBoardTitle(initialData.boardTitle);
       setDescription(initialData.description);
-      setSelectedDepts(
-        DepartmentOptions.filter((dept) =>
-          initialData.deptIds?.includes(dept.value) 
-        )
-      );
     }
   }, [initialData]);  
 
@@ -46,7 +32,7 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
       alert("제목과 설명을 입력해주세요.");
       return;
     }
-    onSave(boardTitle, description, selectedDepts.map((dept) => dept.value));
+    onSave(boardTitle, description);
     onClose();
   };
 
@@ -66,17 +52,6 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
             placeholder="설명"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          />
-          <Select
-            className={styles.multiSelect}
-            options={DepartmentOptions}
-            isMulti
-            value={selectedDepts}
-            onChange={(selectedOptions: MultiValue<DepartmentOption>) =>{
-              console.log("Selected Options:", selectedOptions);
-              setSelectedDepts(selectedOptions as DepartmentOption[]);
-            }}
-            placeholder="부서 선택..."
           />
           <div className={styles.modalActions}>
             <button className={styles.saveButton} onClick={handleSave}>

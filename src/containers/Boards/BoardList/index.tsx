@@ -121,7 +121,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
               </div>
               </div>
             ) : (
-              <p>No departments available</p>  // 부서 정보가 없다면 대체 텍스트 출력
+              <p>No departments available</p>
             )}
             <div className={styles.boardFooter}>
               <div className={styles.boardPeriod}>
