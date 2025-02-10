@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "hatefilterai.blob.core.windows.net",
-        pathname: "/blob1/**",
+        hostname: "ai23.blob.core.windows.net",
+        pathname: "/blob/**",
       }
     ]
   },
