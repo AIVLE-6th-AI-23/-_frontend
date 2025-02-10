@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { colors } from "@/styles/colors.css";
+import exp from "constants";
 
 export const modalOverlay = style({
   position: "fixed",
@@ -19,12 +20,13 @@ export const modalContent = style({
   padding: "20px",
   borderRadius: "8px",
   width: "400px",
-  height: "260px",
+  height: "300px",
   maxWidth: "90%",
   maxHeight: "90%",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   position: "relative",
 });
+
 
 export const modalActions = style({
   display: "flex",
@@ -67,6 +69,23 @@ export const descriptionField = style({
 export const multiSelect = style({
   marginBottom: "10px",
   width: "100%",
+});
+
+export const datePickerContainer = style({
+  marginBottom: '6px',
+  display:"flex",
+  flexGrow: 1,
+  width:"100%",
+});
+
+export const datePickerContainerLabel = style({
+  fontSize: '14px',
+  color: '#333',
+});
+
+export const datePickerContainerInput = style({
+  padding: '8px',
+  fontSize: '16px',
 });
 
 export const saveButton = style({

@@ -53,13 +53,13 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     setIsEditing(true);
   };
 
-  const handleSave = (boardTitle: string, description: string, deptIds: string[]) => {
+  const handleSave = (boardTitle: string, description: string, deptIds: string[], endDate: string | null) => {
     if (!selectedBoard) return;
 
     updateMutation.mutate({
       boardTitle,
       description,
-      endDate: null,
+      endDate,
       deptIds,
     });
   };
@@ -83,6 +83,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
             boardTitle: selectedBoard.boardTitle,
             description: selectedBoard.description,
             deptIds: selectedBoard.deptIds,
+            endDate:selectedBoard.endDate,
           }}
         />      
       )}
@@ -112,13 +113,11 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
             </div>
 
             {board.deptIds && board.deptIds.length > 0 ? (
-              <div className={styles.boardDeptIds}>
-              <div>
+              <div className={styles.boardDepts}>
                 {board.deptIds.map((id) => {
                   const label = DepartmentOptions.find((dept) => dept.value === id)?.label || id;
-                  return <div key={id}>{label}</div>;
+                  return <div className = {styles.boardDpetLabels}key={id}>{label}</div>;
                 })}
-              </div>
               </div>
             ) : (
               <p>No departments available</p>
