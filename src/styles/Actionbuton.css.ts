@@ -147,50 +147,59 @@ export const createButtonImage = style({
 });
 
 export const editButton = style({
-  width: "25px",
-  height: "25px", 
-  // backgroundColor: colors.edit, 
-  border: "none", 
-  padding: 0, 
-  display: "flex", 
-  cursor: "pointer",
-  justifyContent:'center',
-  alignItems: 'center',
-});
-
-export const editButtonImage = style({
-  width: "30px",
-  height: "30px", 
-  objectFit: "contain", 
-  backgroundColor: "transparent", 
-  border: "none", 
-  alignItems: 'baseline',
-  ":hover": {
-    transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
-    transition: "transform 0.2s ease, background-color 0.2s ease", 
+  backgroundColor: '#eee',
+  border: 'none',
+  padding: '0.5rem',
+  fontSize: '1rem',
+  width: '4em',
+  borderRadius: '1rem',
+  color: colors.department,
+  boxShadow: '0 0.4rem #dfd9d9',
+  cursor: 'pointer',
+  selectors: {
+    '&:active': {
+      color: 'white',
+      boxShadow: '0 0.2rem #dfd9d9',
+      transform: 'translateY(0.2rem)',
+    },
+    '&:hover:not(:disabled)': {
+      backgroundColor:colors.department,
+      color: 'white',
+      textShadow: '0 0.1rem #bcb4b4',
+    },
+    '&:disabled': {
+      cursor: 'auto',
+      color: 'grey',
+    },
   },
 });
 
+
 export const deleteButton = style({
-  width: "25px",
-  height: "25px", 
-  backgroundColor: "transparent",
-  border: "none", 
-  paddingTop: 3, 
-  display: "flex", 
-  cursor: "pointer",
-});
-
-export const deleteButtonImage = style({
-  width: "23px",
-  height: "23px", 
-  objectFit: "contain", 
-  backgroundColor: "transparent",
-  border: "none", 
-
-  ":hover": {
-    transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
-    transition: "transform 0.2s ease, background-color 0.2s ease", 
+  backgroundColor: '#eee',
+  border: 'none',
+  padding: '1px',
+  fontSize: '1rem',
+  width: '4em',
+  borderRadius: '1rem',
+  color: 'lightcoral',
+  boxShadow: '0 0.4rem #dfd9d9',
+  cursor: 'pointer',
+  selectors: {
+    '&:active': {
+      color: 'white',
+      boxShadow: '0 0.2rem #dfd9d9',
+      transform: 'translateY(0.2rem)',
+    },
+    '&:hover:not(:disabled)': {
+      background: 'lightcoral',
+      color: 'white',
+      textShadow: '0 0.1rem #bcb4b4',
+    },
+    '&:disabled': {
+      cursor: 'auto',
+      color: 'grey',
+    },
   },
 });
 

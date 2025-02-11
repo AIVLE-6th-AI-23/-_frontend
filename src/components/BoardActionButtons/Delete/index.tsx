@@ -11,7 +11,7 @@ interface DeleteBoardProps {
 const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId,onOpenModal }) => {
   return (
     <button className={styles.deleteButton} onClick={(e) => {onOpenModal(boardId); e.stopPropagation();}}>
-      <img src="/images/remove.png" className={styles.deleteButtonImage} />
+      delete
     </button>
   );
 };

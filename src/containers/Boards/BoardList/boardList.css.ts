@@ -14,8 +14,8 @@ export const boardListBody = style({
 
 export const boardListContainer = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))', // 한 행에 여러 열이 들어가도록 설정
-  gap: '16px',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', // 한 행에 여러 열이 들어가도록 설정
+  gap: '20px',
   width: '100%',
   padding: '16px',
   marginTop:'20px',
@@ -36,8 +36,8 @@ export const boardItem = style({
   width: '100%', 
   maxWidth: '100%', 
   boxSizing: 'border-box', 
-  height: 'auto',
-  maxHeight: '250px', 
+  height: '100%',
+  maxHeight: '330px', 
   cursor: 'pointer',
 
   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
@@ -51,10 +51,19 @@ export const boardTitle = style({
   fontSize: '18px',
   fontWeight: 'bold',
   marginBottom: '4px',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap', 
+  maxWidth: '100%', 
 });
 
 export const boardDescription = style({
   fontSize: '14px',
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: 3, 
+  overflow: 'hidden',
+  maxWidth: '100%',
 });
 
 export const boardFooter = style({
@@ -97,6 +106,11 @@ export const boardDpetLabels = style({
 
 });
 
+export const buttonHidden = style({
+  height:'30%',
+  minHeight:'20px',
+});
+
 export const boardActions = style({
   position: 'absolute',
   top: '16px',
@@ -116,30 +130,27 @@ export const boardActions = style({
 
 export const buttonContainer = style({
   display: "flex",
-  justifyContent: "center",
-  gap: "15px",
-  alignItems: "center",
+  gap: "5px",
   height: "100%",
-  width: "auto", 
+  width: "100%",
 });
 
 export const boardWrapper = style({
   display: 'flex',
-  position: 'relative',
   flexDirection: 'column',
-  padding: '20px',
+  paddingLeft:'3px',
   borderRadius: '8px',
-  backgroundColor: colors.background,
-  gap: '12px',
+  margin:'5px',
   justifyContent: 'center',
-  width: '78%', // 부모의 크기에 맞게 폭을 자동으로 조정
+  width: '100%', 
   height: "100%",
-  boxSizing: 'border-box', // 여백을 포함한 크기 계산
-   });
+  boxSizing: 'border-box',
+});
 
-   export const buttonAndBoardWrapper = style({
-    display: 'flex',
-    height:"100%",
-    flexDirection: 'column',
-    gap: '12px', 
-  });
+  export const buttonAndBoardWrapper = style({
+  display: 'flex',
+  height:"100%",
+  flexDirection: 'column',
+  boxSizing: 'border-box',
+  gap: '12px', 
+});

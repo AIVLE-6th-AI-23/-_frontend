@@ -136,17 +136,19 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
           style={{ cursor: "pointer" }}
         >
           <div className={styles.buttonAndBoardWrapper}>
+          <div className={styles.buttonHidden}>
             <div className={styles.boardActions}>
-              <div className={styles.buttonContainer}>
-                <EditBoardButton onEdit={() => handleEditClick(board)} />
-                <DeleteBoardButton boardId = {board.boardId} onOpenModal={openModal} />
-              </div>
+                <div className={styles.buttonContainer}>
+                  <EditBoardButton onEdit={() => handleEditClick(board)} />
+                  <DeleteBoardButton boardId = {board.boardId} onOpenModal={openModal} />
+                </div>
             </div>
+          </div>
 
-            <div className={styles.boardWrapper}>
-              <h3 className={styles.boardTitle}>{board.boardTitle}</h3>
-              <p className={styles.boardDescription}>{board.description}</p>
-            </div>
+              <div className={styles.boardWrapper}>
+                  <h3 className={styles.boardTitle}>{board.boardTitle}</h3>
+                  <p className={styles.boardDescription}>{board.description}</p>
+              </div>
 
             {board.deptIds && board.deptIds.length > 0 ? (
               <div className={styles.boardDepts}>
