@@ -58,15 +58,19 @@ export default function SignupPage() {
               transition={{ duration: 0.4 }}
               onSubmit={handleNextStep}
             >
-              <input name="employeeId" placeholder="사원 번호" required className={styles.input} value={employeeId} onChange={(e) => setEmployeeId(e.target.value)} />
-              <Select 
-                options={DepartmentOptions} 
-                className={styles.input} 
-                placeholder="부서 선택" 
-                onChange={(selectedOption) => setDeptId(selectedOption?.value || '')}
-                isClearable
-              />
-              <button type="submit" className={styles.button}>다음</button>
+              <div className={styles.inputButtonContainer}>
+                <input name="employeeId" placeholder="사원 번호" required className={styles.input} value={employeeId} onChange={(e) => setEmployeeId(e.target.value)} />
+                <Select 
+                  options={DepartmentOptions} 
+                  className={styles.input} 
+                  placeholder="부서 선택" 
+                  onChange={(selectedOption) => setDeptId(selectedOption?.value || '')}
+                  isClearable
+                />
+                <button type="submit" className={styles.button}>
+                  다음
+                </button>
+              </div>
             </motion.form>
           ) : step === 2 ? (
             <motion.form 
