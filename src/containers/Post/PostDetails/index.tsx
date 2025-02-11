@@ -70,19 +70,25 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
                 }}
                 />      
             )}
+            <div className={styles.analyzeWrapper}>
+            <div className={styles.editbuttonTop}>
+                <EditPostButton onEdit={() => handleEditClick(postData)}/>
+            </div>
             <div className={styles.postThumbnailStyle}>
                 <PostThumbnail post={postData} update={true} />
             </div>
-
             <div className={styles.postHeader}>
                 <h1 className={styles.postTitleStyle}>{postData.postTitle}</h1>
-                <EditPostButton onEdit={() => handleEditClick(postData)}/>
+                <p className={styles.postDescriptionStyle}>{postData.description}</p>
             </div>
-            <p className={styles.postDescriptionStyle}>{postData.description}</p>
             
             <div className={styles.infoTextStyle}>
                 <p>조회수: {postData.viewCount}</p>
                 <p>작성일: {postData.createdAt ? new Date(postData.createdAt).toLocaleDateString() : "작성일 없음"}</p>
+            </div>
+            <button className={styles.buttonStyle}>
+                upload..
+            </button>
             </div>
         </>
     );

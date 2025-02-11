@@ -10,11 +10,11 @@ interface EditPostButtonProps {
 
 const EditPostButton: React.FC<EditPostButtonProps> = ({ onEdit }) => {
  return (
-     <button className={styles.editButtonImage} onClick={(e) => {
+     <button className={styles.editButton} onClick={(e) => {
        e.stopPropagation();
        onEdit();
      }}>
-       <img src="/images/update.png"  className={styles.editButton} />
+      edit
      </button>
    );
 };

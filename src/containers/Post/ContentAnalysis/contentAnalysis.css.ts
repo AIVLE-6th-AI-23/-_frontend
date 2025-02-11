@@ -5,6 +5,7 @@ export const contentAnalysisContainer = style({
   borderRadius: '8px',
   backgroundColor: '#f1f3f5',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  marginTop:'10px',
 });
 
 export const analysisTitleStyle = style({

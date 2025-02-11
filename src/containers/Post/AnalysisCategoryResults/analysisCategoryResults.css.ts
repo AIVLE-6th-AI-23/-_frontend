@@ -6,6 +6,7 @@ export const styles = {
         backgroundColor: "#ffffff",
         borderRadius: "8px",
         boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+        marginTop:"20px",
     }),
     title: style({
         fontSize: "1.25rem",
