@@ -48,7 +48,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({
             onChange={(e) => setpostTitle(e.target.value)}
           />
           <textarea
-            className={styles.descriptionField}
+            className={styles.descriptionField_post}
             placeholder="설명"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

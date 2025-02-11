@@ -56,18 +56,20 @@ export default function LoginPage() {
               transition={{ duration: 0.4 }}
               onSubmit={handleNextStep}
             >
-              <input 
-                name="userId" 
-                type="text"
-                placeholder="사원 번호를 입력하세요" 
-                required 
-                className={styles.input} 
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-              <button type="submit" className={styles.button}>
-                다음
-              </button>
+              <div className={styles.inputButtonContainer}>
+                <input 
+                  name="userId" 
+                  type="text"
+                  placeholder="사원 번호를 입력하세요" 
+                  required 
+                  className={styles.input} 
+                  value={userId}
+                  onChange={(e) => setUserId(e.target.value)}
+                />
+                <button type="submit" className={styles.button}>
+                  다음
+                </button>
+              </div>  
               <p className={styles.signupLink}>계정이 없으신가요? <Link href="/signup" className={styles.link}>회원가입</Link></p>
             </motion.form>
           ) : (

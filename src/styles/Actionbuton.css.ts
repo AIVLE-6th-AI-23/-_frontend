@@ -65,6 +65,16 @@ export const descriptionField = style({
   height: "120px", 
 });
 
+export const descriptionField_post = style({
+  width: "100%",
+  padding: "10px",
+  marginBottom: "10px",
+  borderRadius: "4px",
+  border: "1px solid #ccc",
+  boxSizing: "border-box",
+  height: "65%", 
+});
+
 export const multiSelect = style({
   marginBottom: "10px",
   width: "100%",
