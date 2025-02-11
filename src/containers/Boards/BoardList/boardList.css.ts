@@ -14,10 +14,15 @@ export const boardListBody = style({
 
 export const boardListContainer = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', // 한 행에 여러 열이 들어가도록 설정
+  gridTemplateColumns: 'repeat(4, minmax(300px, 1fr))', // 한 행에 여러 열이 들어가도록 설정
   gap: '16px',
   width: '100%',
   padding: '16px',
+  marginTop:'20px',
+  borderRadius: '13px',
+  height :'100%',
+  minHeight: '700px',
+  backgroundColor :'#ffffff',
   boxSizing: 'border-box',
 });
 
@@ -32,7 +37,7 @@ export const boardItem = style({
   maxWidth: '100%', 
   boxSizing: 'border-box', 
   height: 'auto',
-  minHeight: '200px', 
+  maxHeight: '250px', 
   cursor: 'pointer',
 
   transition: 'transform 0.2s ease, box-shadow 0.2s ease',
