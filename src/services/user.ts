@@ -35,4 +35,24 @@ export const updateUserInfo = async (
     return response.data.data;
 };
 
+export const checkId = async (
+    userId: string
+): Promise<Boolean> => {
+    const response = await api.get<ApiResponse<Boolean>>(`/api/user/checkid/${userId}`)
+    return response.data.data
+}
 
+export const verifyUser = async (userVerifyRequestDto: {
+    employeeId: string;
+    deptId: string;
+    email: string;
+}): Promise<boolean> => {
+    const response = await api.post<ApiResponse<boolean>>('/api/user/verify', userVerifyRequestDto);
+    return response.data.data;
+};
+
+export const resetPassword = async (token: string, newPassword: string): Promise<void> => {
+    await api.post<ApiResponse<void>>(`/api/user/password/reset?token=${token}`, {
+        newPassword: newPassword
+    });
+};
