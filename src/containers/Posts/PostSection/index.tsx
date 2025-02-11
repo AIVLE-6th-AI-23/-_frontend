@@ -25,7 +25,10 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
 
     return (
         <section className={styles.postSection}>
+            <div>
             <h2 className={styles.sectionTitle}>{title}</h2>
+            </div>
+            <div className={styles.postConent}>
             <InfiniteScrollList
                 data={posts}
                 renderItem={(post) => (
@@ -46,10 +49,12 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
                             <p className={styles.postViewCount}>조회수: {post.viewCount}</p>
                         </div>
                     </div>
+                    
                 )}
                 fetchNextPage={fetchNextPage}
                 isFetchingNextPage={isFetchingNextPage}
             />
+           </div>
         </section>
     );
 };

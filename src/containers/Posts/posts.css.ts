@@ -1,5 +1,6 @@
 import { colors } from '@/styles/colors.css';
 import { style } from '@vanilla-extract/css';
+import { color } from 'framer-motion';
 
 export const postContainer = style({
     display: 'flex',
@@ -17,17 +18,22 @@ export const postSectionWrapper = style({
     alignItems:'start',
     gridTemplateColumns: 'repeat(2, auto)',
     gap: '16px',
-    width: '100%',
+    width: '93%',
+    padding:'20px',
+    margin:'0 20px',
+    borderRadius:'20px',
+    //backgroundColor:'#e7edef',
+    backgroundColor: colors.background,
 });
 
 export const postsHeader = style({
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     width : '100%',
-    padding: '16px 24px',
-    borderBottom: '1px solid #e0e0e0',
+    padding: '0 0 0 10px',
+    justifyContent: 'flex-start',
+  
 });
 
 export const postsTitle = style({

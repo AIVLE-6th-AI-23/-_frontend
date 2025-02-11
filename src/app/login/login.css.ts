@@ -17,6 +17,13 @@ export const loginBox = style({
   textAlign: 'center',
 });
 
+export const inputButtonContainer = style({
+  width:'100%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
 export const title = style({
   marginBottom: '20px',
   fontSize: '26px',
@@ -33,6 +40,7 @@ export const input = style({
   fontSize: '16px',
   outline: 'none',
   transition: 'border-color 0.3s',
+  boxSizing:'border-box',
 
   ':focus': {
     borderColor: '#1a73e8',

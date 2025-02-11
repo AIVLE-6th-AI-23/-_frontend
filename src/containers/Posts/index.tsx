@@ -9,9 +9,10 @@ import GlobalLoadingBar from '@/components/LoadingBar';
 
 interface PostListProps {
     boardId: number;
+    boardTitle : string;
 }
 
-const PostsPage: React.FC<PostListProps> = ({ boardId }) => {
+const PostsPage: React.FC<PostListProps> = ({ boardId,boardTitle }) => {
     const queryClient = useQueryClient();
     const {
         data,
@@ -44,7 +45,7 @@ const PostsPage: React.FC<PostListProps> = ({ boardId }) => {
         <div className={styles.postContainer}>
             {isLoading && <GlobalLoadingBar />}
             <div className={styles.postsHeader}>
-                <h1 className={styles.postsTitle}>Board {boardId} Posts</h1>
+                <h1 className={styles.postsTitle}>Board {boardTitle} Posts</h1>
                 <CreatePostButton boardId={boardId} />
             </div>
             <div className={styles.postSectionWrapper}>

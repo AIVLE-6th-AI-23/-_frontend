@@ -10,6 +10,13 @@ export const boardContainer = style({
     minHeight: '100vh',
 });
 
+export const toggleLeft =style({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width:'53%',
+}); 
+
 export const boardPageTitle = style({
     display: 'flex',
     alignItems: 'center',
@@ -22,9 +29,8 @@ export const boardHeader = style({
     display: 'flex',
     position: 'relative',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     gap: '24px',
     width : '100%',
-    padding: '8px 16px 30px',
-    borderBottom: '1px solid #e0e0e0',
+    padding: '0 0 0 20px',
 });

@@ -65,6 +65,16 @@ export const descriptionField = style({
   height: "120px", 
 });
 
+export const descriptionField_post = style({
+  width: "100%",
+  padding: "10px",
+  marginBottom: "10px",
+  borderRadius: "4px",
+  border: "1px solid #ccc",
+  boxSizing: "border-box",
+  height: "65%", 
+});
+
 export const multiSelect = style({
   marginBottom: "10px",
   width: "100%",
@@ -137,49 +147,165 @@ export const createButtonImage = style({
 });
 
 export const editButton = style({
-  width: "25px",
-  height: "25px", 
-  // backgroundColor: colors.edit, 
-  border: "none", 
-  padding: 0, 
-  display: "flex", 
-  cursor: "pointer",
-  justifyContent:'center',
-  alignItems: 'center',
-});
-
-export const editButtonImage = style({
-  width: "30px",
-  height: "30px", 
-  objectFit: "contain", 
-  backgroundColor: "transparent", 
-  border: "none", 
-  alignItems: 'baseline',
-  ":hover": {
-    transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
-    transition: "transform 0.2s ease, background-color 0.2s ease", 
+  backgroundColor: '#eee',
+  border: 'none',
+  padding: '0.5rem',
+  fontSize: '1rem',
+  width: '4em',
+  borderRadius: '1rem',
+  color: colors.department,
+  boxShadow: '0 0.4rem #dfd9d9',
+  cursor: 'pointer',
+  selectors: {
+    '&:active': {
+      color: 'white',
+      boxShadow: '0 0.2rem #dfd9d9',
+      transform: 'translateY(0.2rem)',
+    },
+    '&:hover:not(:disabled)': {
+      backgroundColor:colors.department,
+      color: 'white',
+      textShadow: '0 0.1rem #bcb4b4',
+    },
+    '&:disabled': {
+      cursor: 'auto',
+      color: 'grey',
+    },
   },
 });
+
 
 export const deleteButton = style({
-  width: "25px",
-  height: "25px", 
-  backgroundColor: "transparent",
-  border: "none", 
-  paddingTop: 3, 
-  display: "flex", 
-  cursor: "pointer",
+  backgroundColor: '#eee',
+  border: 'none',
+  padding: '1px',
+  fontSize: '1rem',
+  width: '4em',
+  borderRadius: '1rem',
+  color: 'lightcoral',
+  boxShadow: '0 0.4rem #dfd9d9',
+  cursor: 'pointer',
+  selectors: {
+    '&:active': {
+      color: 'white',
+      boxShadow: '0 0.2rem #dfd9d9',
+      transform: 'translateY(0.2rem)',
+    },
+    '&:hover:not(:disabled)': {
+      background: 'lightcoral',
+      color: 'white',
+      textShadow: '0 0.1rem #bcb4b4',
+    },
+    '&:disabled': {
+      cursor: 'auto',
+      color: 'grey',
+    },
+  },
 });
 
-export const deleteButtonImage = style({
-  width: "23px",
-  height: "23px", 
-  objectFit: "contain", 
-  backgroundColor: "transparent",
-  border: "none", 
 
-  ":hover": {
-    transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
-    transition: "transform 0.2s ease, background-color 0.2s ease", 
-  },
+//DeleteModal css
+
+export const modalOverlayDelete = style({
+  position: "fixed",
+  top: "0",
+  left: "0",
+  width: "100vw",
+  height: "100vh",
+  background: "rgba(0, 0, 0, 0.5)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 1000,
+});
+
+export const card = style({
+  overflow: "hidden",
+  position: "relative",
+  backgroundColor: "#ffffff",
+  textAlign: "left",
+  borderRadius: "0.5rem",
+  maxWidth: "290px",
+  boxShadow:
+    "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+});
+
+export const header = style({
+  padding: "1.25rem 1rem 1rem 1rem",
+  backgroundColor: "#ffffff",
+});
+
+export const image = style({
+  display: "flex",
+  marginLeft: "auto",
+  marginRight: "auto",
+  backgroundColor: "#fee2e2",
+  flexShrink: 0,
+  justifyContent: "center",
+  alignItems: "center",
+  width: "3rem",
+  height: "3rem",
+  borderRadius: "9999px",
+});
+
+export const imageSvg = style({
+  color: "#dc2626",
+  width: "1.5rem",
+  height: "1.5rem",
+});
+
+export const content = style({
+  marginTop: "0.75rem",
+  textAlign: "center",
+});
+
+export const title = style({
+  color: "#111827",
+  fontSize: "1rem",
+  fontWeight: "600",
+  lineHeight: "1.5rem",
+});
+
+export const message = style({
+  marginTop: "0.5rem",
+  color: "#6b7280",
+  fontSize: "0.875rem",
+  lineHeight: "1.25rem",
+});
+
+export const actions = style({
+  margin: "0.75rem 1rem",
+  backgroundColor: "#f9fafb",
+});
+
+export const desactivate = style({
+  display: "inline-flex",
+  padding: "0.5rem 1rem",
+  backgroundColor: "#dc2626",
+  color: "#ffffff",
+  fontSize: "1rem",
+  lineHeight: "1.5rem",
+  fontWeight: "500",
+  justifyContent: "center",
+  width: "100%",
+  borderRadius: "0.375rem",
+  borderWidth: "1px",
+  borderColor: "transparent",
+  boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+});
+
+export const cancel = style({
+  display: "inline-flex",
+  marginTop: "0.75rem",
+  padding: "0.5rem 1rem",
+  backgroundColor: "#ffffff",
+  color: "#374151",
+  fontSize: "1rem",
+  lineHeight: "1.5rem",
+  fontWeight: "500",
+  justifyContent: "center",
+  width: "100%",
+  borderRadius: "0.375rem",
+  border: "1px solid #d1d5db",
+  boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
 });

@@ -16,8 +16,10 @@ const Board: React.FC = () => {
     <div className={styles.boardContainer}>
       {isLoading && <GlobalLoadingBar />}
       <div className={styles.boardHeader}>
-        <h1 className={styles.boardPageTitle}>Boards</h1>
+        <div className={styles.toggleLeft}>
         <ToggleButton isActive={isActive} onToggle={() => setIsActive((prev : boolean) => !prev)} />
+        <h1 className={styles.boardPageTitle}>Boards</h1>
+        </div>
         <CreateBoardButton />
       </div>
       <BoardList boardStatus={isActive ? "active" : "completed"} />

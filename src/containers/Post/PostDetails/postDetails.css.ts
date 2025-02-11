@@ -1,18 +1,38 @@
+import { colors } from '@/styles/colors.css';
 import { style } from '@vanilla-extract/css';
+
+
+export const analyzeWrapper =style({
+  width:'100%',
+  height:'100%',
+  boxSizing:'border-box',
+  display:'flex',
+  flexDirection:'column',
+});
+
+export const editbuttonTop =style({
+  width:'100%',
+  height:'40px',
+  display:'flex',
+  justifyContent: 'flex-end',
+});
 
 export const postThumbnailStyle = style({
   display: 'flex',
   justifyContent: 'center',
-  width: '75%',
+  width: '80%',
   margin: '0 auto',
 });
 
 export const postHeader = style({
+  width:'100%',
   display: 'flex',
   position: 'relative',
+  flexDirection:'column',
   justifyContent: 'center',
   alignItems : 'center',
-  gap: '10px'
+  backgroundColor:'#fff',
+  borderRadius:'10px',
 });
 
 export const postTitleStyle = style({
@@ -26,7 +46,7 @@ export const postDescriptionStyle = style({
   fontSize: '14px',
   color: '#666',
   textAlign: 'center',
-  width: "75%"
+  width: "100%",
 });
 
 export const editFormStyle = style({
@@ -58,5 +78,3 @@ export const infoTextStyle = style({
   color: '#888',
   textAlign: 'center',
 });
-
-
