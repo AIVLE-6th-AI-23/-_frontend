@@ -62,8 +62,8 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
   });
 
 
-  const handleBoardClick = (boardId: number) => {
-    router.push(`${pathName}/${boardId}/posts`);
+  const handleBoardClick = (boardId: number, boardTitle:string) => {
+    router.push(`${pathName}/${boardId}/posts?title=${encodeURIComponent(boardTitle)}`);
   };
 
   const handleEditClick = (board: Board) => {
@@ -132,7 +132,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
         <div
           key={board.boardId}
           className={styles.boardItem}
-          onClick={() => handleBoardClick(board.boardId)}
+          onClick={() => handleBoardClick(board.boardId, board.boardTitle)}
           style={{ cursor: "pointer" }}
         >
           <div className={styles.buttonAndBoardWrapper}>
