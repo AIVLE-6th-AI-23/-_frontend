@@ -5,31 +5,12 @@ import * as styles from "@/styles/Actionbuton.css";
 
 interface DeleteBoardProps {
   boardId: number;
+  onOpenModal: (boardId: number) => void;
 }
 
-const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId }) => {
-  const queryClient = useQueryClient();
-
-  const deleteMutation = useMutation({
-    mutationFn: (boardId: number) => deleteBoard({boardId}), 
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["boards"],
-      })
-    },
-    onError: (error) => alert(`게시판 삭제 실패: ${error.message}`),
-  });
-  
-  const handleDelete = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    if (window.confirm("이 게시판을 정말 삭제하시겠습니까?")) {
-      deleteMutation.mutate(boardId);
-    }
-  };
-  
-
+const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId,onOpenModal }) => {
   return (
-    <button className={styles.deleteButton} onClick={handleDelete}>
+    <button className={styles.deleteButton} onClick={(e) => {onOpenModal(boardId); e.stopPropagation();}}>
       <img src="/images/remove.png" className={styles.deleteButtonImage} />
     </button>
   );

@@ -1,5 +1,5 @@
 import { useMutation, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchBoards, updateBoard } from "@/services/board"; // ✅ updateBoard 추가
+import { fetchBoards, updateBoard, deleteBoard } from "@/services/board"; // ✅ updateBoard 추가
 import { Board, Boards, BoardRequest } from "@/types/types";
 import InfiniteScrollList from "@/components/InfiniteScrollList";
 import { usePathname, useRouter } from "next/navigation";
@@ -8,10 +8,12 @@ import EditBoardButton from "@/components/BoardActionButtons/Edit";
 import DeleteBoardButton from "@/components/BoardActionButtons/Delete";
 import { useEffect, useState } from "react";
 import CreateBoardModal from "@/components/BoardActionButtons/CreateModal";
+import DeleteModal from "@/components/BoardActionButtons/DeleteModal";
 import { DepartmentOptions } from "@/constants/constants";
 
 interface BoardListProps {
   boardStatus: string;
+  onOpenModal: (board: Board) => void; 
 }
 
 const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
@@ -21,6 +23,9 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
 
   const [selectedBoard, setSelectedBoard] = useState<Board | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [boardIdToDelete, setBoardIdToDelete] = useState<number | null>(null);
 
 
   const { data, fetchNextPage, isFetchingNextPage, status } = useInfiniteQuery({
@@ -34,6 +39,8 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     retry: false,
   });
 
+
+  //Update
   const updateMutation = useMutation({
     mutationFn: (updatedData: BoardRequest) =>
       updateBoard({ boardId: selectedBoard!.boardId, boardData: updatedData }),
@@ -43,6 +50,17 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     },
     onError: (error: any) => alert(`게시판 수정 실패: ${error.message}`),
   });
+
+  //Delete 
+  const deleteMutation = useMutation({
+    mutationFn: (boardId: number) => deleteBoard({ boardId }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["boards", boardStatus] }); // 목록 새로고침
+      setIsModalOpen(false); // 모달 닫기
+    },
+    onError: (error: any) => alert(`게시판 삭제 실패: ${error.message}`),
+  });
+
 
   const handleBoardClick = (boardId: number) => {
     router.push(`${pathName}/${boardId}/posts`);
@@ -64,6 +82,24 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     });
   };
 
+  const openModal = (boardId: number) => {
+    setBoardIdToDelete(boardId);  // boardId만 설정
+    setIsModalOpen(true); // 모달 열기
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // 모달 닫기
+  };
+
+  const confirmDelete = () => {
+    if (boardIdToDelete !== null) {
+      deleteMutation.mutate(boardIdToDelete); // boardId로 게시판 삭제 실행
+    } else {
+      alert("삭제할 게시판 ID가 없습니다.");
+    }
+  };
+
+  
   useEffect(() => {
     if (status === "error") {
       queryClient.resetQueries({ queryKey: ["boards", boardStatus] });
@@ -103,7 +139,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
             <div className={styles.boardActions}>
               <div className={styles.buttonContainer}>
                 <EditBoardButton onEdit={() => handleEditClick(board)} />
-                <DeleteBoardButton boardId={board.boardId} />
+                <DeleteBoardButton boardId = {board.boardId} onOpenModal={openModal} />
               </div>
             </div>
 
@@ -134,6 +170,15 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
       isFetchingNextPage={isFetchingNextPage}
     />
   </div>
+
+      {/* 삭제 모달 */}
+      {isModalOpen && (
+      <DeleteModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+      />
+    )}
   </div>
 );
 };
