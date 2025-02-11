@@ -56,8 +56,12 @@ export interface Post {
 export type Posts = Post[];
 
 export interface AnalysisCategoryResult {
-    category: string;
-    score: number;
+    resultId: number;
+    categoryScore: number;
+    detectionMetadata: string;
+    categoryName: string;
+    description: string;
+    severityLevel: number;
 }
 
 export type analysisCategoryResultResponseDto = AnalysisCategoryResult[];

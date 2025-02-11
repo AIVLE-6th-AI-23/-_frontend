@@ -4,6 +4,8 @@ import { fetchPost, updatePost } from '@/services/post';
 import { Post, PostRequest } from '@/types/types';
 import PostThumbnail from '@/components/PostThumbnail';
 import * as styles from './postDetails.css';
+import EditPostButton from '@/components/PostActionButton/Edit';
+import CreatePostModal from '@/components/PostActionButton/CreateModal';
 
 interface PostProps {
     boardId: number;
@@ -13,7 +15,7 @@ interface PostProps {
 export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
     const queryClient = useQueryClient();
     const [isEditing, setIsEditing] = useState(false);
-
+    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const cachedPosts = queryClient.getQueryData<Post[]>(["posts", boardId]);
     const cachedPost = Array.isArray(cachedPosts)
         ? cachedPosts.find((post) => post.postId === Number(postId))
@@ -44,48 +46,45 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
 
     if (!postData) return <p className={styles.infoTextStyle}>게시글이 존재하지 않습니다.</p>;
 
-    const handleSave = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const updatedPost = {
-            boardId,
-            postTitle: formData.get("postTitle") as string,
-            description: formData.get("description") as string,
-        };
-        updateMutation.mutate(updatedPost);
+    const handleEditClick = (post: Post) => {
+        setSelectedPost(post);
+        setIsEditing(true);
+      };
+
+    const handleSave = (postTitle: string, description: string) => {
+        if (!selectedPost) return;
+
+        updateMutation.mutate({boardId, postTitle, description});
     };
 
     return (
-        <div>
+        <>
+            {isEditing && selectedPost && (
+                <CreatePostModal
+                isOpen={isEditing}
+                onClose={() => setIsEditing(false)}
+                onSave={handleSave}
+                initialData={{
+                    postTitle: selectedPost.postTitle,
+                    description: selectedPost.description,
+                }}
+                />      
+            )}
             <div className={styles.postThumbnailStyle}>
                 <PostThumbnail post={postData} update={true} />
             </div>
 
-            <div className="text-center space-y-2">
+            <div className={styles.postHeader}>
                 <h1 className={styles.postTitleStyle}>{postData.postTitle}</h1>
-                <p className={styles.postDescriptionStyle}>{postData.description}</p>
+                <EditPostButton onEdit={() => handleEditClick(postData)}/>
             </div>
-
-            {isEditing ? (
-                <form onSubmit={handleSave} className={styles.editFormStyle}>
-                    <input type="text" name="postTitle" defaultValue={postData.postTitle} className="w-full p-2 border rounded" />
-                    <textarea name="description" defaultValue={postData.description} className="w-full p-2 border rounded"></textarea>
-                    <div className="flex justify-end space-x-2">
-                        <button type="submit" className={styles.buttonStyle}>저장</button>
-                        <button type="button" onClick={() => setIsEditing(false)} className={styles.buttonStyle}>취소</button>
-                    </div>
-                </form>
-            ) : (
-                <div className="flex justify-center">
-                    <button onClick={() => setIsEditing(true)} className={styles.buttonStyle}>수정</button>
-                </div>
-            )}
-
+            <p className={styles.postDescriptionStyle}>{postData.description}</p>
+            
             <div className={styles.infoTextStyle}>
                 <p>조회수: {postData.viewCount}</p>
                 <p>작성일: {postData.createdAt ? new Date(postData.createdAt).toLocaleDateString() : "작성일 없음"}</p>
             </div>
-        </div>
+        </>
     );
 };
 

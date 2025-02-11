@@ -11,18 +11,20 @@ export const boardContainer = style({
 });
 
 export const boardPageTitle = style({
+    display: 'flex',
+    alignItems: 'center',
     fontSize: '2rem',
     fontWeight: 'bold',
     color: colors.text,
-    marginBottom: '16px',
 });
 
 export const boardHeader = style({
-    position: 'relative',
     display: 'flex',
+    position: 'relative',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    gap: '24px',
     width : '100%',
-    padding: '16px 24px',
+    padding: '8px 16px 30px',
     borderBottom: '1px solid #e0e0e0',
 });

@@ -8,8 +8,8 @@ interface EditBoardButtonProps {
 const EditBoardButton: React.FC<EditBoardButtonProps> = ({ onEdit }) => {
   return (
     <button className={styles.editButtonImage} onClick={(e) => {
-      e.stopPropagation(); // 상위 클릭 방지
-      onEdit(); // 모달 열기
+      e.stopPropagation();
+      onEdit();
     }}>
       <img src="/images/update.png"  className={styles.editButton} />
     </button>

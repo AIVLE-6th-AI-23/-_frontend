@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPost } from "@/services/post";
 import { PostRequest } from "@/types/types";
 import * as styles from "@/styles/Actionbuton.css";
+import CreatePostModal from "../CreateModal";
 
 interface CreatePostButtonProps {
   boardId: number; // 게시판 ID
@@ -10,8 +11,6 @@ interface CreatePostButtonProps {
 
 const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
   const [isCreating, setIsCreating] = useState(false);
-  const [postTitle, setPostTitle] = useState("");
-  const [description, setDescription] = useState("");
   const queryClient = useQueryClient();
 
   const createMutation = useMutation({
@@ -22,13 +21,11 @@ const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
             queryKey: ["posts", boardId],
         });
       setIsCreating(false);
-      setPostTitle("");
-      setDescription("");
     },
     onError: () => alert("게시글 생성 실패"),
   });
 
-  const handleCreate = () => {
+  const handleCreatePost = (postTitle: string, description: string) => {
     createMutation.mutate({
       boardId,
       postTitle,
@@ -37,43 +34,19 @@ const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
   };
 
   return (
-    <div>
-      {isCreating ? (
-        <div className={styles.formContainer}>
-          <input
-            type="text"
-            className={styles.inputField}
-            placeholder="제목"
-            value={postTitle}
-            onClick={(e) => e.stopPropagation()} 
-            onChange={(e) => setPostTitle(e.target.value)}
-          />
-          <textarea
-            className={styles.inputField}
-            placeholder="내용"
-            value={description}
-            onClick={(e) => e.stopPropagation()} 
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <button className={styles.saveButton} onClick={handleCreate}>
-            Save
-          </button>
-          <button
-            className={styles.cancelButton}
-            onClick={() => setIsCreating(false)}
-          >
-            Cancel
-          </button>
-        </div>
-      ) : (
-        <button
-          className={styles.createButton}
-          onClick={() => setIsCreating(true)}
-        >
-          ➕
-        </button>
-      )}
-    </div>
+    <div className={styles.createContainer}>
+    <CreatePostModal
+      isOpen={isCreating}
+      onClose={() => setIsCreating(false)}
+      onSave={handleCreatePost}
+      initialData={{ postTitle: "", description: ""}} 
+    />
+    {!isCreating && (
+      <button className={styles.createButton} onClick={() => setIsCreating(true)}> 
+        <img src="/images/plus.png" className={styles.createButtonImage} />
+      </button>
+    )}
+  </div>
   );
 };
 

@@ -22,7 +22,7 @@ const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId }) => {
   
   const handleDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
-    if (window.confirm("이 게시판을 삭제하시겠습니까?")) {
+    if (window.confirm("이 게시판을 정말 삭제하시겠습니까?")) {
       deleteMutation.mutate(boardId);
     }
   };

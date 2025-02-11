@@ -7,6 +7,14 @@ export const postThumbnailStyle = style({
   margin: '0 auto',
 });
 
+export const postHeader = style({
+  display: 'flex',
+  position: 'relative',
+  justifyContent: 'center',
+  alignItems : 'center',
+  gap: '10px'
+});
+
 export const postTitleStyle = style({
   fontSize: '20px',
   fontWeight: '600',
@@ -18,6 +26,7 @@ export const postDescriptionStyle = style({
   fontSize: '14px',
   color: '#666',
   textAlign: 'center',
+  width: "75%"
 });
 
 export const editFormStyle = style({

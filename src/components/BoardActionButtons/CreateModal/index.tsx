@@ -6,9 +6,7 @@ import { DepartmentOptions } from "@/constants/constants";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/locale";  // 한국 로케일 가져오기
-import { toZonedTime, format } from "date-fns-tz";  
-
-
+import { toZonedTime, format } from "date-fns-tz";
 
 interface CreateBoardModalProps {
   isOpen: boolean;

@@ -26,14 +26,14 @@ const DeletePostButton: React.FC<DeletePostButtonProps> = ({
 
   const handleDelete = (event: React.MouseEvent) => {
     event.stopPropagation();
-    if (window.confirm("정말 삭제 하시겠습니까?")) {
+    if (window.confirm("이 게시글을 정말 삭제 하시겠습니까?")) {
       deleteMutation.mutate();
     }
   };
 
   return (
     <button className={styles.deleteButton} onClick={handleDelete}>
-      🗑️
+      <img src="/images/remove.png" className={styles.deleteButtonImage} />
     </button>
   );
 };

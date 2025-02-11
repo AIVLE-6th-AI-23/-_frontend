@@ -1,6 +1,5 @@
 import { style } from "@vanilla-extract/css";
 import { colors } from "@/styles/colors.css";
-import exp from "constants";
 
 export const modalOverlay = style({
   position: "fixed",
@@ -109,6 +108,9 @@ export const cancelButton = style({
 export const createContainer = style({
   display: "flex",
   flexDirection: "column",
+  marginLeft: 'auto',
+  position: 'absolute',
+  right: '24px',
   alignItems: "center",
 });
 
@@ -117,7 +119,6 @@ export const createButton = style({
   backgroundColor: "transparent", 
   border: "none", 
   padding: 0, 
-  display: "flex", 
   cursor: "pointer",
 });
 
@@ -135,15 +136,6 @@ export const createButtonImage = style({
 
 });
 
-export const editInput = style({
-  padding: "8px",
-  border: `1px solid ${colors.border}`,
-  borderRadius: "4px",
-  fontSize: "14px",
-  width: "100%",
-  backgroundColor: colors.inputBackground,
-});
-
 export const editButton = style({
   width: "25px",
   height: "25px", 
@@ -152,15 +144,17 @@ export const editButton = style({
   padding: 0, 
   display: "flex", 
   cursor: "pointer",
+  justifyContent:'center',
+  alignItems: 'center',
 });
 
 export const editButtonImage = style({
-  width: "20px",
-  height: "20px", 
+  width: "30px",
+  height: "30px", 
   objectFit: "contain", 
   backgroundColor: "transparent", 
   border: "none", 
-
+  alignItems: 'baseline',
   ":hover": {
     transform: "scale(1.2)", // 마우스 오버 시 조금 더 크게
     transition: "transform 0.2s ease, background-color 0.2s ease", 

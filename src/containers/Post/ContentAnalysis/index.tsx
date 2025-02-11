@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchContentAnalysis } from "@/services/contentAnalysis";
 import * as styles from './contentAnalysis.css';
+import AnalysisCategoryResults from "../AnalysisCategoryResults";
 
 interface ContentAnalysisProps {
     postId: number;
@@ -24,14 +25,7 @@ const ContentAnalysis: React.FC<ContentAnalysisProps> = ({ postId }) => {
             <p className={styles.analysisTextStyle}>분석 세부 정보: {data?.analysisDetail}</p>
             <p className={styles.analysisTextStyle}>분석 일시: {data?.analysisAt ? new Date(data?.analysisAt).toLocaleString() : "작성일 없음"}</p>
             
-            <h2 className={styles.analysisTitleStyle}>분석 카테고리 결과</h2>
-            <ul className={styles.analysisListStyle}>
-                {data?.analysisCategoryResultResponseDto.map((result, index) => (
-                    <li key={index} className={styles.analysisListItemStyle}>
-                        {result.category}: {result.score}
-                    </li>
-                ))}
-            </ul>
+            <AnalysisCategoryResults data={data?.analysisCategoryResultResponseDto}/>
         </div>
     );
 };

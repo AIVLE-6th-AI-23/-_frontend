@@ -4,35 +4,35 @@ import * as styles from "@/styles/Actionbuton.css";
 interface CreatePostModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (boardTitle: string, description: string) => void;
+  onSave: (postTitle: string, description: string) => void;
   initialData?: {
-    boardTitle: string;
+    postTitle: string;
     description: string;
   };
 }
 
-const CreateBoardModal: React.FC<CreatePostModalProps> = ({
+const CreatePostModal: React.FC<CreatePostModalProps> = ({
   isOpen,
   onClose,
   onSave,
   initialData,
 }) => {
-  const [boardTitle, setBoardTitle] = useState<string>(initialData?.boardTitle || "");
+  const [postTitle, setpostTitle] = useState<string>(initialData?.postTitle || "");
   const [description, setDescription] = useState<string>(initialData?.description || "");
   
   useEffect(() => {
     if (initialData) {
-      setBoardTitle(initialData.boardTitle);
+      setpostTitle(initialData.postTitle);
       setDescription(initialData.description);
     }
   }, [initialData]);  
 
   const handleSave = () => {
-    if (!boardTitle.trim() || !description.trim()) {
+    if (!postTitle.trim() || !description.trim()) {
       alert("제목과 설명을 입력해주세요.");
       return;
     }
-    onSave(boardTitle, description);
+    onSave(postTitle, description);
     onClose();
   };
 
@@ -44,8 +44,8 @@ const CreateBoardModal: React.FC<CreatePostModalProps> = ({
             className={styles.inputField}
             type="text"
             placeholder="게시판 제목"
-            value={boardTitle}
-            onChange={(e) => setBoardTitle(e.target.value)}
+            value={postTitle}
+            onChange={(e) => setpostTitle(e.target.value)}
           />
           <textarea
             className={styles.descriptionField}
@@ -67,4 +67,4 @@ const CreateBoardModal: React.FC<CreatePostModalProps> = ({
   );
 };
 
-export default CreateBoardModal;
+export default CreatePostModal;

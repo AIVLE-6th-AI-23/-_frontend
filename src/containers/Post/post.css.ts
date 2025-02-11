@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
 export const postContainer = style({
-    maxWidth: '900px',
+    width: '90%',
     margin: '0 auto',
     padding: '24px',
     backgroundColor: '#fff',
@@ -9,11 +9,13 @@ export const postContainer = style({
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '24px',
+    alignItems: 'center',
+    gap: '12px',
 });
 
 export const contentAnalysisContainer = style({
     padding: '16px',
     borderRadius: '8px',
     backgroundColor: '#f1f3f5',
+    width: '100%'
   });
