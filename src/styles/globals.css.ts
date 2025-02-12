@@ -1,5 +1,4 @@
 import { fontFace, globalStyle } from '@vanilla-extract/css'; 
-import { Html } from 'next/document';
 
 
 export const nanum = fontFace({
