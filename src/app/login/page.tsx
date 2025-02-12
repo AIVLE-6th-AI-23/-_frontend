@@ -86,6 +86,7 @@ export default function LoginPage() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
                 className={styles.userIdDisplay}
+                onClick={() => setStep(1)}
               >
                 {userId}
               </motion.p>
@@ -101,9 +102,7 @@ export default function LoginPage() {
               <button type="submit" disabled={isLoggingIn} className={styles.button}>
                 {isLoggingIn ? "로그인 중..." : "로그인"}
               </button>
-              <button type="button" className={styles.backButton} onClick={() => setStep(1)}>
-                다른 계정으로 로그인
-              </button>
+              <p className={styles.signupLink}>비밀 번호를 잊으셨나요? <Link href="/reset-password" className={styles.link}>비밀번호 찾기</Link></p>
             </motion.form>
           )}
         </AnimatePresence>

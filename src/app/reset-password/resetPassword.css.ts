@@ -8,7 +8,7 @@ export const container = style({
   backgroundColor: '#f8f9fa',
 });
 
-export const loginBox = style({
+export const resetBox = style({
   width: '400px',
   padding: '40px',
   borderRadius: '12px',
@@ -16,13 +16,6 @@ export const loginBox = style({
   boxShadow: '0 2px 10px rgba(0, 0, 0, 0.15)',
   textAlign: 'center',
 });
-
-export const inputButtonContainer = style({
-  width:'100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-})
 
 export const title = style({
   marginBottom: '20px',
@@ -40,7 +33,6 @@ export const input = style({
   fontSize: '16px',
   outline: 'none',
   transition: 'border-color 0.3s',
-  boxSizing:'border-box',
 
   ':focus': {
     borderColor: '#1a73e8',
@@ -70,40 +62,8 @@ export const error = style({
   marginBottom: '10px',
 });
 
-export const userIdDisplay = style({
-  fontSize: '18px',
-  fontWeight: '500',
+export const message = style({
+  fontSize: '16px',
   color: '#202124',
-  marginBottom: '12px',
-  cursor: 'pointer',
-});
-
-export const backButton = style({
-  marginTop: '10px',
-  backgroundColor: 'transparent',
-  border: 'none',
-  color: '#1a73e8',
-  fontSize: '14px',
-  cursor: 'pointer',
-  textDecoration: 'underline',
-
-  ':hover': {
-    textDecoration: 'none',
-  },
-});
-
-export const signupLink = style({
-  marginTop: '16px',
-  fontSize: '14px',
-  color: '#5f6368',
-});
-
-export const link = style({
-  color: '#1a73e8',
-  textDecoration: 'none',
-  fontWeight: '500',
-
-  ':hover': {
-      textDecoration: 'underline',
-  },
+  marginTop: '20px',
 });
