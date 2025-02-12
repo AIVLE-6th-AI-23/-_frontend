@@ -63,14 +63,8 @@ export const boardFooter = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  opacity: 0,
-  visibility: 'hidden',
-  selectors: {
-    [`${boardItem}:hover &`]: {
-      opacity: 1,
-      visibility: 'visible',
-    },
-  },
+  opacity: '1',
+  visibility: 'visible',
 });
 
 export const boardPeriod = style({

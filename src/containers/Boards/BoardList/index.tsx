@@ -122,7 +122,10 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
       <div className={styles.boardListContainer}>
         <InfiniteScrollList
           data={data?.pages.flatMap((page: Boards) => page) || []}
-          renderItem={(board: Board) => (
+          renderItem={(board: Board) => {
+            console.log("Board ID:", board.boardId, "End Date:", board.endDate); // 🔍 콘솔 출력
+          
+            return (
             <div
               key={board.boardId}
               className={styles.boardItem}
@@ -159,13 +162,13 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
                   <div className={styles.boardPeriod}>
                     <p>
                       {new Date(board.createdAt).toLocaleDateString()} ~{" "}
-                      {board.endDate ? new Date(board.endDate).toLocaleTimeString() : ""}
+                      {board.endDate ? new Date(board.endDate).toLocaleDateString() : ""}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          )}}
           fetchNextPage={fetchNextPage}
           isFetchingNextPage={isFetchingNextPage}
         />
