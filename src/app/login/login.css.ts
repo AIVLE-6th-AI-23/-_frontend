@@ -75,6 +75,7 @@ export const userIdDisplay = style({
   fontWeight: '500',
   color: '#202124',
   marginBottom: '12px',
+  cursor: 'pointer',
 });
 
 export const backButton = style({

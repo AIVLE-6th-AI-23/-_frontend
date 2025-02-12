@@ -4,8 +4,8 @@ import { Post } from '@/types/types';
 import InfiniteScrollList from '@/components/InfiniteScrollList';
 import PostThumbnail from '@/components/PostThumbnail';
 import * as styles from './postSection.css';
-import EditPostButton from '@/components/PostActionButton/Edit';
 import DeletePostButton from '@/components/PostActionButton/Delete';
+import { incrementViewCount } from '@/services/post';
 
 interface PostSectionProps {
     title: string;
@@ -19,8 +19,14 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
     const pathName = usePathname();
     const router = useRouter();
 
-    const handlePostClick = (postId: number) => {
-        router.push(`${pathName}/${postId}`);
+    const handlePostClick = async (boardId: number, postId: number) => {
+        try {
+            await incrementViewCount({ boardId, postId }); // ✅ 조회수 증가 API 호출
+            router.push(`${pathName}/${postId}`);
+        } catch (error) {
+            console.error("조회수 증가 실패:", error);
+            router.push(`${pathName}/${postId}`); // 에러 발생 시에도 페이지 이동
+        }
     };
 
     return (
@@ -35,7 +41,7 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
                     <div
                         key={post.postId} 
                         className={styles.postItem}
-                        onClick={() => handlePostClick(post.postId)}
+                        onClick={() => handlePostClick(post.boardId, post.postId)}
                         style={{ cursor: 'pointer' }}
                     >
                         <div className={styles.postActions}>
