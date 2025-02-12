@@ -4,35 +4,49 @@ import { colors } from '@/styles/colors.css';
 export const postSection = style({
     display: 'flex', 
     flexDirection :'column',
-    padding: '0 10px 10px ',
+    padding: '0 10px 20px ',
     gap: '16px',
+    justifyContent:'center',
+    margin:'10px',
     backgroundColor:'#ffffff',
     borderRadius: '19px',
     height:"100%",
-    marginBottom: '20px',
-    width:'95%',
+    width:'100%',
+    boxSizing: 'border-box',
+});
+
+export const postBody = style({
+    backgroundColor:"#fff",
+    borderRadius:'8px',
+    padding:'3px 0 0 8px',
+    width:'100%',
+    height:'90%',
+
 });
 
 export const sectionTitle = style({
     fontSize: '30px',
     fontWeight: 'bold',
+    padding:'10px',
     marginBottom: '12px',
     color: colors.text,
 });
 export const postConent = style({
     display:'grid',
-    gridTemplateColumns: 'repeat(2, minmax(200px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
     gap:'10px',
     width:'100%',
+    gridAutoRows: 'minmax(150px, auto)',  // ✅ 행이 자동 추가되도록 설정
+    alignContent: 'start',  
 });
 
 export const postItem = style({
     position: 'relative',
     padding: '12px',
     marginLeft: '10px',
-    width: '80%',
+    width: '90%',
+    height:'100%',
     boxSizing: 'border-box',
-    // backgroundColor: '#f9f9f9',
     backgroundColor:colors.background,
     borderRadius:'8px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
@@ -53,10 +67,11 @@ export const postsWrapper = style({
     flexDirection: 'column',
     padding: '0 10px',
     borderRadius: '8px',
-    backgroundColor: colors.background,
+    // backgroundColor: colors.test,
     gap: '12px',
     justifyContent: 'center',
-    width: '75%',
+    width: '90%',
+    height:'100%',
 });
 
 export const postTitle = style({
@@ -83,9 +98,20 @@ export const postViewCount = style({
     color: colors.secondary,
 });
 
+export const deleteHidden =style({
+    width:'100%',
+    minHeight:'15px',
+    display:'flex',
+    alignItems:'center',
+    margin:"0 30px 5px 30px",
+    justifyContent:'flex-end',
+    boxSizing:'border-box',
+    position:'relative',
+});
+
 export const postActions = style({
   position: 'absolute',
-  top: '16px',
+  top: '50%', 
   right: '16px',
   display: 'flex',
   gap: '8px',

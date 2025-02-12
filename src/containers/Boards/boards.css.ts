@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { colors } from '@/styles/colors.css';
+import { createButton } from '@/styles/Actionbuton.css';
 
 export const boardContainer = style({
     display: 'flex',
@@ -10,24 +11,19 @@ export const boardContainer = style({
     minHeight: '100vh',
 });
 
-export const toggleLeft =style({
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width:'53%',
-}); 
 
 export const boardPageTitle = style({
     display: 'flex',
     alignItems: 'center',
     fontSize: '2rem',
     fontWeight: 'bold',
+    justifySelf:'center',
     color: colors.text,
 });
 
 export const boardHeader = style({
-    display: 'flex',
-    position: 'relative',
+    display: 'grid',
+    gridTemplateColumns:'1fr auto 1fr',
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: '24px',

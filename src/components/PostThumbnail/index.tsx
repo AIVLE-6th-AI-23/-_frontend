@@ -59,7 +59,7 @@ const PostThumbnail: React.FC<PostThumbnailProps> = ({ post, update }) => {
                         동영상을 재생할 수 없습니다.
                     </video>
                 ) : (
-                    <Image src={filePreview} alt="업로드된 이미지" width={100} height={100} />
+                    <Image src={filePreview} alt="업로드된 이미지" width={200} height={200} />
                 )
                 ) : (
                     <Image src="/images/No-Image-Placeholder.png" alt="No Image" width={100} height={100} />

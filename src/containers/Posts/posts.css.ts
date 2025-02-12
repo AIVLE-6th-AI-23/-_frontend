@@ -13,14 +13,18 @@ export const postContainer = style({
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
 });
 
+export const toggleLeft =style({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width:'53%',
+}); 
+
 export const postSectionWrapper = style({
-    display: 'grid',
     alignItems:'start',
-    gridTemplateColumns: 'repeat(2, auto)',
     gap: '16px',
     width: '93%',
     padding:'20px',
-    margin:'0 20px',
     borderRadius:'20px',
     //backgroundColor:'#e7edef',
     backgroundColor: colors.background,
@@ -28,7 +32,8 @@ export const postSectionWrapper = style({
 
 export const postsHeader = style({
     position: 'relative',
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns:'1fr auto 1fr',
     alignItems: 'center',
     width : '100%',
     padding: '0 0 0 10px',
@@ -41,4 +46,5 @@ export const postsTitle = style({
     fontWeight: 'bold',
     color: colors.text,
     marginBottom: '16px',
+    justifySelf:'center',
 })

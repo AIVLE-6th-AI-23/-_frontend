@@ -8,6 +8,7 @@ import ToggleButton from '@/components/ToggleButton';
 
 const Board: React.FC = () => {
   const [isActive, setIsActive] = useState(true);
+  const [isCreating, setIsCreating] = useState(false);
   const isFetching = useIsFetching() > 0; 
   const isMutating = useIsMutating() > 0;
   const isLoading = isFetching || isMutating;
@@ -16,13 +17,14 @@ const Board: React.FC = () => {
     <div className={styles.boardContainer}>
       {isLoading && <GlobalLoadingBar />}
       <div className={styles.boardHeader}>
-        <div className={styles.toggleLeft}>
-        <ToggleButton isActive={isActive} onToggle={() => setIsActive((prev : boolean) => !prev)} />
+        <ToggleButton isActive={isActive}
+         onToggle={() => setIsActive((prev : boolean) => !prev)}
+         labels={["Active","Completed"]} />
         <h1 className={styles.boardPageTitle}>Boards</h1>
+        <CreateBoardButton isCreating={isCreating} setIsCreating={setIsCreating} />
         </div>
-        <CreateBoardButton />
-      </div>
-      <BoardList boardStatus={isActive ? "active" : "completed"} />
+      <BoardList boardStatus={isActive ? "active" : "completed"}
+       onOpenModal={() => {}} />
     </div>
   );
 };

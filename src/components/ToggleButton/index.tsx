@@ -4,9 +4,10 @@ import * as styles from './toggleButton.css';
 interface ToggleButtonProps {
     isActive: boolean;
     onToggle: () => void;
+    labels :[string,string];
 }
 
-const ToggleButton: React.FC<ToggleButtonProps> = ({ isActive, onToggle }) => {
+const ToggleButton: React.FC<ToggleButtonProps> = ({ isActive, onToggle, labels }) => {
 
   return (
     <div className={styles.container}>
@@ -25,8 +26,8 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ isActive, onToggle }) => {
         <div className={`${styles.toggleCircle} ${isActive ? styles.toggleCircleChecked : ''}`} />
       </label>
       <div className={styles.toggleText}>
-        <span>Active</span>
-        <span>Completed</span>
+        <span>{labels[0]}</span>
+        <span>{labels[1]}</span>
       </div>
     </div>
   );

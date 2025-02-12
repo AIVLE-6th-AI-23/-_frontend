@@ -5,9 +5,15 @@ import { BoardRequest } from "@/types/types";
 import CreateBoardModal from "@/components/BoardActionButtons/CreateModal"; // 모달 컴포넌트 불러오기
 import * as styles from "@/styles/Actionbuton.css";
 
-const CreateBoardButton: React.FC = () => {
+
+interface CreateBoardButtonProps {
+  isCreating: boolean;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+
+const CreateBoardButton: React.FC<CreateBoardButtonProps> = ({ isCreating, setIsCreating }) => {
   const queryClient = useQueryClient();
-  const [isCreating, setIsCreating] = useState<boolean>(false);
 
   const createMutation = useMutation({
     mutationFn: (boardData: BoardRequest) => createBoard({ boardData }),

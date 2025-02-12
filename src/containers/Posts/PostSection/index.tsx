@@ -38,15 +38,19 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
                         onClick={() => handlePostClick(post.postId)}
                         style={{ cursor: 'pointer' }}
                     >
-                        <div className={styles.postActions}>
-                            <DeletePostButton boardId={post.boardId} postId={post.postId} />
-                        </div>
                         <div className={styles.postsWrapper}>
-                            <PostThumbnail post={post} update={false} />
-                            <h3 className={styles.postTitle}>{post.postTitle}</h3>
-                            <p className={styles.postDescription}>{post.description}</p>
-                            {inProgress && <p className={styles.postStatus}>상태: {post.status}</p>}
-                            <p className={styles.postViewCount}>조회수: {post.viewCount}</p>
+                            <div className={styles.deleteHidden}>
+                                <div className={styles.postActions}>
+                                    <DeletePostButton boardId={post.boardId} postId={post.postId} />
+                                </div>
+                            </div>
+                                <PostThumbnail post={post} update={false} />
+                                <div className={styles.postBody}>
+                                <h3 className={styles.postTitle}>{post.postTitle}</h3>
+                                <p className={styles.postDescription}>{post.description}</p>
+                                {inProgress && <p className={styles.postStatus}>상태: {post.status}</p>}
+                                <p className={styles.postViewCount}>조회수: {post.viewCount}</p>
+                            </div>
                         </div>
                     </div>
                     
