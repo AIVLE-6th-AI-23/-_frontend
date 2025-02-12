@@ -1,20 +1,21 @@
-import React, { useEffect , useState } from 'react';
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
-import { fetchPosts } from '@/services/post';
+import React, { useEffect, useState } from 'react';
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { fetchPosts, deletePost } from '@/services/post';
 import { Posts } from '@/types/types';
 import PostSection from './PostSection';
 import * as styles from './posts.css';
 import CreatePostButton from '@/components/PostActionButton/Create';
+import DeleteModal from "@/components/DeleteModal";
 import GlobalLoadingBar from '@/components/LoadingBar';
 import ToggleButton from '@/components/ToggleButton';
 
 
 interface PostListProps {
     boardId: number;
-    boardTitle : string;
+    boardTitle: string;
 }
 
-const PostsPage: React.FC<PostListProps> = ({ boardId,boardTitle }) => {
+const PostsPage: React.FC<PostListProps> = ({ boardId, boardTitle }) => {
     const queryClient = useQueryClient();
     const {
         data,
@@ -32,51 +33,92 @@ const PostsPage: React.FC<PostListProps> = ({ boardId,boardTitle }) => {
         retry: false,
     });
 
+
+    const [isActive, setIsActive] = useState(true);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [postIdToDelete, setPostIdToDelete] = useState<number | null>(null);
+
+    const allPosts = data?.pages.flatMap((page) => page) || [];
+    const todoPosts = allPosts.filter((post) => !post.status);
+    const inProgressPosts = allPosts.filter((post) => post.status);
+
+
+    const handleDeleteModal = (postId: number) => {
+        setPostIdToDelete(postId);  // 삭제할 포스트 ID 설정
+        setIsDeleteModalOpen(true);  // 모달 열기
+    };
+
+    const deleteMutation = useMutation({
+        mutationFn: (postId: number) => deletePost({ boardId, postId }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["posts", boardId],
+            });
+            setIsDeleteModalOpen(false);
+        },
+        onError: (e) => { alert("게시글 삭제 실패"); setIsDeleteModalOpen(false); throw new Error(e.message);}
+      });
+
+    const confirmDelete = () => {
+        if (postIdToDelete !== null && boardId !== undefined) {
+            deleteMutation.mutate(postIdToDelete);
+        } else {
+            alert("삭제할 포스트 ID가 없습니다.");
+        }
+    };
+
     useEffect(() => {
         if (status === "error") {
-        queryClient.resetQueries({ queryKey: ["posts", boardId] });
-        throw new Error();
+            queryClient.resetQueries({ queryKey: ["posts", boardId] });
+            throw new Error();
         }
     }, [status, queryClient]);
 
-    const [isActive, setIsActive] = useState(true);
-    const allPosts = data?.pages.flatMap((page) => page) || [];
-    const todoPosts = allPosts.filter((post) => !post.status );
-    const inProgressPosts = allPosts.filter((post) => post.status);
 
     return (
+
         <div className={styles.postContainer}>
             {isLoading && <GlobalLoadingBar />}
             <div className={styles.postsHeader}>
                 <ToggleButton isActive={isActive}
-                 onToggle={() => setIsActive((prev: boolean) => !prev)}
-                 labels={["Todo","Inprogress"]} />
+                    onToggle={() => setIsActive((prev: boolean) => !prev)}
+                    labels={["Todo", "Inprogress"]} />
                 <h1 className={styles.postsTitle}>{boardTitle}</h1>
                 <CreatePostButton boardId={boardId} />
             </div>
             <div className={styles.postSectionWrapper}>
-            {isActive && (
-                <PostSection
-                    title="To Do"
-                    posts={todoPosts}
-                    fetchNextPage={fetchNextPage}
-                    isFetchingNextPage={isFetchingNextPage}
-                    inProgress={false}
-                />
-            )}
+                {isActive && (
+                    <PostSection
+                        title="To Do"
+                        posts={todoPosts}
+                        fetchNextPage={fetchNextPage}
+                        isFetchingNextPage={isFetchingNextPage}
+                        inProgress={false}
+                        onDeleteModal={handleDeleteModal}
+
+                    />
+                )}
                 {!isActive && (
-                <PostSection
-                    title="In Progress"
-                    posts={inProgressPosts}
-                    fetchNextPage={fetchNextPage}
-                    isFetchingNextPage={isFetchingNextPage}
-                    inProgress={true}
-                />
+                    <PostSection
+                        title="In Progress"
+                        posts={inProgressPosts}
+                        fetchNextPage={fetchNextPage}
+                        isFetchingNextPage={isFetchingNextPage}
+                        inProgress={true}
+                        onDeleteModal={handleDeleteModal}
+                    />
                 )}
             </div>
+            {/* 삭제 모달 */}
+            {isDeleteModalOpen && (
+                <DeleteModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onConfirm={confirmDelete}
+                />
+            )}
         </div>
     );
-    
 };
 
 export default PostsPage;

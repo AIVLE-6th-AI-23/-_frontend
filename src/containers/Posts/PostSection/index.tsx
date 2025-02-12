@@ -4,7 +4,6 @@ import { Post } from '@/types/types';
 import InfiniteScrollList from '@/components/InfiniteScrollList';
 import PostThumbnail from '@/components/PostThumbnail';
 import * as styles from './postSection.css';
-import EditPostButton from '@/components/PostActionButton/Edit';
 import DeletePostButton from '@/components/PostActionButton/Delete';
 
 interface PostSectionProps {
@@ -13,9 +12,10 @@ interface PostSectionProps {
     fetchNextPage: () => void;
     isFetchingNextPage: boolean;
     inProgress: boolean;
+    onDeleteModal: (postId: number) => void; 
 }
 
-const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, isFetchingNextPage, inProgress }) => {
+const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, isFetchingNextPage, inProgress, onDeleteModal }) => {
     const pathName = usePathname();
     const router = useRouter();
 
@@ -41,7 +41,10 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
                         <div className={styles.postsWrapper}>
                             <div className={styles.deleteHidden}>
                                 <div className={styles.postActions}>
-                                    <DeletePostButton boardId={post.boardId} postId={post.postId} />
+                                    <DeletePostButton 
+                                    postId={post.postId} 
+                                    onOpenModal={onDeleteModal}
+                                    />
                                 </div>
                             </div>
                                 <PostThumbnail post={post} update={false} />

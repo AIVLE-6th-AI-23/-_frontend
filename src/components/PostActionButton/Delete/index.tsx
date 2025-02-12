@@ -1,40 +1,27 @@
 import React from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deletePost } from "@/services/post";
 import * as styles from "@/styles/Actionbuton.css";
 
 interface DeletePostButtonProps {
-  boardId: number;
   postId: number;
+  onOpenModal:(postId: number) => void;
 }
 
 const DeletePostButton: React.FC<DeletePostButtonProps> = ({
-  boardId,
   postId,
+  onOpenModal
 }) => {
-  const queryClient = useQueryClient();
-
-  const deleteMutation = useMutation({
-    mutationFn: () => deletePost({ boardId, postId }),
-    onSuccess: () => {
-        queryClient.invalidateQueries({
-            queryKey: ["posts", boardId],
-        });
-    },
-    onError: () => alert("게시글 삭제 실패"),
-  });
-
-  const handleDelete = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    if (window.confirm("이 게시글을 정말 삭제 하시겠습니까?")) {
-      deleteMutation.mutate();
-    }
-  };
 
   return (
-    <button className={styles.deleteButton} onClick={handleDelete}>
+    <button 
+      className={styles.deleteButton} 
+      onClick={(e) => { 
+        onOpenModal(postId); // 모달을 열 때 postId를 전달
+        e.stopPropagation(); // 이벤트 전파 막기
+      }}
+    >
       delete
     </button>
+
   );
 };
 

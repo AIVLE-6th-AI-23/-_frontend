@@ -1,5 +1,5 @@
 import { useMutation, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchBoards, updateBoard, deleteBoard } from "@/services/board"; // ✅ updateBoard 추가
+import { fetchBoards, updateBoard, deleteBoard } from "@/services/board";
 import { Board, Boards, BoardRequest } from "@/types/types";
 import InfiniteScrollList from "@/components/InfiniteScrollList";
 import { usePathname, useRouter } from "next/navigation";
@@ -8,12 +8,12 @@ import EditBoardButton from "@/components/BoardActionButtons/Edit";
 import DeleteBoardButton from "@/components/BoardActionButtons/Delete";
 import { useEffect, useState } from "react";
 import CreateBoardModal from "@/components/BoardActionButtons/CreateModal";
-import DeleteModal from "@/components/BoardActionButtons/DeleteModal";
+import DeleteModal from "@/components/DeleteModal";
 import { DepartmentOptions } from "@/constants/constants";
 
 interface BoardListProps {
   boardStatus: string;
-  onOpenModal: (board: Board) => void; 
+  onOpenModal: (board: Board) => void;
 }
 
 const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
@@ -23,10 +23,8 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
 
   const [selectedBoard, setSelectedBoard] = useState<Board | null>(null);
   const [isEditing, setIsEditing] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [boardIdToDelete, setBoardIdToDelete] = useState<number | null>(null);
-
 
   const { data, fetchNextPage, isFetchingNextPage, status } = useInfiniteQuery({
     queryKey: ["boards", boardStatus],
@@ -39,30 +37,28 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     retry: false,
   });
 
-
-  //Update
+  // Update
   const updateMutation = useMutation({
     mutationFn: (updatedData: BoardRequest) =>
       updateBoard({ boardId: selectedBoard!.boardId, boardData: updatedData }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["boards", boardStatus] }); // 목록 새로고침
-      setIsEditing(false); 
+      setIsEditing(false);
     },
     onError: (error: any) => alert(`게시판 수정 실패: ${error.message}`),
   });
 
-  //Delete 
+  // Delete
   const deleteMutation = useMutation({
     mutationFn: (boardId: number) => deleteBoard({ boardId }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["boards", boardStatus] }); // 목록 새로고침
       setIsModalOpen(false); // 모달 닫기
     },
-    onError: (error: any) => alert(`게시판 삭제 실패: ${error.message}`),
+    onError: (error: any) => {alert("게시판 삭제 실패"); setIsModalOpen(false);}
   });
 
-
-  const handleBoardClick = (boardId: number, boardTitle:string) => {
+  const handleBoardClick = (boardId: number, boardTitle: string) => {
     router.push(`${pathName}/${boardId}/posts?title=${encodeURIComponent(boardTitle)}`);
   };
 
@@ -99,7 +95,6 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     }
   };
 
-  
   useEffect(() => {
     if (status === "error") {
       queryClient.resetQueries({ queryKey: ["boards", boardStatus] });
@@ -108,8 +103,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
   }, [status, queryClient]);
 
   return (
-    
-    <div className={styles.boardListBody}>
+    <>
       {isEditing && selectedBoard && (
         <CreateBoardModal
           isOpen={isEditing}
@@ -119,70 +113,74 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
             boardTitle: selectedBoard.boardTitle,
             description: selectedBoard.description,
             deptIds: selectedBoard.deptIds,
-            endDate:selectedBoard.endDate,
+            endDate: selectedBoard.endDate,
           }}
-        />      
+        />
       )}
 
       {/* 게시판 리스트 */}
       <div className={styles.boardListContainer}>
-      <InfiniteScrollList
-      data={data?.pages.flatMap((page: Boards) => page) || []}
-      renderItem={(board: Board) => (
-        <div
-          key={board.boardId}
-          className={styles.boardItem}
-          onClick={() => handleBoardClick(board.boardId, board.boardTitle)}
-          style={{ cursor: "pointer" }}
-        >
-          <div className={styles.buttonAndBoardWrapper}>
-          <div className={styles.buttonHidden}>
-            <div className={styles.boardActions}>
-                <div className={styles.buttonContainer}>
-                  <EditBoardButton onEdit={() => handleEditClick(board)} />
-                  <DeleteBoardButton boardId = {board.boardId} onOpenModal={openModal} />
+        <InfiniteScrollList
+          data={data?.pages.flatMap((page: Boards) => page) || []}
+          renderItem={(board: Board) => (
+            <div
+              key={board.boardId}
+              className={styles.boardItem}
+              onClick={() => handleBoardClick(board.boardId, board.boardTitle)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className={styles.buttonAndBoardWrapper}>
+                <div className={styles.buttonHidden}>
+                  <div className={styles.boardActions}>
+                    <div className={styles.buttonContainer}>
+                      <EditBoardButton onEdit={() => handleEditClick(board)} />
+                      <DeleteBoardButton boardId={board.boardId} onOpenModal={openModal} />
+                    </div>
+                  </div>
                 </div>
-            </div>
-          </div>
 
-              <div className={styles.boardWrapper}>
+                <div className={styles.boardWrapper}>
                   <h3 className={styles.boardTitle}>{board.boardTitle}</h3>
                   <p className={styles.boardDescription}>{board.description}</p>
-              </div>
+                </div>
 
-            {board.deptIds && board.deptIds.length > 0 ? (
-              <div className={styles.boardDepts}>
-                {board.deptIds.map((id) => {
-                  const label = DepartmentOptions.find((dept) => dept.value === id)?.label || id;
-                  return <div className = {styles.boardDpetLabels}key={id}>{label}</div>;
-                })}
-              </div>
-            ) : (
-              <p>No departments available</p>
-            )}
-            <div className={styles.boardFooter}>
-              <div className={styles.boardPeriod}>
-                <p>{new Date(board.createdAt).toLocaleDateString()} ~ {board.endDate ? new Date(board.endDate).toLocaleTimeString() : ""} </p>
+                {board.deptIds && board.deptIds.length > 0 ? (
+                  <div className={styles.boardDepts}>
+                    {board.deptIds.map((id) => {
+                      const label = DepartmentOptions.find((dept) => dept.value === id)?.label || id;
+                      return <div className={styles.boardDpetLabels} key={id}>{label}</div>;
+                    })}
+                  </div>
+                ) : (
+                  <p>No departments available</p>
+                )}
+
+                <div className={styles.boardFooter}>
+                  <div className={styles.boardPeriod}>
+                    <p>
+                      {new Date(board.createdAt).toLocaleDateString()} ~{" "}
+                      {board.endDate ? new Date(board.endDate).toLocaleTimeString() : ""}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-      fetchNextPage={fetchNextPage}
-      isFetchingNextPage={isFetchingNextPage}
-    />
-  </div>
+          )}
+          fetchNextPage={fetchNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+        />
+      </div>
 
       {/* 삭제 모달 */}
       {isModalOpen && (
-      <DeleteModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        onConfirm={confirmDelete}
-      />
-    )}
-  </div>
-);
+        <DeleteModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onConfirm={confirmDelete}
+        />
+      )}
+    </>
+  );
 };
 
 export default BoardList;
