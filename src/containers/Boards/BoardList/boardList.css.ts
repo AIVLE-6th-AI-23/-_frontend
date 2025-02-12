@@ -1,29 +1,20 @@
 import { style } from '@vanilla-extract/css';
 import { colors } from '@/styles/colors.css';
 
-export const boardListBody = style({
-  width: '90%', 
-  height: '90%',
-  borderRadius: '12px', 
-  margin: '0 auto', 
-  display: 'flex', 
-  justifyContent: 'center', 
-  alignItems: 'center', 
-  overflow: 'hidden', 
-})
 
 export const boardListContainer = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', // 한 행에 여러 열이 들어가도록 설정
-  gap: '20px',
-  width: '100%',
-  padding: '16px',
+  gap: '50px',
+  width: '90%',
+  padding: '30px',
   marginTop:'20px',
   borderRadius: '13px',
   height :'100%',
   minHeight: '700px',
   backgroundColor :'#ffffff',
   boxSizing: 'border-box',
+  gridAutoFlow: 'row',
 });
 
 
@@ -48,10 +39,12 @@ export const boardItem = style({
 })
 
 export const boardTitle = style({
+  margin:'0',
   fontSize: '18px',
   fontWeight: 'bold',
   marginBottom: '4px',
   overflow: 'hidden',
+  justifyContent: 'flex-start',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap', 
   maxWidth: '100%', 
@@ -138,10 +131,10 @@ export const buttonContainer = style({
 export const boardWrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  paddingLeft:'3px',
+  padding:'3px',
   borderRadius: '8px',
   margin:'5px',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   width: '100%', 
   height: "100%",
   boxSizing: 'border-box',
@@ -149,6 +142,7 @@ export const boardWrapper = style({
 
   export const buttonAndBoardWrapper = style({
   display: 'flex',
+  justifyContent: 'flex-start',
   height:"100%",
   flexDirection: 'column',
   boxSizing: 'border-box',

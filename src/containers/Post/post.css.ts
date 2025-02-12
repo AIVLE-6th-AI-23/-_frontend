@@ -1,6 +1,6 @@
-import { colors } from '@/styles/colors.css';
+
 import { style } from '@vanilla-extract/css';
-import { color } from 'framer-motion';
+
 
  
 export const postContainer = style({
@@ -49,7 +49,6 @@ export const card = style({
     margin:'50px auto',
     paddingBottom:'30px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    
 });
 
 // 툴바 스타일

@@ -3,16 +3,15 @@ import { style } from "@vanilla-extract/css";
 export const navbar = style({
     display: 'flex',
     alignItems: 'center',
+    justifyContent:'center',
     gap: '20px',
   });
   
 export const navLinks = style({
     display: 'flex',
     listStyle: 'none',
-    gap: '20px',
-    padding: 0,
-    margin: 0,
-    fontSize: '1rem',
+    gap: '50px',
+    fontSize: '1.3rem',
     fontWeight: 'bold',
 });
 

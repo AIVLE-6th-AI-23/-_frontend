@@ -10,7 +10,7 @@ export const header = style({
   backgroundColor: '#ffffff',
   borderBottom: '1px solid #ddd',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  fontFamily: 'Arial, sans-serif',
+  fontFamily: 'var(--font-my-font), sans-serif',
 });
 
 export const headerContainer = style({

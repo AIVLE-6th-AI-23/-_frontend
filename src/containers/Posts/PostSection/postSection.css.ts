@@ -31,10 +31,12 @@ export const sectionTitle = style({
     marginBottom: '12px',
     color: colors.text,
 });
+
 export const postConent = style({
     display:'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
     gap:'10px',
+    height:'100%',
     width:'100%',
     gridAutoRows: 'minmax(150px, auto)',  // ✅ 행이 자동 추가되도록 설정
     alignContent: 'start',  

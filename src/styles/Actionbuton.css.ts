@@ -147,6 +147,7 @@ export const createButtonImage = style({
 });
 
 export const editButton = style({
+  fontFamily: 'var(--font-my-font), sans-serif',
   backgroundColor: '#eee',
   border: 'none',
   padding: '0.5rem',
@@ -176,6 +177,7 @@ export const editButton = style({
 
 
 export const deleteButton = style({
+  fontFamily: 'var(--font-my-font), sans-serif',
   backgroundColor: '#eee',
   border: 'none',
   padding: '1px',

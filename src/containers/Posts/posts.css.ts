@@ -4,6 +4,7 @@ import { color } from 'framer-motion';
 
 export const postContainer = style({
     display: 'flex',
+    height:'100%',
     flexDirection: 'column',
     alignItems: 'center',
     gap: '24px',
@@ -13,12 +14,6 @@ export const postContainer = style({
     boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
 });
 
-export const toggleLeft =style({
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width:'53%',
-}); 
 
 export const postSectionWrapper = style({
     alignItems:'start',
