@@ -35,10 +35,10 @@ const PostPage: React.FC<PostPageProps> = ({ boardId, postId }) => {
             <div className={styles.resultWrapper}>
             <PostDetails boardId={boardId} postId={postId}/>
             </div>
-            <div className={styles.contentAnalysisContainer}>
+          </div>
+          <div className={styles.contentAnalysisContainer}>
               <ContentAnalysis postId={postId}/>
             </div>
-          </div>
       </div>
     );
   };

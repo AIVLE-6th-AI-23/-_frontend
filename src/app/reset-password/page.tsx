@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { verifyUser, resetPassword } from '@/services/user';
 import { motion } from 'framer-motion';
 import * as styles from './resetPassword.css';
+import Select from 'react-select';
+import { DepartmentOptions } from '@/constants/constants';
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -76,13 +78,12 @@ export default function ResetPasswordPage() {
               required
               className={styles.input}
             />
-            <input
-              type="text"
-              placeholder="부서"
-              value={department}
-              onChange={(e) => setDepartment(e.target.value)}
-              required
-              className={styles.input}
+            <Select 
+              options={DepartmentOptions} 
+              className={styles.input} 
+              placeholder="부서 선택" 
+              onChange={(selectedOption) => setDepartment(selectedOption?.value || '')}
+              isClearable
             />
             <input
               type="email"

@@ -90,6 +90,7 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
             
             <div className={styles.infoTextStyle}>
                 <p>조회수: {postData.viewCount}</p>
+                <p>상태 : {postData.status}</p>
                 <p>작성일: {postData.createdAt ? new Date(postData.createdAt).toLocaleDateString() : "작성일 없음"}</p>
                 <p>{postData.status}</p>
             </div>

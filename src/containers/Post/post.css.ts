@@ -13,7 +13,7 @@ export const postContainer = style({
   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
   borderRadius: '16px',
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   alignItems: 'center',
   gap: '25px',
   boxSizing: 'border-box', 
