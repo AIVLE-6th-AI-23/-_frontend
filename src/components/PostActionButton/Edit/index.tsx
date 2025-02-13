@@ -14,7 +14,7 @@ const EditPostButton: React.FC<EditPostButtonProps> = ({ onEdit }) => {
        e.stopPropagation();
        onEdit();
      }}>
-      edit
+      수정
      </button>
    );
 };

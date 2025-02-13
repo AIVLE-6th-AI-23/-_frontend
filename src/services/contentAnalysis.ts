@@ -6,3 +6,8 @@ export const fetchContentAnalysis = async (postId: number): Promise<ContentAnaly
     
     return response.data.data;
 }
+
+export const startContentAnalysis = async (postId: number): Promise<void> => {
+    const response = await api.post<ApiResponse<void>>(`/api/${postId}/content-analysis/start`);
+    return response.data.data;
+};

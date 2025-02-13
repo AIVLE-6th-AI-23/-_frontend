@@ -37,8 +37,8 @@ export const updateUserInfo = async (
 
 export const checkId = async (
     userId: string
-): Promise<Boolean> => {
-    const response = await api.get<ApiResponse<Boolean>>(`/api/user/checkid/${userId}`)
+): Promise<boolean> => {
+    const response = await api.get<ApiResponse<boolean>>(`/api/user/checkid/${userId}`)
     return response.data.data
 }
 

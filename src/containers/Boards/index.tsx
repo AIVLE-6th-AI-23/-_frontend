@@ -20,7 +20,7 @@ const Board: React.FC = () => {
         <ToggleButton isActive={isActive}
          onToggle={() => setIsActive((prev : boolean) => !prev)}
          labels={["Active","Completed"]} />
-        <h1 className={styles.boardPageTitle}>Boards</h1>
+        <h1 className={styles.boardPageTitle}>대시보드</h1>
         <CreateBoardButton isCreating={isCreating} setIsCreating={setIsCreating} />
         </div>
       <BoardList boardStatus={isActive ? "active" : "completed"}

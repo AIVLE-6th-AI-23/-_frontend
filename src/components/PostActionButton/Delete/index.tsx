@@ -19,7 +19,7 @@ const DeletePostButton: React.FC<DeletePostButtonProps> = ({
         e.stopPropagation(); // 이벤트 전파 막기
       }}
     >
-      delete
+      삭제
     </button>
 
   );

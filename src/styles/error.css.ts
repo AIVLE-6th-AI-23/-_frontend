@@ -16,8 +16,8 @@ export const container = style({
 });
 
 export const errorImage = style({
-  width: "300px",
-  height: "auto",
+  width: "auto",
+  height: "200px",
   marginBottom: "20px",
   borderRadius: "10px",
 });

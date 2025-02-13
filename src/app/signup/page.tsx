@@ -1,10 +1,10 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
+import { queryOptions, useMutation, useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Select from 'react-select';
-import { signup } from '@/services/user';
+import { checkId, signup } from '@/services/user';
 import * as styles from './signup.css';
 import { useRouter } from 'next/navigation';
 import { DepartmentOptions } from '@/constants/constants';
@@ -16,6 +16,7 @@ export default function SignupPage() {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [checkIdValid, setCheckIdValid] = useState(true)
 
   const router = useRouter();
   const { mutate: signupMutate, isPending: isSigningUp, error: signupError } = useMutation({
@@ -26,10 +27,19 @@ export default function SignupPage() {
     },
   });
 
-  const handleNextStep = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleNextStep = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (step === 1 && employeeId && deptId) setStep(2);
-    else if (step === 2 && userName && email) setStep(3);
+    if (step === 1 && employeeId && deptId) {
+      try {
+        const response = await checkId(employeeId);
+        setCheckIdValid(!response);
+        if (!response) setStep(2);
+      } catch (error) {
+        setCheckIdValid(false);
+      }
+    } else if (step === 2 && userName && email) {
+      setStep(3);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,7 +57,7 @@ export default function SignupPage() {
       >
         <h1 className={styles.title}>회원가입</h1>
         {signupError && <p className={styles.error}>회원가입 실패</p>}
-        
+        {!checkIdValid && <p className={styles.error}>이미 가입된 회원입니다.</p>}
         <AnimatePresence mode="wait">
           {step === 1 ? (
             <motion.form 

@@ -6,6 +6,7 @@ import PostThumbnail from '@/components/PostThumbnail';
 import * as styles from './postDetails.css';
 import EditPostButton from '@/components/PostActionButton/Edit';
 import CreatePostModal from '@/components/PostActionButton/CreateModal';
+import { startContentAnalysis } from '@/services/contentAnalysis';
 
 interface PostProps {
     boardId: number;
@@ -42,6 +43,11 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
             queryClient.setQueryData(["post", boardId, postId], updatedPost);
             setIsEditing(false);
         },
+    });
+
+    const startMutation = useMutation({
+        mutationFn: () => startContentAnalysis(postId),
+        onError: (error: any) => alert("분석 시작 실패") 
     });
 
     if (!postData) return <p className={styles.infoTextStyle}>게시글이 존재하지 않습니다.</p>;
@@ -85,9 +91,11 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
             <div className={styles.infoTextStyle}>
                 <p>조회수: {postData.viewCount}</p>
                 <p>작성일: {postData.createdAt ? new Date(postData.createdAt).toLocaleDateString() : "작성일 없음"}</p>
+                <p>{postData.status}</p>
             </div>
-            <button className={styles.buttonStyle}>
-                upload..
+
+            <button className={styles.buttonStyle} onClick={() => {startMutation.mutate()}}>
+                분석 시작
             </button>
             </div>
         </>

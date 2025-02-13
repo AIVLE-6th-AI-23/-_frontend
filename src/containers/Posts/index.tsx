@@ -82,7 +82,7 @@ const PostsPage: React.FC<PostListProps> = ({ boardId, boardTitle }) => {
             <div className={styles.postsHeader}>
                 <ToggleButton isActive={isActive}
                     onToggle={() => setIsActive((prev: boolean) => !prev)}
-                    labels={["Todo", "Inprogress"]} />
+                    labels={["Todo", "In Progress"]} />
                 <h1 className={styles.postsTitle}>{boardTitle}</h1>
                 <CreatePostButton boardId={boardId} />
             </div>

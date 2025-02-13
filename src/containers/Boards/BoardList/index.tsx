@@ -45,7 +45,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
       queryClient.invalidateQueries({ queryKey: ["boards", boardStatus] }); // 목록 새로고침
       setIsEditing(false);
     },
-    onError: (error: any) => alert(`게시판 수정 실패: ${error.message}`),
+    onError: (error: any) => alert("게시판 수정 실패"),
   });
 
   // Delete

@@ -5,8 +5,8 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
         <ul className={styles.navLinks}>
-            <li><Link href="/" className={styles.navItem}>HOME</Link></li>
-            <li><Link href="/boards" className={styles.navItem}>BOARD</Link></li>
+            <li><Link href="/" className={styles.navItem}>홈</Link></li>
+            <li><Link href="/boards" className={styles.navItem}>대시보드</Link></li>
         </ul>
     </nav>
   );

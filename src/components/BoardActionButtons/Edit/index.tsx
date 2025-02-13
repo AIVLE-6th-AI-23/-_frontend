@@ -11,7 +11,7 @@ const EditBoardButton: React.FC<EditBoardButtonProps> = ({ onEdit }) => {
       e.stopPropagation();
       onEdit();
     }}>
-      edit
+      수정
     </button>
   );
 };

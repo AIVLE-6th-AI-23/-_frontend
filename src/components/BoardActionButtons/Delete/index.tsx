@@ -1,6 +1,4 @@
 import React from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteBoard } from "@/services/board";
 import * as styles from "@/styles/Actionbuton.css";
 
 interface DeleteBoardProps {
@@ -11,7 +9,7 @@ interface DeleteBoardProps {
 const DeleteBoardButton: React.FC<DeleteBoardProps> = ({ boardId,onOpenModal }) => {
   return (
     <button className={styles.deleteButton} onClick={(e) => {onOpenModal(boardId); e.stopPropagation();}}>
-      delete
+      삭제
     </button>
   );
 };
