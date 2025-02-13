@@ -1,4 +1,4 @@
-import { colors } from '@/styles/colors.css';
+
 import { style } from '@vanilla-extract/css';
 
 
@@ -8,6 +8,7 @@ export const analyzeWrapper =style({
   boxSizing:'border-box',
   display:'flex',
   flexDirection:'column',
+  gap:'8px',
 });
 
 export const editbuttonTop =style({

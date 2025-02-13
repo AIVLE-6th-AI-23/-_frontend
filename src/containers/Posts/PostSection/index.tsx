@@ -54,7 +54,9 @@ const PostSection: React.FC<PostSectionProps> = ({ title, posts, fetchNextPage, 
                                     />
                                 </div>
                             </div>
-                                <PostThumbnail post={post} update={false} />
+                                <div>
+                                    <PostThumbnail post={post} update={false} />
+                                </div>
                                 <div className={styles.postBody}>
                                 <h3 className={styles.postTitle}>{post.postTitle}</h3>
                                 <p className={styles.postDescription}>{post.description}</p>

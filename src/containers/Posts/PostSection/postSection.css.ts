@@ -67,11 +67,11 @@ export const postsWrapper = style({
     display: 'flex',
     position: 'relative',
     flexDirection: 'column',
-    padding: '0 10px',
+    padding: '0 0 0 10px',
     borderRadius: '8px',
     // backgroundColor: colors.test,
-    gap: '12px',
-    justifyContent: 'center',
+    gap: '10px',
+    justifyContent: 'flex-start',
     width: '90%',
     height:'100%',
 });
@@ -102,18 +102,17 @@ export const postViewCount = style({
 
 export const deleteHidden =style({
     width:'100%',
-    minHeight:'15px',
+    minHeight:'40px',
     display:'flex',
     alignItems:'center',
-    margin:"0 30px 5px 30px",
-    justifyContent:'flex-end',
+    margin:"0 30px 0px 30px",
+    justifyContent:'center',
     boxSizing:'border-box',
     position:'relative',
 });
 
 export const postActions = style({
   position: 'absolute',
-  top: '50%', 
   right: '16px',
   display: 'flex',
   gap: '8px',
