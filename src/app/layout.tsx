@@ -45,6 +45,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         
         <html lang="kr" className={myFont.className}>
+            <head>
+                <meta httpEquiv='Content-Security-Policy' content='upgrade-insecure-requests' />
+            </head>
             <body>
                 <QueryClientProvider client={queryClient}>
                     <Header />
