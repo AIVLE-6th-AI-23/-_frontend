@@ -1,6 +1,5 @@
 import { colors } from '@/styles/colors.css';
 import { style } from '@vanilla-extract/css';
-import { color } from 'framer-motion';
 
 export const postContainer = style({
     display: 'flex',

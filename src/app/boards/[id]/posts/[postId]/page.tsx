@@ -11,7 +11,6 @@ const Post = () => {
     const postId = params.postId;
 
     if (!boardId || !postId || Array.isArray(boardId) || Array.isArray(postId)) {
-        console.log(boardId, postId);
         return <p>잘못된 요청입니다.</p>;
     }
 

@@ -32,10 +32,6 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
   const [endDate, setEndDate] = useState<Date | null>(initialData?.endDate ? new Date(initialData.endDate) : null);
 
   useEffect(() => {
-
-    console.log("Initial Data from Parent:", initialData);
-    console.log("initialData.deptIds:", initialData?.deptIds);
-
     if (initialData && initialData.deptIds) {
       setBoardTitle(initialData.boardTitle);
       setDescription(initialData.description);
@@ -55,7 +51,6 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
     }
 
     const endDateString = endDate ? format(toZonedTime(endDate, "Asia/Seoul"), "yyyy-MM-dd'T'HH:mm:ss") : null;
-    console.log("End Date on Save:", endDateString);
     onSave(boardTitle, description, selectedDepts.map((dept) => dept.value), endDateString);
     onClose();
   };
@@ -83,7 +78,6 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
             isMulti
             value={selectedDepts}
             onChange={(selectedOptions: MultiValue<DepartmentOption>) =>{
-              console.log("Selected Options:", selectedOptions);
               setSelectedDepts(selectedOptions as DepartmentOption[]);
             }}
             placeholder="부서 선택..."
@@ -95,7 +89,6 @@ const CreateBoardModal: React.FC<CreateBoardModalProps> = ({
               dateFormat="yyyy-MM-dd"
               onChange={(date: Date | null) => {
                 setEndDate(date)
-                console.log("달력 쳌 :" , date)
               }}
               locale={ko}
               isClearable 

@@ -33,7 +33,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 const response = (error as { response?: { status?: number } }).response;
                 
                 if (response?.status === 403) {
-                    console.log("403 Forbidden: 로그인 페이지로 이동");
                     router.push('/login');
                     queryClient.cancelQueries();
                 }
