@@ -1,7 +1,7 @@
 'use client';
 
-import { queryOptions, useMutation, useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Select from 'react-select';
 import { checkId, signup } from '@/services/user';
@@ -25,18 +25,33 @@ export default function SignupPage() {
     onSuccess: () => {
         router.push('/login');
     },
+    onError: () => {
+      throw signupError
+    },
+    throwOnError: true
   });
 
+  const checkIdMutation = useMutation({
+      mutationKey: ['checkId'],
+      mutationFn: checkId,
+      onError: (error) => {
+        throw error;
+      },
+      throwOnError: true
+    });
+  
+  
   const handleNextStep = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 1 && employeeId && deptId) {
-      try {
-        const response = await checkId(employeeId);
-        setCheckIdValid(!response);
-        if (!response) setStep(2);
-      } catch (error) {
-        setCheckIdValid(false);
-      }
+      checkIdMutation.mutate(employeeId, {
+        onSuccess: (isDuplicate) => {
+          setCheckIdValid(!isDuplicate);
+          if (!isDuplicate) { 
+            setStep(2); 
+          }
+        }
+      })
     } else if (step === 2 && userName && email) {
       setStep(3);
     }

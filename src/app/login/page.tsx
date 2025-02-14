@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as styles from './login.css';
 import Link from 'next/link';
+import { AxiosError } from 'axios';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,6 +22,13 @@ export default function LoginPage() {
       queryClient.setQueryData(["user"], data);
       router.push('/boards');
     },
+    throwOnError: (error: AxiosError) => {
+      if(error.response?.status === 403 || error.response?.status === 401){ 
+        return false;
+      } else {
+        return true;
+      }
+    }
   });
 
   const handleNextStep = (e: React.FormEvent<HTMLFormElement>) => {

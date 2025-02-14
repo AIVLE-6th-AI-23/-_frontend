@@ -30,10 +30,10 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
 
     useEffect(() => {
         if (status === "error") {
-        queryClient.resetQueries({ queryKey: ["posts", boardId] });
-        throw new Error();
+            queryClient.resetQueries({ queryKey: ["posts", boardId] });
+            throw error;
         }
-    }, [status, queryClient]);
+    }, [status, queryClient, boardId]);
 
     const postData = cachedPost || post;
 
@@ -43,11 +43,14 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
             queryClient.setQueryData(["post", boardId, postId], updatedPost);
             setIsEditing(false);
         },
+        onError: (error:Error) => {alert("Post 수정 실패"); throw error;},
+        throwOnError: true
     });
 
     const startMutation = useMutation({
         mutationFn: () => startContentAnalysis(postId),
-        onError: (error: any) => alert("분석 시작 실패") 
+        onError: (error:Error) => {alert("분석 시작 실패"); throw error;},
+        throwOnError: true
     });
 
     if (!postData) return <p className={styles.infoTextStyle}>게시글이 존재하지 않습니다.</p>;
@@ -96,7 +99,7 @@ export const PostDetails: React.FC<PostProps> = ({ boardId, postId }) => {
             </div>
 
             <button className={styles.buttonStyle} onClick={() => {startMutation.mutate()}}>
-                분석 시작
+                {isLoading ? "분석 시작 중" : "분석 시작" }
             </button>
             </div>
         </>

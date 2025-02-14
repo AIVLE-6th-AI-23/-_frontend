@@ -34,7 +34,7 @@ const InfiniteScrollList = <T,>({
     return (
         <>
             {data.map(renderItem)}
-            <div ref={observerRef} />
+            {!isFetchingNextPage && <div ref={observerRef} />}
         </>
     );
 };

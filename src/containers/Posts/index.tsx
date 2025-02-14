@@ -8,6 +8,8 @@ import CreatePostButton from '@/components/PostActionButton/Create';
 import DeleteModal from "@/components/DeleteModal";
 import GlobalLoadingBar from '@/components/LoadingBar';
 import ToggleButton from '@/components/ToggleButton';
+import { AxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
 
 
 interface PostListProps {
@@ -17,6 +19,7 @@ interface PostListProps {
 
 const PostsPage: React.FC<PostListProps> = ({ boardId, boardTitle }) => {
     const queryClient = useQueryClient();
+    const router = useRouter();
     const {
         data,
         fetchNextPage,
@@ -28,11 +31,18 @@ const PostsPage: React.FC<PostListProps> = ({ boardId, boardTitle }) => {
         queryFn: ({ pageParam = null }) => fetchPosts({ boardId, pageParam }),
         getNextPageParam: (lastPage: Posts) =>
             lastPage.length > 0 ? lastPage[lastPage.length - 1].createdAt : null,
+        throwOnError:(error: AxiosError) => {
+            if(error.response?.status === 403 || error.response?.status === 401){
+                router.push("/login");
+                return false;
+            } else {
+                return true;
+            }
+        },
         initialPageParam: null,
         refetchOnWindowFocus: false,
         retry: false,
     });
-
 
     const [isActive, setIsActive] = useState(true);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -56,8 +66,9 @@ const PostsPage: React.FC<PostListProps> = ({ boardId, boardTitle }) => {
             });
             setIsDeleteModalOpen(false);
         },
-        onError: (e) => { alert("게시글 삭제 실패"); setIsDeleteModalOpen(false); throw new Error(e.message);}
-      });
+        onError: (e) => { alert("게시글 삭제 실패"); setIsDeleteModalOpen(false); throw e;},
+        throwOnError: true
+    });
 
     const confirmDelete = () => {
         if (postIdToDelete !== null && boardId !== undefined) {
@@ -72,7 +83,7 @@ const PostsPage: React.FC<PostListProps> = ({ boardId, boardTitle }) => {
             queryClient.resetQueries({ queryKey: ["posts", boardId] });
             throw new Error();
         }
-    }, [status, queryClient]);
+    }, [status, queryClient, boardId]);
 
 
     return (

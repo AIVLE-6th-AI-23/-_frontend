@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import CreateBoardModal from "@/components/BoardActionButtons/CreateModal";
 import DeleteModal from "@/components/DeleteModal";
 import { DepartmentOptions } from "@/constants/constants";
+import { AxiosError } from "axios";
 
 interface BoardListProps {
   boardStatus: string;
@@ -32,6 +33,14 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
       fetchBoards({ pageParam, status: boardStatus }),
     getNextPageParam: (lastPage: Boards) =>
       lastPage.length > 0 ? lastPage[lastPage.length - 1].createdAt : null,
+    throwOnError:(error: AxiosError) => {
+      if(error.response?.status === 403 || error.response?.status === 401){
+        router.push('/login');
+        return false;
+      } else {
+        return true;
+      }
+    },
     initialPageParam: null,
     refetchOnWindowFocus: false,
     retry: false,
@@ -45,7 +54,14 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
       queryClient.invalidateQueries({ queryKey: ["boards", boardStatus] }); // 목록 새로고침
       setIsEditing(false);
     },
-    onError: (error: any) => alert("게시판 수정 실패"),
+    throwOnError: (error:AxiosError) => { 
+        if(error.response?.status === 403 || error.response?.status === 401){ 
+          alert("<권한 부족> 게시판 수정 실패"); 
+          return false;
+        } else {
+          return true;
+        }
+      },
   });
 
   // Delete
@@ -55,7 +71,14 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
       queryClient.invalidateQueries({ queryKey: ["boards", boardStatus] }); // 목록 새로고침
       setIsModalOpen(false); // 모달 닫기
     },
-    onError: (error: any) => {alert("게시판 삭제 실패"); setIsModalOpen(false);}
+    throwOnError: (error: AxiosError) => {
+      if(error.response?.status === 403 || error.response?.status === 401){
+        alert("<권한 부족> 게시판 삭제 실패"); setIsModalOpen(false); 
+        return false;
+      } else {
+        return true;
+      }
+    },
   });
 
   const handleBoardClick = (boardId: number, boardTitle: string) => {
@@ -98,7 +121,7 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
   useEffect(() => {
     if (status === "error") {
       queryClient.resetQueries({ queryKey: ["boards", boardStatus] });
-      throw new Error();
+      
     }
   }, [status, queryClient]);
 
@@ -123,8 +146,6 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
         <InfiniteScrollList
           data={data?.pages.flatMap((page: Boards) => page) || []}
           renderItem={(board: Board) => {
-            console.log("Board ID:", board.boardId, "End Date:", board.endDate); // 🔍 콘솔 출력
-          
             return (
             <div
               key={board.boardId}

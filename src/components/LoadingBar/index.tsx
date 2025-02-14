@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import * as styles from "./loadingBar.css";
 
 const GlobalLoadingBar: React.FC = () => {

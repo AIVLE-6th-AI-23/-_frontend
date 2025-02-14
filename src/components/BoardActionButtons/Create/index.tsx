@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBoard } from "@/services/board";
 import { BoardRequest } from "@/types/types";
-import CreateBoardModal from "@/components/BoardActionButtons/CreateModal"; // 모달 컴포넌트 불러오기
+import CreateBoardModal from "@/components/BoardActionButtons/CreateModal";
 import * as styles from "@/styles/Actionbuton.css";
+import { AxiosError } from "axios";
 
 
 interface CreateBoardButtonProps {
@@ -14,14 +14,21 @@ interface CreateBoardButtonProps {
 
 const CreateBoardButton: React.FC<CreateBoardButtonProps> = ({ isCreating, setIsCreating }) => {
   const queryClient = useQueryClient();
-
   const createMutation = useMutation({
     mutationFn: (boardData: BoardRequest) => createBoard({ boardData }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["boards"] });
-      setIsCreating(false); // 모달 닫기
+      setIsCreating(false);
     },
-    onError: (error: any) => alert(`게시판 생성 실패: ${error.message}`),
+    throwOnError: (error: AxiosError) => {
+      if(error.response?.status === 403 || error.response?.status === 401){ 
+        alert("<권한 부족> 게시글 생성 실패"); 
+        return false;
+      } else {
+        return true
+      }
+    },
+    
   });
 
   const handleCreateBoard = (boardTitle: string, description: string, deptIds: string[], endDate : string|null) => {

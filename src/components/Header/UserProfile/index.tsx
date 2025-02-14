@@ -17,7 +17,7 @@ const UserProfile: React.FC = () => {
         queryFn: sessionCheck,
         staleTime: 0,
         retry: false,
-        refetchOnWindowFocus:true
+        refetchOnWindowFocus:true,
     });
 
     const handleLogout = async (): Promise<void> => {

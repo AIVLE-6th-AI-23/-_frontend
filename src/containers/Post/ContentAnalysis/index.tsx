@@ -15,7 +15,7 @@ const ContentAnalysis: React.FC<ContentAnalysisProps> = ({ postId }) => {
     });
 
     if (isLoading) return <p className={styles.analysisTextStyle}>분석 결과를 불러오는 중...</p>;
-    if (status === "error") throw new Error('500');
+    if (status === "error") throw error;
 
     return (
         <div className={styles.contentAnalysisContainer}>

@@ -28,23 +28,6 @@ if(CSRFProtection){
   );
 }
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    console.error("❌ API 요청 오류:", error);
-
-    if (axios.isAxiosError(error) && error.code === "ECONNABORTED") {
-      throw new Error("⏳ 요청 시간이 초과되었습니다. 다시 시도해주세요.");
-    }
-
-    if (error.response?.status >= 500) {
-      throw new Error("❌ 서버 오류가 발생했습니다.");
-    }
-    
-    throw new Error(`unexpected error ${error}`)
-  }
-);
-
 export interface ApiResponse<T> {
   success: boolean;
   message: string;

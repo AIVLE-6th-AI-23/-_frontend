@@ -1,6 +1,5 @@
 import { style } from '@vanilla-extract/css';
 import { colors } from '@/styles/colors.css';
-import { createButton } from '@/styles/Actionbuton.css';
 
 export const boardContainer = style({
     display: 'flex',
