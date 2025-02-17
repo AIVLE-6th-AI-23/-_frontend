@@ -23,25 +23,6 @@ const queryClient = new QueryClient({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
-    const router = useRouter();
-
-    React.useEffect(() => {
-        const unsubscribe = queryClient.getQueryCache().subscribe((event) => {
-            const error = event?.query.state.error as unknown;
-        
-            if (typeof error === "object" && error !== null && "response" in error) {
-                const response = (error as { response?: { status?: number } }).response;
-                
-                if (response?.status === 403) {
-                    router.push('/login');
-                    queryClient.cancelQueries();
-                }
-            }
-        });
-
-        return () => unsubscribe();
-    }, [router]);
-
     return (
         
         <html lang="kr" className={myFont.className}>
