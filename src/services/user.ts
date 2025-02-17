@@ -39,6 +39,8 @@ export const checkId = async (
     userId: string
 ): Promise<boolean> => {
     const response = await api.get<ApiResponse<boolean>>(`/api/user/checkid/${userId}`)
+    if (response.status == 403)
+        return false
     return response.data.data
 }
 
