@@ -13,7 +13,8 @@ const nextConfig: NextConfig = {
       }
     ]
   },
-  reactStrictMode: true
+  reactStrictMode: true,
+  output: 'standalone'
 };
 
 export default withVanillaExtract(nextConfig);
