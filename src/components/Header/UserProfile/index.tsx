@@ -18,6 +18,7 @@ const UserProfile: React.FC = () => {
         staleTime: 0,
         retry: false,
         refetchOnWindowFocus:true,
+        throwOnError: false
     });
 
     const handleLogout = async (): Promise<void> => {
