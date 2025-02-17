@@ -15,6 +15,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ✅ 2. 환경 변수 설정
+      - name: Set Environment Variables
+        run: |
+          echo "NEXT_PUBLIC_CSRF_PROTECTION=${{ secrets.NEXT_PUBLIC_CSRF_PROTECTION }}" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+
       # ✅ 3. 이전 캐시 삭제
       - name: Clear Previous Cache
         run: |
@@ -41,12 +47,16 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      # ✅ 8. 빌드 파일 업로드
+      # ✅ 8. `.next`, `.env` 포함하여 ZIP 생성
+      - name: Create ZIP with .next and .env
+        run: zip -r next.zip ./* .next .env -qr
+
+      # ✅ 9. 빌드 파일 업로드
       - name: Upload artifact for deployment
         uses: actions/upload-artifact@v4
         with:
           name: nextjs-app
-          path: .next/standalone
+          path: next.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,4 +76,4 @@ jobs:
           app-name: 'nero-front'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5E8997761B4F4CB89641E6137F16BD6D }}
-          package: '.'
+          package: './next.zip'
