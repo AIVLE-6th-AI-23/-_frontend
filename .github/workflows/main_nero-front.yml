@@ -65,11 +65,7 @@ jobs:
         with:
           name: nextjs-app
 
-      # ✅ 2. 의존성 재설치 (`next` 명령어 포함)
-      - name: Install Dependencies for Production
-        run: npm install --production=false
-
-      # ✅ 3. Azure Web App에 배포
+      # ✅ 2. Azure Web App에 배포
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
