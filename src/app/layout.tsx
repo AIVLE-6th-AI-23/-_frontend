@@ -3,7 +3,6 @@
 import '@/styles/globals.css';
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import React from 'react';
-import { useRouter } from "next/navigation";
 import Header from '@/components/Header';
 import localFont from 'next/font/local'
 
