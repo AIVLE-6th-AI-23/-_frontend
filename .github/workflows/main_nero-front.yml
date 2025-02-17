@@ -69,7 +69,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'nero-frontend'  # Azure Web App 이름
+          app-name: 'nero-front'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5E8997761B4F4CB89641E6137F16BD6D }}
           package: '.'
