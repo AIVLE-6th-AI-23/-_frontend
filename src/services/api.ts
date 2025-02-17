@@ -20,7 +20,7 @@ if(CSRFProtection){
     (config) => {
       const csrfToken = getCsrfToken();
       if (csrfToken) {
-        config.headers["X-CSRF-TOKEN"] = csrfToken;
+        config.headers["X-XSRF-TOKEN"] = csrfToken;
       }
       return config;
     },
