@@ -37,8 +37,8 @@ jobs:
       # ✅ 5. 환경 변수 주입 (GitHub Secrets 사용)
       - name: Create .env file
         run: |
-          echo "NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}" >> .env
-          echo "NEXT_PUBLIC_APP_NAME=${{ secrets.NEXT_PUBLIC_APP_NAME }}" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+          echo "NEXT_PUBIC_CSRF_PROTECTION=${{ secrets.NEXT_PUBIC_CSRF_PROTECTION }}" >> .env
           cat .env
 
       # ✅ 6. Next.js 빌드 (Vanilla Extract 포함)
