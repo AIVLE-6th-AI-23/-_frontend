@@ -71,5 +71,5 @@ jobs:
         with:
           app-name: 'nero-front'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5E8997761B4F4CB89641E6137F16BD6D }}
           package: '.'
