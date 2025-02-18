@@ -15,7 +15,6 @@ export default function LoginPage() {
   const [step, setStep] = useState(1);
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
-
   const { mutate: loginMutate, isPending: isLoggingIn, error: loginError } = useMutation({
     mutationFn: (data: { userId: string; password: string }) => login({ employeeId: data.userId, password: data.password }),
     onSuccess: (data) => {

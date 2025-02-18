@@ -4,6 +4,7 @@ import { BoardRequest } from "@/types/types";
 import CreateBoardModal from "@/components/BoardActionButtons/CreateModal";
 import * as styles from "@/styles/Actionbuton.css";
 import { AxiosError } from "axios";
+import { useState } from "react";
 
 
 interface CreateBoardButtonProps {
@@ -14,6 +15,7 @@ interface CreateBoardButtonProps {
 
 const CreateBoardButton: React.FC<CreateBoardButtonProps> = ({ isCreating, setIsCreating }) => {
   const queryClient = useQueryClient();
+  const [createError, setcreateError] = useState(false);
   const createMutation = useMutation({
     mutationFn: (boardData: BoardRequest) => createBoard({ boardData }),
     onSuccess: () => {
@@ -22,7 +24,10 @@ const CreateBoardButton: React.FC<CreateBoardButtonProps> = ({ isCreating, setIs
     },
     throwOnError: (error: AxiosError) => {
       if(error.response?.status === 403 || error.response?.status === 401){ 
-        alert("<권한 부족> 게시글 생성 실패"); 
+        if(!createError){
+          alert("<권한 부족> 게시글 생성 실패");
+          setcreateError(true);
+        } 
         return false;
       } else {
         return true

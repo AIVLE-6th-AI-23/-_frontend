@@ -26,7 +26,9 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [boardIdToDelete, setBoardIdToDelete] = useState<number | null>(null);
-
+  const [hasUpdateError, setHasUpdateError] = useState(false);
+  const [hasDeleteError, setHasDeleteError] = useState(false);
+  
   const { data, fetchNextPage, isFetchingNextPage, status } = useInfiniteQuery({
     queryKey: ["boards", boardStatus],
     queryFn: ({ pageParam }: { pageParam?: string | null }) =>
@@ -56,7 +58,10 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     },
     throwOnError: (error:AxiosError) => { 
         if(error.response?.status === 403 || error.response?.status === 401){ 
-          alert("<권한 부족> 게시판 수정 실패"); 
+          if(!hasUpdateError){
+            alert("<권한 부족> 게시판 수정 실패");
+            setHasUpdateError(true);
+          } 
           return false;
         } else {
           return true;
@@ -73,7 +78,10 @@ const BoardList: React.FC<BoardListProps> = ({ boardStatus }) => {
     },
     throwOnError: (error: AxiosError) => {
       if(error.response?.status === 403 || error.response?.status === 401){
-        alert("<권한 부족> 게시판 삭제 실패"); setIsModalOpen(false); 
+        if(!hasDeleteError){
+          alert("<권한 부족> 게시판 삭제 실패"); setIsModalOpen(false); 
+          setHasDeleteError(true);
+        }
         return false;
       } else {
         return true;

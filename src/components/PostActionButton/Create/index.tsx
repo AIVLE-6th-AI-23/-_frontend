@@ -12,6 +12,7 @@ interface CreatePostButtonProps {
 
 const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
   const [isCreating, setIsCreating] = useState(false);
+  const [hasCreateError, sethasCreateError] = useState(false);
   const queryClient = useQueryClient();
 
   const createMutation = useMutation({
@@ -25,7 +26,10 @@ const CreatePostButton: React.FC<CreatePostButtonProps> = ({ boardId }) => {
     },
     throwOnError: (error : AxiosError) => {
       if(error.response?.status === 403 || error.response?.status === 401){
-        alert("<권한 부족> 게시글 생성 실패");
+        if(!hasCreateError){
+          alert("<권한 부족> 게시글 생성 실패");
+          sethasCreateError(true);
+        }
         return false;
       } else {
         return true;
